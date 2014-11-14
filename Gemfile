@@ -5,7 +5,7 @@ ruby '2.1.2'
 gem 'rails', '~> 4.1.7'
 
 # Heroku stuff
-gem 'rails_12factor', '~> 0.0.3'
+gem 'rails_12factor', '~> 0.0.3', group: :production
 
 # Use postgresql as the database for Active Record
 gem 'pg'
