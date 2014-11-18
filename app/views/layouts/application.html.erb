@@ -14,6 +14,7 @@
 
     <%= stylesheet_link_tag "application", media: 'all' %>
     <%= render 'layouts/favicons' %>
+    <%= render 'layouts/rollbar' if Rails.env.production? %>
     <%= javascript_include_tag "application" %>
   </head>
   <body>
