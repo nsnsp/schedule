@@ -1,1 +1,18 @@
 Welcome!
+
+<script src="https://cdn.auth0.com/js/lock-6.2.min.js"></script>
+<script type="text/javascript">
+  var lock = new Auth0Lock(<%= ENV['AUTH0_CLIENT_ID'].to_json.html_safe %>,
+                           <%= ENV['AUTH0_DOMAIN'].to_json.html_safe %>);
+
+  function signin() {
+    lock.show({
+      callbackURL: <%= ENV['AUTH0_CALLBACK_URL'].to_json.html_safe %>,
+      responseType: 'code',
+      authParams: {
+        scope: 'openid profile'
+      }
+    });
+  }
+</script>
+<button onclick="signin()">Login</button>

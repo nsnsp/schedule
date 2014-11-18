@@ -49,3 +49,6 @@ gem 'less-rails'
 gem 'twitter-bootstrap-rails'
 
 gem 'high_voltage', '~> 2.2.1'
+
+gem 'omniauth', '~> 1.2'
+gem 'omniauth-auth0', '~> 1.1'
