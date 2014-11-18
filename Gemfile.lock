@@ -27,6 +27,7 @@ GEM
       minitest (~> 5.1)
       thread_safe (~> 0.1)
       tzinfo (~> 1.1)
+    aggregate (0.2.2)
     arel (5.0.1.20140414130214)
     builder (3.2.2)
     coffee-rails (4.0.1)
@@ -60,6 +61,16 @@ GEM
     less-rails (2.6.0)
       actionpack (>= 3.1)
       less (~> 2.6.0)
+    librato-metrics (1.5.0)
+      aggregate (~> 0.2.2)
+      faraday (~> 0.7)
+      multi_json
+    librato-rack (0.4.5)
+      librato-metrics (~> 1.1)
+    librato-rails (0.11.1)
+      activesupport (>= 3.0)
+      librato-rack (~> 0.4.2)
+      railties (>= 3.0)
     libv8 (3.16.14.7)
     mail (2.6.3)
       mime-types (>= 1.16, < 3)
@@ -166,6 +177,7 @@ DEPENDENCIES
   jbuilder (~> 2.0)
   jquery-rails
   less-rails
+  librato-rails
   newrelic_rpm
   omniauth (~> 1.2)
   omniauth-auth0 (~> 1.1)

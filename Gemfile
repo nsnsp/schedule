@@ -1,7 +1,9 @@
 source 'https://rubygems.org'
 ruby '2.1.2'
 
+# Monitoring
 gem 'newrelic_rpm'
+gem 'librato-rails'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 4.1.7'
