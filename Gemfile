@@ -7,6 +7,9 @@ gem 'rails', '~> 4.1.7'
 # Heroku stuff
 gem 'rails_12factor', '~> 0.0.3', group: :production
 
+# Caching
+gem 'dalli'
+
 # Use postgresql as the database for Active Record
 gem 'pg'
 # Use SCSS for stylesheets
