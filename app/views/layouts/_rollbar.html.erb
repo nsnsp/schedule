@@ -1,6 +1,6 @@
 <script>
 var _rollbarConfig = {
-    accessToken: <%= ENV['ROLLBAR_ACCESS_TOKEN'].to_json.html_safe %>,
+    accessToken: <%= ENV['ROLLBAR_CLIENT_ACCESS_TOKEN'].to_json.html_safe %>,
     captureUncaught: true,
     payload: {
         environment: <%= Rails.env.to_json.html_safe %>
