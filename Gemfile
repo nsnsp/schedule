@@ -14,6 +14,9 @@ gem 'rails_12factor', '~> 0.0.3', group: :production
 # Caching
 gem 'dalli'
 
+# Mail
+gem 'postmark-rails'
+
 # Use postgresql as the database for Active Record
 gem 'pg'
 # Use SCSS for stylesheets
