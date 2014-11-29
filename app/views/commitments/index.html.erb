@@ -1,0 +1,30 @@
+<h1>Listing commitments</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>User</th>
+      <th>Date</th>
+      <th>Type</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @commitments.each do |commitment| %>
+      <tr>
+        <td><%= commitment.user %></td>
+        <td><%= commitment.date %></td>
+        <td><%= commitment.type %></td>
+        <td><%= link_to 'Show', commitment_path(commitment) %></td>
+        <td><%= link_to 'Edit', edit_commitment_path(commitment) %></td>
+        <td><%= link_to 'Destroy', commitment_path(commitment),
+          method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Commitment', new_commitment_path %>

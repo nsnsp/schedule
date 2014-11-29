@@ -11,10 +11,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141129010550) do
+ActiveRecord::Schema.define(version: 20141129220946) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "commitments", force: true do |t|
+    t.integer  "user_id"
+    t.date     "date",       null: false
+    t.string   "type",       null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "commitments", ["date"], name: "index_commitments_on_date", using: :btree
+  add_index "commitments", ["type"], name: "index_commitments_on_type", using: :btree
+  add_index "commitments", ["user_id"], name: "index_commitments_on_user_id", using: :btree
 
   create_table "users", force: true do |t|
     t.string   "first_name"
