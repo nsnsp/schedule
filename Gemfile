@@ -11,6 +11,7 @@ gem 'sucker_punch', '~> 1.0'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 4.1.7'
+gem 'strip_attributes', '~> 1.5.1'
 
 # Heroku stuff
 gem 'rails_12factor', '~> 0.0.3', group: :production
