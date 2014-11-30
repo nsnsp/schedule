@@ -2,4 +2,18 @@ class Identity < ActiveRecord::Base
   belongs_to :user, inverse_of: :identities
 
   validates :auth0_uid, uniqueness: true
+
+  def short_name
+    first_name || email
+  end
+
+  def provider_is?(provider)
+    auth0_uid.split('|').first == provider.downcase
+  end
+
+  def email_trusted?
+    # explicitly verified Auth0 account, or any other account (implicitly
+    # trust email addresses from other providers like Gmail, Facebook, Yahoo)
+    email_verified || !provider_is?('auth0')
+  end
 end

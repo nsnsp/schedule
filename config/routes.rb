@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   # auth0
   get '/auth/auth0/callback' => 'auth0#callback'
   get '/auth/failure' => 'auth0#failure'
+  get '/auth/signout' => 'auth0#sign_out'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
