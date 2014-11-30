@@ -1,5 +1,6 @@
 class User < ActiveRecord::Base
   has_many :commitments, inverse_of: :user
+  has_many :identities, inverse_of: :user
 
   validates :first_name, :last_name, presence: true
   validates :email, format: {

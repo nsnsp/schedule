@@ -4,9 +4,21 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
   def authenticate_user!
-    unless session[:userinfo].present?
+    unless current_user
       # Redirect to page that has the login here
       redirect_to root_url, alert: 'You must be logged in to go there.'
     end
+  end
+
+  def current_identity=(identity)
+    session[:identity_id] = identity.id
+  end
+
+  def current_identity
+    Identity.find_by(id: session[:identity_id])
+  end
+
+  def current_user
+    current_identity.try(:user)
   end
 end
