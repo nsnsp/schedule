@@ -14,8 +14,6 @@
 
     <%= stylesheet_link_tag "application", media: 'all' %>
     <%= render 'layouts/favicons' %>
-    <%= render 'layouts/rollbar' if Rails.env.production? %>
-    <%= javascript_include_tag "application" %>
   </head>
   <body>
 
@@ -33,7 +31,7 @@
           <ul class="nav navbar-nav">
             <li><%= link_to "Link1", "/path1"  %></li>
             <li><%= link_to "Link2", "/path2"  %></li>
-            <li><%= link_to "Link3", "/path3"  %></li>
+            <li><%= link_to 'Patroller Login', '#', onclick: 'signIn()' %></li>
           </ul>
         </div>
       </div>
@@ -64,5 +62,8 @@
 
     </div> <!-- /container -->
 
+    <%= render 'layouts/auth0' %>
+    <%= render 'layouts/rollbar' if Rails.env.production? %>
+    <%= javascript_include_tag "application" %>
   </body>
 </html>
