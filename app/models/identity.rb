@@ -16,4 +16,8 @@ class Identity < ActiveRecord::Base
     # trust email addresses from other providers like Gmail, Facebook, Yahoo)
     email_verified || !provider_is?('auth0')
   end
+
+  def self.find_by_auth0_email(email)
+    where(email: email).where('auth0_uid LIKE ?', 'auth0|%').first
+  end
 end
