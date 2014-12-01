@@ -38,15 +38,16 @@ class Auth0Controller < ApplicationController
   def verify_email
     # Auth0 sends us this - it should always be present and "true"
     unless params[:success] == 'true'
-      message = "Email verification failed (400): #{params[:message]}"
-      redirect_to root_url, status: 400, alert: message
+      message = params[:message]
+      message[0] = message[0].chr.downcase unless message.blank?
+      redirect_to root_url, alert: "Email verification failed – #{message}"
       return
     end
 
     # We configure this param to be present in the Auth0 callback URL, to ensure
     # that a malicious user can't manually craft a fake email verification GET.
     unless params[:secret_key] == ENV['AUTH0_VERIFY_EMAIL_CALLBACK_SECRET_KEY']
-      redirect_to root_url, status: 401, alert: 'Email verification failed: 401'
+      redirect_to root_url, alert: 'Email verification failed – bad secret key'
       return
     end
 
@@ -56,7 +57,8 @@ class Auth0Controller < ApplicationController
     # Email address might not exist or the associated identity might have a
     # provider other than auth0. Should never happen; protects against evil.
     unless identity
-      redirect_to root_url, status: 404, alert: 'Email verification failed: 404'
+      message = "Email verification failed – unknown email address: #{email}"
+      redirect_to root_url, alert: message
       return
     end
 
