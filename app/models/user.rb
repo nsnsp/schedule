@@ -1,4 +1,6 @@
 class User < ActiveRecord::Base
+  has_paper_trail
+
   has_many :commitments, inverse_of: :user
   has_many :identities, inverse_of: :user
 

@@ -1,4 +1,6 @@
 class Identity < ActiveRecord::Base
+  has_paper_trail
+
   belongs_to :user, inverse_of: :identities
 
   validates :auth0_uid, uniqueness: true

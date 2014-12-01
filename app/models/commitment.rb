@@ -1,4 +1,6 @@
 class Commitment < ActiveRecord::Base
+  has_paper_trail
+
   belongs_to :user, inverse_of: :commitments
 
   validates :user, :date, presence: true
