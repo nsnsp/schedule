@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   get '/auth/failure' => 'auth0#failure'
   get '/auth/signout' => 'auth0#sign_out'
   get '/auth/auth0/verify_email' => 'auth0#verify_email'
+  get '/auth/auth0/password_reset' => 'auth0#password_reset'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

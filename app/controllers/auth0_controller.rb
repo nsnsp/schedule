@@ -70,6 +70,17 @@ class Auth0Controller < ApplicationController
                                      'an administrator to approve your account')
   end
 
+  def password_reset
+    message = params[:message]
+    message[0] = message[0].chr.downcase unless message.blank?
+
+    if params[:success] == 'true'
+      redirect_to root_url, notice: "Password reset – #{message}"
+    else
+      redirect_to root_url, alert: "Password not reset – #{message}"
+    end
+  end
+
   private
 
   def handle_identity(identity, params)
