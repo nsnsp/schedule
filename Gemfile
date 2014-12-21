@@ -59,8 +59,9 @@ gem 'awesome_print'
 
 # Bootstrap
 gem 'therubyracer'
-gem 'less-rails'
-gem 'twitter-bootstrap-rails'
+gem 'bootstrap-sass', '~> 3.3.1'
+gem 'autoprefixer-rails'
+gem 'sprockets-rails', '>= 2.1.4'
 
 gem 'high_voltage', '~> 2.2.1'
 
