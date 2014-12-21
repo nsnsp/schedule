@@ -1,3 +1,11 @@
+body {
+  background: image-url('background.jpg') no-repeat right fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
 .navbar-brand {
   background-position: 15px center;
   background-repeat: no-repeat;
@@ -5,4 +13,8 @@
   background-image: asset-data-url('sawblade-60x64.png');
 
   padding-left: 58px !important;
+}
+
+footer {
+  text-shadow: 0px 0px 2px #fff;
 }
