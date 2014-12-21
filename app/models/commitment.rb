@@ -10,7 +10,7 @@ class Commitment < ActiveRecord::Base
   }
 
   def self.to_s
-    name.demodulize.underscore.humanize
+    name.demodulize.underscore.humanize.titleize
   end
 
   def to_s
