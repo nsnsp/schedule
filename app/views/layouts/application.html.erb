@@ -25,11 +25,12 @@
           <span class="icon-bar"></span>
         </button>
 
-        <%= link_to 'Northstar NSP', root_path, class: 'navbar-brand' %>
+        <%= link_to 'Northstar NSP', home_path, class: 'navbar-brand' %>
 
         <div class="navbar-collapse collapse navbar-responsive-collapse">
           <ul class="nav navbar-nav">
             <% if current_user %>
+              <li><%= link_to 'Home', home_path %></li>
               <li><%= link_to 'Sign out', :auth_signout %></li>
             <% else %>
               <li><%= link_to 'Sign in', '#', onclick: 'signIn()' %></li>
