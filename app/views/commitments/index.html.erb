@@ -8,7 +8,7 @@
           <% @commitments.each do |commitment| %>
             <li>
               <span class="label <%= commitment.class.bootstrap_label_class %>"
-                    ><%= commitment.class.display %></span>
+                    ><%= commitment.class.display_text %></span>
               <%= commitment.user.name %>
             </li>
           <% end %>
@@ -21,13 +21,14 @@
   </div>
 
   <div class="col-md-8 col-md-pull-4">
-    <div id="calendar" class="well"></div>
+    <div id="calendar" class="well invisible"></div>
   </div>
 </div>
 
 <%= javascript_tag do %>
   var NSNSP = NSNSP || {};
   NSNSP.commitments = NSNSP.commitments || {
+    events: <%= @events.to_json.html_safe %>,
     defaultDate: <%= @date.strftime('%Y-%m-%d').to_json.html_safe %>,
     timezone: <%= Time.zone.tzinfo.name.to_json.html_safe %>
   };

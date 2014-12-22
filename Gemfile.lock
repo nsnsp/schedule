@@ -77,6 +77,8 @@ GEM
       librato-rack (~> 0.4.2)
       railties (>= 3.0)
     libv8 (3.16.14.7)
+    lodash-rails (2.4.1)
+      railties (>= 3.1)
     mail (2.6.3)
       mime-types (>= 1.16, < 3)
     mime-types (2.4.3)
@@ -202,6 +204,7 @@ DEPENDENCIES
   jbuilder (~> 2.0)
   jquery-rails
   librato-rails
+  lodash-rails
   momentjs-rails
   newrelic_rpm
   omniauth (~> 1.2)

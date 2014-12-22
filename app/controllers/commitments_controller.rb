@@ -13,8 +13,16 @@ class CommitmentsController < ApplicationController
         @commitments =
           Commitment.where(date: @date).includes(:user).sort do |a, b|
             x = [[Commitments::DISPLAY_ORDER.index(a.class) -
-                  Commitments::DISPLAY_ORDER.index(b.class), 1].min, -1].max
+                  Commitments::DISPLAY_ORDER.index(b.class),
+                  1].min,
+                 -1].max
             x.zero? ? (a.user.last_name > b.user.last_name ? 1 : -1) : x
+        end
+        @events = Commitment.group([:date, :type]).count.map do |key, count|
+          commitment_class = key[1].constantize
+          { color: commitment_class.display_color,
+            start: key[0].strftime('%Y-%m-%d'),
+            title: "#{commitment_class.display_text}: #{count}" }
         end
       end
     end

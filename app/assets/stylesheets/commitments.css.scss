@@ -26,23 +26,23 @@
 
     .label {
       font-size: 11px;
-      margin-right: .3em;
+      margin-right: .2em;
+      position: relative;
+      top: -1px;
     }
   }
 }
 
-.fc-day {
+.fc-day-grid {
   cursor: pointer;
+}
 
+.fc-day {
   &.fc-today {
     background-color: white;
   }
 
   &.selected {
-    background-color: lemonChiffon;
-  }
-
-  &:hover {
     background-color: lemonChiffon;
   }
 }

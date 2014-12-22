@@ -12,6 +12,7 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require lodash
 //= require bootstrap-sprockets
 //= require pickadate/picker
 //= require pickadate/picker.date

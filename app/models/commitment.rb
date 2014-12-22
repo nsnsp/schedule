@@ -13,11 +13,11 @@ class Commitment < ActiveRecord::Base
     name.demodulize.underscore.humanize.titleize
   end
 
-  def self.display
+  def self.display_text
     self.name.demodulize
   end
 
   def to_s
-    "#{self.class.display} on #{date} for #{user}"
+    "#{self.class.display_text} on #{date} for #{user}"
   end
 end

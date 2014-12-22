@@ -9,5 +9,11 @@ jQuery ($) ->
       window.location = window.location.pathname + '?date=' + dateString
     dayRender: (date, cell) ->
       cell.addClass('selected') if date.isSame(NSNSP.commitments.defaultDate)
+    eventClick: (event, jsEvent, view) ->
+      dateString = event.start.format('YYYY-MM-DD')
+      window.location = window.location.pathname + '?date=' + dateString
     defaultDate: NSNSP.commitments.defaultDate
+    eventAfterAllRender: (view) ->
+      $('#calendar').removeClass('invisible')
+    events: NSNSP.commitments.events
     timezone: NSNSP.commitments.timezone
