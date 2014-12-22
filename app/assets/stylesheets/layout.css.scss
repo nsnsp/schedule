@@ -1,4 +1,4 @@
-body {
+body.unauthenticated {
   background: image-url('background.jpg') no-repeat right fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
@@ -16,5 +16,7 @@ body {
 }
 
 footer {
+  margin-top: 2em;
+  font-weight: 300;
   text-shadow: 0px 0px 2px #fff;
 }
