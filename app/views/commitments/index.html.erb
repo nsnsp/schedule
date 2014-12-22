@@ -1,56 +1,34 @@
-<div>
-  <h1>Schedule <small>as of <%= Time.now.strftime('%l:%M%P') %></small></h1>
-  <br>
-  <div role="tabpanel" style="background-color: white">
+<div class="row">
+  <div class="col-md-4 col-md-push-8">
+    <div class="well day">
+      <h2><%= @date.try(:strftime, '%A, %-m/%-d') %></h2>
 
-    <!-- Nav tabs -->
-    <ul class="nav nav-tabs" role="tablist">
-      <li role="presentation"
-          class="<%= 'active' if Time.now < Date.today.noon && !@other_date %>">
-        <a href="#today" aria-controls="today" role="tab" data-toggle="tab">
-          Today
-        </a>
-      </li>
-      <li role="presentation"
-          class="<%= 'active' if Time.now >= Date.today.noon &&
-                                 !@other_date %>">
-        <a href="#tomorrow" aria-controls="tomorrow" role="tab"
-           data-toggle="tab">
-          Tomorrow
-        </a>
-      </li>
-      <li role="presentation" class="<%= 'active' if @other_date %>">
-        <a href="#" id="other-schedule">Other <span class="caret"></span></a>
-        <%= text_field_tag 'other-schedule-date', nil, style: 'display: none' %>
-      </li>
-    </ul>
+      <% if @commitments.present? %>
+        <ul>
+          <% @commitments.each do |commitment| %>
+            <li>
+              <span class="label <%= commitment.class.bootstrap_label_class %>"
+                    ><%= commitment.class.display %></span>
+              <%= commitment.user.name %>
+            </li>
+          <% end %>
+        </ul>
+      <% else %>
+        <p class="none">Nobody</p>
+      <% end %>
 
-    <!-- Tab panes -->
-    <div class="tab-content">
-      <div role="tabpanel" id="today"
-           class="tab-pane <%= 'active' if Time.now < Date.today.noon &&
-                                        !@other_date %>">
-        <%= render 'index_day', locals: {
-          date: Date.today,
-          commitments: @today_commitments
-        } %>
-      </div>
-      <div role="tabpanel" id="tomorrow"
-           class="tab-pane <%= 'active' if Time.now >= Date.today.noon &&
-                                           !@other_date %>">
-        <%= render 'index_day', locals: {
-          date: Date.tomorrow,
-          commitments: @tomorrow_commitments
-        } %>
-      </div>
-      <div role="tabpanel" id="date"
-           class="tab-pane <%= 'active' if @other_date %>">
-        <%= render 'index_day', locals: {
-          date: @other_date,
-          commitments: @other_commitments
-        } %>
-      </div>
     </div>
+  </div>
 
+  <div class="col-md-8 col-md-pull-4">
+    <div id="calendar" class="well"></div>
   </div>
 </div>
+
+<%= javascript_tag do %>
+  var NSNSP = NSNSP || {};
+  NSNSP.commitments = NSNSP.commitments || {
+    defaultDate: <%= @date.strftime('%Y-%m-%d').to_json.html_safe %>,
+    timezone: <%= Time.zone.tzinfo.name.to_json.html_safe %>
+  };
+<% end %>

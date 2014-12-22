@@ -1,15 +1,62 @@
 // Place all the styles related to the commitments controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
 .none {
-  color: whiteSmoke;
-  font-size: 5em;
+  color: #ececec;
+  font-size: 4em;
   font-weight: bold;
   text-align: center;
 }
 
-@media (min-width: 768px) {
-  .none {
-    font-size: 10em;
+.day {
+  h2 {
+    margin-top: 0;
+    margin-bottom: .5em;
+  }
+
+  ul {
+    list-style-type: circle;
+    padding-left: 2em;
+  }
+
+  li {
+    margin-bottom: .2em;
+    font-size: 15px;
+
+    .label {
+      font-size: 11px;
+      margin-right: .3em;
+    }
+  }
+}
+
+.fc-day {
+  cursor: pointer;
+
+  &.fc-today {
+    background-color: white;
+  }
+
+  &.selected {
+    background-color: lemonChiffon;
+  }
+
+  &:hover {
+    background-color: lemonChiffon;
+  }
+}
+
+.fc-past {
+  background-color: whiteSmoke;
+
+  &.fc-day-number {
+    opacity: 0.3;
+    filter: alpha(opacity=30);
+
+    &.fc-other-month {
+      opacity: 0.15;
+      filter: alpha(opacity=15);
+    }
   }
 }

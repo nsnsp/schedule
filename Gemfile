@@ -69,3 +69,6 @@ gem 'high_voltage', '~> 2.2.1'
 
 gem 'omniauth', '~> 1.2'
 gem 'omniauth-auth0', '~> 1.1'
+
+gem 'fullcalendar-rails'
+gem 'momentjs-rails'

@@ -3,16 +3,11 @@
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
 jQuery ($) ->
-  input = $('#other-schedule-date').pickadate
-    clear: false
-    formatSubmit: 'yyyy-mm-dd'
-    onSet: (e) ->
-      return unless e.select
-      $('.tab-content').remove()
-      date = $('#other-schedule-date_hidden').val()
-      window.location = window.location.pathname + '?date=' + date
-  window.calendar = input.data('pickadate')
-  $("#other-schedule").click (e) ->
-    window.calendar.open()
-    e.stopPropagation()
-    e.preventDefault()
+  $('#calendar').fullCalendar
+    dayClick: (date, jsEvent, view) ->
+      dateString = date.format('YYYY-MM-DD')
+      window.location = window.location.pathname + '?date=' + dateString
+    dayRender: (date, cell) ->
+      cell.addClass('selected') if date.isSame(NSNSP.commitments.defaultDate)
+    defaultDate: NSNSP.commitments.defaultDate
+    timezone: NSNSP.commitments.timezone

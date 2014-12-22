@@ -1,10 +1,11 @@
-<h3><%= locals[:date].try(:strftime, '%A, %-m/%-d/%y') %></h3>
+
 
 <% if locals[:commitments].present? %>
   <ul>
     <% locals[:commitments].each do |commitment| %>
       <li>
-        <span class="label label-danger"><%= commitment.class %></span>
+        <span class="label <%= commitment.class.bootstrap_label_class %>"
+              ><%= commitment.class.display %></span>
         <%= commitment.user.name %>
       </li>
     <% end %>

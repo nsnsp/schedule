@@ -8,15 +8,13 @@ class CommitmentsController < ApplicationController
     respond_to do |format|
       format.json { render json: Commitment.all }
       format.html do
-        @today_commitments =
-          Commitment.where(date: Date.today).includes(:user)
-        @tomorrow_commitments =
-          Commitment.where(date: Date.tomorrow).includes(:user)
-
-        if params[:date]
-          @other_date = Date.parse(params[:date])
-          @other_commitments =
-            Commitment.where(date: @other_date).includes(:user)
+        @date = params[:date] ? Date.parse(params[:date]) :
+          Time.now.hour < 12 ? Date.today : Date.tomorrow
+        @commitments =
+          Commitment.where(date: @date).includes(:user).sort do |a, b|
+            x = [[Commitments::DISPLAY_ORDER.index(a.class) -
+                  Commitments::DISPLAY_ORDER.index(b.class), 1].min, -1].max
+            x.zero? ? (a.user.last_name > b.user.last_name ? 1 : -1) : x
         end
       end
     end

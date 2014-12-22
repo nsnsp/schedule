@@ -15,5 +15,7 @@
 //= require bootstrap-sprockets
 //= require pickadate/picker
 //= require pickadate/picker.date
+//= require moment
+//= require fullcalendar
 //= require turbolinks
 //= require_tree .
