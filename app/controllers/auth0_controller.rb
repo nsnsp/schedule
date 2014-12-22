@@ -21,9 +21,19 @@ class Auth0Controller < ApplicationController
       failure_message =  'Waiting for an administrator to approve your account…'
     end
 
-    handle_identity(identity,
-                    success_message: 'Welcome back!',
-                    failure_message: failure_message)
+    greeting = case Time.now.hour
+               when 0...12
+                 'Good morning'
+               when 12...17
+                 'Good afternoon'
+               else
+                 'Good evening'
+               end
+
+    handle_identity(
+      identity,
+      success_message: -> (user) { "#{greeting}, #{user.short_name}." },
+      failure_message: failure_message)
   end
 
   def failure
@@ -83,6 +93,10 @@ class Auth0Controller < ApplicationController
 
   private
 
+  def evaluate_message(object, *args)
+    object.is_a?(Proc) ? object.call(*args) : object
+  end
+
   def handle_identity(identity, params)
     self.current_identity = identity
 
@@ -102,13 +116,13 @@ class Auth0Controller < ApplicationController
     # happy path: Identity is linked to a User
     if current_user
       puts "Identity #{current_identity.id} (user #{current_user.id}) signed in"
-      flash[:notice] = params[:success_message]
+      flash[:notice] = evaluate_message(params[:success_message], current_user)
       redirect_to after_sign_in_path_for(current_user) and return
     end
 
     # unhappy path: Identity is not linked to a User
     puts "Identity #{current_identity.id} not linked to a user"
-    flash[:info] = params[:failure_message]
+    flash[:info] = evaluate_message(params[:failure_message])
     redirect_to root_url and return
   end
 end

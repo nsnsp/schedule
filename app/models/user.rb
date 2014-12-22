@@ -11,6 +11,10 @@ class User < ActiveRecord::Base
 
   strip_attributes collapse_spaces: true
 
+  def short_name
+    first_name || email
+  end
+
   def name
     "#{first_name} #{last_name}"
   end

@@ -5,10 +5,6 @@ class Identity < ActiveRecord::Base
 
   validates :auth0_uid, uniqueness: true
 
-  def short_name
-    first_name || email
-  end
-
   def provider_is?(provider)
     auth0_uid.split('|').first == provider.downcase
   end
