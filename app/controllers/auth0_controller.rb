@@ -16,9 +16,9 @@ class Auth0Controller < ApplicationController
 
     if identity.provider_is?('auth0') && !identity.email_verified?
       failure_message = 'Account created – please check your email for a ' \
-                        'verification link…'
+                        'verification link.'
     else
-      failure_message =  'Waiting for an administrator to approve your account…'
+      failure_message =  'Waiting for an administrator to approve your account.'
     end
 
     greeting = case Time.now.hour

@@ -1,3 +1,15 @@
 // Place all the styles related to the commitments controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+.none {
+  color: whiteSmoke;
+  font-size: 5em;
+  font-weight: bold;
+  text-align: center;
+}
+
+@media (min-width: 768px) {
+  .none {
+    font-size: 10em;
+  }
+}

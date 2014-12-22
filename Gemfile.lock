@@ -102,6 +102,8 @@ GEM
       activerecord (>= 3.0, < 5.0)
       activesupport (>= 3.0, < 5.0)
     pg (0.17.1)
+    pickadate-rails (3.5.5.0)
+      railties (>= 3.1.0)
     postmark (1.4.3)
       json
       rake
@@ -199,6 +201,7 @@ DEPENDENCIES
   omniauth-auth0 (~> 1.1)
   paper_trail (~> 3.0.6)
   pg
+  pickadate-rails
   postmark-rails
   rails (~> 4.1.7)
   rails_12factor (~> 0.0.3)

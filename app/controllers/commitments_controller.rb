@@ -1,10 +1,25 @@
 class CommitmentsController < ApplicationController
   before_action :set_commitment, only: [:show, :edit, :update, :destroy]
+  before_filter :authenticate_user!
 
   # GET /commitments
   # GET /commitments.json
   def index
-    @commitments = Commitment.all
+    respond_to do |format|
+      format.json { render json: Commitment.all }
+      format.html do
+        @today_commitments =
+          Commitment.where(date: Date.today).includes(:user)
+        @tomorrow_commitments =
+          Commitment.where(date: Date.tomorrow).includes(:user)
+
+        if params[:date]
+          @other_date = Date.parse(params[:date])
+          @other_commitments =
+            Commitment.where(date: @other_date).includes(:user)
+        end
+      end
+    end
   end
 
   # GET /commitments/1

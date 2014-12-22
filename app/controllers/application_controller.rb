@@ -7,7 +7,7 @@ class ApplicationController < ActionController::Base
 
   def authenticate_user!
     unless current_user
-      # Redirect to page that has the login here
+      # Redirect to page that has the "login here"
       redirect_to root_url, alert: 'You must be logged in to go there.'
     end
   end
