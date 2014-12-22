@@ -1,30 +1,39 @@
-<h1>Listing commitments</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th>User</th>
-      <th>Date</th>
-      <th>Type</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @commitments.each do |commitment| %>
-      <tr>
-        <td><%= commitment.user %></td>
-        <td><%= commitment.date %></td>
-        <td><%= commitment.type %></td>
-        <td><%= link_to 'Show', commitment_path(commitment) %></td>
-        <td><%= link_to 'Edit', edit_commitment_path(commitment) %></td>
-        <td><%= link_to 'Destroy', commitment_path(commitment),
-          method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
+<h1>Schedule <small>as of <%= Time.now.strftime('%l:%M%P') %></small></h1>
 <br>
+<div role="tabpanel" style="background-color: white">
 
-<%= link_to 'New Commitment', new_commitment_path %>
+  <!-- Nav tabs -->
+  <ul class="nav nav-tabs" role="tablist">
+    <li role="presentation"
+        class="<%= 'active' if Time.now < Date.today.noon %>">
+      <a href="#today" aria-controls="today" role="tab" data-toggle="tab">
+        Today
+      </a>
+    </li>
+    <li role="presentation"
+        class="<%= 'active' if Time.now >= Date.today.noon %>">
+      <a href="#tomorrow" aria-controls="tomorrow" role="tab" data-toggle="tab">
+        Tomorrow
+      </a>
+    </li>
+    <li role="presentation">
+      <a href="#" id="datepickerTab">Other <span class="caret"></span></a>
+    </li>
+  </ul>
+
+  <!-- Tab panes -->
+  <div class="tab-content">
+    <div role="tabpanel" id="today"
+         class="tab-pane <%= 'active' if Time.now < Date.today.noon %>">
+      <h4><%= Date.today %></h4>
+    </div>
+    <div role="tabpanel" id="tomorrow"
+         class="tab-pane <%= 'active' if Time.now >= Date.today.noon %>">
+      <h4><%= Date.tomorrow %></h4>
+    </div>
+    <div role="tabpanel" class="tab-pane" id="datepicker">
+
+    </div>
+  </div>
+
+</div>

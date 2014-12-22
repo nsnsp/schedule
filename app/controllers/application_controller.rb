@@ -13,7 +13,7 @@ class ApplicationController < ActionController::Base
   end
 
   def after_sign_in_path_for(user)
-    url_for controller: 'high_voltage/pages', action: 'show', id: 'welcome'
+    commitments_path
   end
 
   def home_path
