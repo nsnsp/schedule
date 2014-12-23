@@ -27,19 +27,30 @@
 }
 
 .day {
-  h2 {
-    margin-top: 0;
-    margin-bottom: .5em;
+  .actions {
+    form {
+      display: inline-block;
+    }
+
+    input[type=submit] {
+      margin-top: .25em;
+      margin-bottom: .25em;
+    }
   }
 
   ul {
     list-style-type: circle;
     padding-left: 2em;
+    margin-top: 10px;
   }
 
   li {
-    margin-bottom: .2em;
     font-size: 15px;
+    margin-top: .2em;
+
+    &:first-child {
+      margin-top: 0;
+    }
 
     .label {
       font-size: 11px;

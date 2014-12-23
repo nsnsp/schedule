@@ -10,6 +10,7 @@ class CommitmentsController < ApplicationController
       format.html do
         @date = params[:date] ? Date.parse(params[:date]) :
           Time.now.hour < 12 ? Date.today : Date.tomorrow
+        @new_commitment = Commitment.new(user: current_user, date: @date)
         @commitments =
           Commitment.where(date: @date).includes(:user).sort do |a, b|
             x = [[Commitments::DISPLAY_ORDER.index(a.class) -
@@ -49,10 +50,19 @@ class CommitmentsController < ApplicationController
 
     respond_to do |format|
       if @commitment.save
-        format.html { redirect_to @commitment, notice: 'Commitment was successfully created.' }
+        format.html do
+          redirect_to commitments_path(date: @commitment.date),
+            notice: "Signed up to " \
+              "#{upcapitalize @commitment.display_verb} on " \
+              "#{@commitment.date.strftime('%A, %-m/%-d/%Y')}."
+        end
         format.json { render :show, status: :created, location: @commitment }
       else
-        format.html { render :new }
+        format.html do
+          message = 'Sign up failed: ' \
+            "#{@commitment.errors.full_messages.to_sentence.downcase}."
+          redirect_to commitments_path(date: @commitment.date), alert: message
+        end
         format.json { render json: @commitment.errors, status: :unprocessable_entity }
       end
     end

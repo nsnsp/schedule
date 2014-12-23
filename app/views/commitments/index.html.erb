@@ -6,28 +6,55 @@
 
 <div class="row">
   <div class="col-md-4 col-md-push-8">
-    <div class="well day">
-      <h2><%= @date.try(:strftime, '%A, %-m/%-d') %></h2>
+    <div class="panel panel-default day">
 
-      <% if @commitments.present? %>
-        <ul>
-          <% @commitments.each do |commitment| %>
-            <li>
-              <span class="label <%= commitment.class.bootstrap_label_class %>"
-                    ><%= commitment.class.display_text %></span>
-              <%= commitment.user.name %>
-            </li>
+      <div class="panel-heading">
+        <h2 class="panel-title"><%= @date.try(:strftime, '%A, %-m/%-d') %></h2>
+      </div>
+
+      <div class="panel-body">
+        <% if @commitments.present? %>
+          <ul>
+            <% @commitments.each do |commitment| %>
+              <li>
+                <span class="label label-<%= commitment.bootstrap_class_suffix %>"
+                      ><%= commitment.display_text %></span>
+                <%= commitment.user.name %>
+              </li>
+            <% end %>
+          </ul>
+        <% else %>
+          <p class="none">Nobody</p>
+        <% end %>
+      </div>
+
+      <div class="panel-footer">
+        <div class="actions">
+          <% [Commitments::Patrol,
+              Commitments::PatrolAM,
+              Commitments::PatrolPM,
+              Commitments::Instructor].each do |klass| %>
+            <%= form_for @new_commitment do |f| %>
+              <%= f.hidden_field :user_id %>
+              <%= f.hidden_field :date %>
+              <%= f.hidden_field :type, value: klass.name %>
+              <%= f.submit klass.display_verb,
+                class: "btn btn-sm btn-#{klass.bootstrap_class_suffix}",
+                data: { confirm: "#{klass.display_verb} on " \
+                                 "#{@date.strftime('%A, %-m/%-d/%Y')}?" } %>
+            <% end %>
           <% end %>
-        </ul>
-      <% else %>
-        <p class="none">Nobody</p>
-      <% end %>
-
+        </div>
+      </div>
     </div>
   </div>
 
   <div class="col-md-8 col-md-pull-4">
-    <div id="calendar" class="well invisible"></div>
+    <div class="panel panel-default">
+      <div class="panel-body">
+        <div id="calendar" class="invisible"></div>
+      </div>
+    </div>
   </div>
 </div>
 

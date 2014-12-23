@@ -1,11 +1,11 @@
 module Commitments
   class Patrol < Commitment
-    def self.bootstrap_label_class() 'label-danger' end
+    def self.bootstrap_class_suffix() 'danger' end
     def self.display_color() '#D9534F' end
   end
 
   class PatrolAM < Commitment
-    def self.bootstrap_label_class() 'label-danger' end
+    def self.bootstrap_class_suffix() 'danger' end
     def self.display_color() '#D9534F' end
     def self.display_text() 'Patrol (AM)' end
   end
@@ -13,23 +13,26 @@ module Commitments
   class PatrolPM < Commitment
     def self.display_color() '#D9534F' end
     def self.display_text() 'Patrol (PM)' end
-    def self.bootstrap_label_class() 'label-danger' end
+    def self.bootstrap_class_suffix() 'danger' end
   end
 
   class Instructor < Commitment
     def self.display_color() '#5CB85C' end
-    def self.bootstrap_label_class() 'label-success' end
+    def self.display_verb() 'Instruct' end
+    def self.bootstrap_class_suffix() 'success' end
   end
 
   class Candidate < Commitment
     def self.display_color() '#F0AD4E' end
-    def self.bootstrap_label_class() 'label-warning' end
+    def self.display_verb() 'Attend training' end
+    def self.bootstrap_class_suffix() 'warning' end
   end
 
   class Other < Commitment
     def self.display_color() '#5BC0DE' end
     def self.display_text() 'Special Event' end
-    def self.bootstrap_label_class() 'label-info' end
+    def self.display_verb() 'Attent special event' end
+    def self.bootstrap_class_suffix() 'info' end
   end
 
   DISPLAY_ORDER = [Other, Patrol, PatrolAM, PatrolPM, Instructor, Candidate]
