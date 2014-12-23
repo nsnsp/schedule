@@ -10,7 +10,7 @@ gem 'rollbar', '~> 1.2.7'
 gem 'sucker_punch', '~> 1.0'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 4.1.7'
+gem 'rails', '~> 4.2'
 gem 'strip_attributes', '~> 1.5.1'
 gem 'paper_trail', '~> 3.0.6'
 
