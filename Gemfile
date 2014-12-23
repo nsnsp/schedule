@@ -57,7 +57,8 @@ gem 'unicorn'
 
 # Use debugger
 # gem 'debugger', group: [:development, :test]
-gem 'awesome_print'
+gem 'awesome_print', group: :development
+gem 'web-console', '~> 2.0', group: :development
 
 # Bootstrap
 gem 'therubyracer'
