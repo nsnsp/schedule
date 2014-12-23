@@ -1,14 +1,13 @@
+<div class="row date-input-container">
+  <div class="col-sm-12">
+    <%= date_field_tag :date, @date %>
+  </div>
+</div>
+
 <div class="row">
   <div class="col-md-4 col-md-push-8">
     <div class="well day">
-
-      <div class="mobile">
-        <%= date_field_tag :date, @date %>
-        <span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
-      </div>
-      <div class="non-mobile">
-        <h2><%= @date.try(:strftime, '%A, %-m/%-d') %></h2>
-      </div>
+      <h2><%= @date.try(:strftime, '%A, %-m/%-d') %></h2>
 
       <% if @commitments.present? %>
         <ul>

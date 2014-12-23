@@ -3,6 +3,8 @@
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
 jQuery ($) ->
+  $('.day h2').click ->
+    $('input#date').focus().click()
   $('input[type=date]').change ->
     window.location = window.location.pathname + '?date=' + $(this).val()
   $('#calendar').fullCalendar

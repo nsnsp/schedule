@@ -9,26 +9,21 @@
   text-align: center;
 }
 
-#calendar {
-  display: none;
-}
-
-.non-mobile {
-  display: none;
+@media (max-width: 767px) {
+  #calendar {
+    display: none;
+  }
 }
 
 @media (min-width: 768px) {
-  #calendar {
-    display: block;
-  }
-
-  .mobile {
+  .date-input-container {
     display: none;
   }
+}
 
-  .non-mobile {
-    display: block;
-  }
+.date-input-container {
+  text-align: right;
+  margin-bottom: 15px;
 }
 
 .day {
