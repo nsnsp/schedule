@@ -136,6 +136,7 @@ GEM
       actionmailer (>= 3.0.0)
       postmark (~> 1.4.0)
     rack (1.6.0)
+    rack-ssl-enforcer (0.2.8)
     rack-test (0.6.2)
       rack (>= 1.0)
     rails (4.2.0)
@@ -244,6 +245,7 @@ DEPENDENCIES
   paper_trail (~> 3.0.6)
   pg
   postmark-rails
+  rack-ssl-enforcer
   rails (~> 4.2)
   rails_12factor (~> 0.0.3)
   rollbar (~> 1.2.7)
