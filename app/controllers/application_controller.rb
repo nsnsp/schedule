@@ -3,7 +3,7 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
 
-  helper_method :current_identity, :current_user, :home_path, :upcapitalize
+  helper_method :current_identity, :current_user, :home_path, :uncapitalize
 
   def authenticate_user!
     unless current_user
@@ -32,7 +32,7 @@ class ApplicationController < ActionController::Base
     current_identity.try(:user)
   end
 
-  def upcapitalize(string)
+  def uncapitalize(string)
     string[0, 1].downcase + string[1..-1]
   end
 end

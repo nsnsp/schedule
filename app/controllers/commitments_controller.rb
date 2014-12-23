@@ -1,6 +1,7 @@
 class CommitmentsController < ApplicationController
   before_action :set_commitment, only: [:show, :edit, :update, :destroy]
   before_filter :authenticate_user!
+  before_filter :authenticate_owner!, only: [:show, :edit, :update, :destroy]
 
   # GET /commitments
   # GET /commitments.json
@@ -11,13 +12,15 @@ class CommitmentsController < ApplicationController
         @date = params[:date] ? Date.parse(params[:date]) :
           Time.now.hour < 12 ? Date.today : Date.tomorrow
         @new_commitment = Commitment.new(user: current_user, date: @date)
-        @commitments =
-          Commitment.where(date: @date).includes(:user).sort do |a, b|
-            x = [[Commitments::DISPLAY_ORDER.index(a.class) -
-                  Commitments::DISPLAY_ORDER.index(b.class),
-                  1].min,
-                 -1].max
-            x.zero? ? (a.user.last_name > b.user.last_name ? 1 : -1) : x
+        @commitments = Commitment.where(date: @date).includes(:user)
+        # see if we have anything in here before sorting it into an array
+        @my_commitment = @commitments.find_by_user_id(current_user.id)
+        @commitments = @commitments.sort do |a, b|
+          x = [[Commitments::DISPLAY_ORDER.index(a.class) -
+                Commitments::DISPLAY_ORDER.index(b.class),
+                1].min,
+               -1].max
+          x.zero? ? (a.user.last_name > b.user.last_name ? 1 : -1) : x
         end
         @events = Commitment.group([:date, :type]).count.map do |key, count|
           commitment_class = key[1].constantize
@@ -52,8 +55,8 @@ class CommitmentsController < ApplicationController
       if @commitment.save
         format.html do
           redirect_to commitments_path(date: @commitment.date),
-            notice: "Signed up to " \
-              "#{upcapitalize @commitment.display_verb} on " \
+            notice: "You're signed up to " \
+              "#{uncapitalize @commitment.display_verb} on " \
               "#{@commitment.date.strftime('%A, %-m/%-d/%Y')}."
         end
         format.json { render :show, status: :created, location: @commitment }
@@ -85,9 +88,14 @@ class CommitmentsController < ApplicationController
   # DELETE /commitments/1
   # DELETE /commitments/1.json
   def destroy
+    date = @commitment.date
     @commitment.destroy
     respond_to do |format|
-      format.html { redirect_to commitments_url, notice: 'Commitment was successfully destroyed.' }
+      format.html do
+        flash[:info] =
+          "You're off the list for #{date.strftime('%A, %-m/%-d/%Y')}."
+        redirect_to commitments_path(date: date)
+      end
       format.json { head :no_content }
     end
   end
@@ -102,4 +110,11 @@ class CommitmentsController < ApplicationController
     def commitment_params
       params.require(:commitment).permit(:user_id, :date, :type)
     end
+
+    def authenticate_owner!
+      unless @commitment.user_id == current_user.id
+        redirect_to :commitments, alert: "That doesn't belong to you."
+      end
+    end
+
 end

@@ -10,7 +10,7 @@
 }
 
 @media (max-width: 767px) {
-  #calendar {
+  #calendar-container {
     display: none;
   }
 }
@@ -28,14 +28,7 @@
 
 .day {
   .actions {
-    form {
-      display: inline-block;
-    }
-
-    input[type=submit] {
-      margin-top: .25em;
-      margin-bottom: .25em;
-    }
+    text-align: right;
   }
 
   ul {
@@ -45,8 +38,7 @@
   }
 
   li {
-    font-size: 15px;
-    margin-top: .2em;
+    margin-top: .25em;
 
     &:first-child {
       margin-top: 0;
@@ -86,5 +78,11 @@
       opacity: 0.15;
       filter: alpha(opacity=15);
     }
+  }
+}
+
+#signupModal {
+  .radio {
+    margin-left: 15px;
   }
 }

@@ -9,7 +9,9 @@
     <div class="panel panel-default day">
 
       <div class="panel-heading">
-        <h2 class="panel-title"><%= @date.try(:strftime, '%A, %-m/%-d') %></h2>
+        <h2 class="panel-title">
+          <%= @date.try(:strftime, '%A, %-m/%-d/%y') %>
+        </h2>
       </div>
 
       <div class="panel-body">
@@ -30,30 +32,59 @@
 
       <div class="panel-footer">
         <div class="actions">
-          <% [Commitments::Patrol,
-              Commitments::PatrolAM,
-              Commitments::PatrolPM,
-              Commitments::Instructor].each do |klass| %>
-            <%= form_for @new_commitment do |f| %>
-              <%= f.hidden_field :user_id %>
-              <%= f.hidden_field :date %>
-              <%= f.hidden_field :type, value: klass.name %>
-              <%= f.submit klass.display_verb,
-                class: "btn btn-sm btn-#{klass.bootstrap_class_suffix}",
-                data: { confirm: "#{klass.display_verb} on " \
-                                 "#{@date.strftime('%A, %-m/%-d/%Y')}?" } %>
-            <% end %>
+          <% if @my_commitment %>
+            <%= link_to 'Take me off the list', commitment_path(@my_commitment),
+              method: :delete, class: 'btn btn-default' %>
+          <% else %>
+            <%= button_tag 'Sign up', type: :button, class: 'btn btn-primary',
+              data: { toggle: 'modal', target: '#signupModal' }%>
           <% end %>
         </div>
       </div>
     </div>
   </div>
 
-  <div class="col-md-8 col-md-pull-4">
+  <div class="col-md-8 col-md-pull-4 invisible" id="calendar-container">
     <div class="panel panel-default">
       <div class="panel-body">
-        <div id="calendar" class="invisible"></div>
+        <div id="calendar"></div>
       </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="signupModal" tabindex="-1" role="dialog"
+     aria-labelledby="signupModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <%= form_for @new_commitment do |f| %>
+        <%= f.hidden_field :user_id %>
+        <%= f.hidden_field :date %>
+
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="signupModalLabel">
+            <%= @date.try(:strftime, '%A, %-m/%-d/%y') %>
+          </h4>
+        </div>
+        <div class="modal-body">
+          <% [Commitments::Patrol,
+              Commitments::PatrolAM,
+              Commitments::PatrolPM].each_with_index do |klass, i| %>
+            <div class="radio">
+              <label>
+                <%= f.radio_button :type, klass.name, checked: i.zero? %>
+                <%= klass.display_text %>
+              </label>
+            </div>
+          <% end %>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+          <%= f.submit 'Sign up', class: 'btn btn-primary' %>
+        </div>
+      <% end %>
     </div>
   </div>
 </div>

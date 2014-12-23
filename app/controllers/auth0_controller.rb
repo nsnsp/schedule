@@ -18,7 +18,7 @@ class Auth0Controller < ApplicationController
       failure_message = 'Account created – please check your email for a ' \
                         'verification link.'
     else
-      failure_message =  'Waiting for an administrator to approve your account.'
+      failure_message = 'Please ask an administrator to approve your account.'
     end
 
     greeting = case Time.now.hour

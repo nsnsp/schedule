@@ -18,6 +18,6 @@ jQuery ($) ->
       window.location = window.location.pathname + '?date=' + dateString
     defaultDate: NSNSP.commitments.defaultDate
     eventAfterAllRender: (view) ->
-      $('#calendar').removeClass('invisible')
+      $('#calendar-container').removeClass('invisible')
     events: NSNSP.commitments.events
     timezone: NSNSP.commitments.timezone
