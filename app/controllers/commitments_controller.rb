@@ -51,6 +51,17 @@ class CommitmentsController < ApplicationController
   def create
     @commitment = Commitment.new(commitment_params)
 
+    if unavailable?(@commitment.date)
+      respond_to do |format|
+        format.html do
+          message = 'Sign up failed: the date is too soon or too far away.'
+          redirect_to commitments_path(date: @commitment.date), alert: message
+        end
+        format.json { render json: @commitment.errors, status: :unprocessable_entity }
+      end
+      return
+    end
+
     respond_to do |format|
       if @commitment.save
         format.html do
@@ -89,14 +100,26 @@ class CommitmentsController < ApplicationController
   # DELETE /commitments/1.json
   def destroy
     date = @commitment.date
-    @commitment.destroy
-    respond_to do |format|
-      format.html do
-        flash[:info] =
-          "You're off the list for #{date.strftime('%A, %-m/%-d/%Y')}."
-        redirect_to commitments_path(date: date)
+
+    if frozen?(date)
+      respond_to do |format|
+        format.html do
+          flash[:alert] =
+            "It's too late to cancel for #{date.strftime('%A, %-m/%-d/%Y')}."
+          redirect_to commitments_path(date: date)
+        end
+        format.json { head :no_content }
       end
-      format.json { head :no_content }
+    else
+      @commitment.destroy
+      respond_to do |format|
+        format.html do
+          flash[:info] =
+            "You're off the list for #{date.strftime('%A, %-m/%-d/%Y')}."
+          redirect_to commitments_path(date: date)
+        end
+        format.json { head :no_content }
+      end
     end
   end
 
