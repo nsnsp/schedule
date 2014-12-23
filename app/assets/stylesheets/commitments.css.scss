@@ -9,6 +9,28 @@
   text-align: center;
 }
 
+#calendar {
+  display: none;
+}
+
+.non-mobile {
+  display: none;
+}
+
+@media (min-width: 768px) {
+  #calendar {
+    display: block;
+  }
+
+  .mobile {
+    display: none;
+  }
+
+  .non-mobile {
+    display: block;
+  }
+}
+
 .day {
   h2 {
     margin-top: 0;
