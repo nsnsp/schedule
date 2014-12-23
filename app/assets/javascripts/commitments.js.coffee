@@ -3,6 +3,7 @@
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
 jQuery ($) ->
+  return unless $('#calendar').length
   $('.day h2').click ->
     $('input#date').focus().click()
   $('input[type=date]').change ->
