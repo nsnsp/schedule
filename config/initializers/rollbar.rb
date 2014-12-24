@@ -11,7 +11,7 @@ Rollbar.configure do |config|
   end
 
   if Rails.env.development?
-    config.enabled = false
+    config.enabled = true
   end
 
   # make some automagic stuff work
