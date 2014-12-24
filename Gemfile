@@ -6,7 +6,7 @@ gem 'newrelic_rpm'
 gem 'librato-rails'
 
 # Error reporting
-gem 'rollbar', '~> 1.2.7'
+gem 'rollbar', '~> 1.3'
 gem 'sucker_punch', '~> 1.0'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
