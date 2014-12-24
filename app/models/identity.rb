@@ -15,6 +15,10 @@ class Identity < ActiveRecord::Base
     email_verified || !provider_is?('auth0')
   end
 
+  def name
+    [first_name, last_name].compact.join(' ')
+  end
+
   def self.find_by_auth0_email(email)
     where(email: email).where('auth0_uid LIKE ?', 'auth0|%').first
   end

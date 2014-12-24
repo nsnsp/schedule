@@ -122,6 +122,8 @@ class Auth0Controller < ApplicationController
 
     # unhappy path: Identity is not linked to a User
     puts "Identity #{current_identity.id} not linked to a user"
+    Rollbar.info("Identity #{current_identity.id} not linked to a user",
+                 email: current_identity.email, name: current_identity.name)
     flash[:info] = evaluate_message(params[:failure_message])
     redirect_to root_url and return
   end
