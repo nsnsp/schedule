@@ -1,4 +1,11 @@
 Rails.application.routes.draw do
+  # always use www (makes the Auto0 stuff work a little better)
+  unless Rails.env.development?
+    constraints subdomain: false do
+      get ':any', to: redirect(subdomain: 'www', path: '/%{any}'), any: /.*/
+    end
+  end
+
   resources :commitments
 
   # auth0
