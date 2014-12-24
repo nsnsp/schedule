@@ -16,10 +16,8 @@ class User < ActiveRecord::Base
   end
 
   def name
-    "#{first_name} #{last_name}"
+    [first_name, last_name].compact.join(' ')
   end
 
-  def to_s
-    name
-  end
+  alias_method :to_s, :name
 end
