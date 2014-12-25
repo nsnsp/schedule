@@ -1,18 +1,13 @@
+# -*- coding: utf-8 -*-
 module Commitments
   class Patrol < Commitment
     def self.bootstrap_class_suffix() 'danger' end
     def self.display_color() '#D9534F' end
   end
 
-  class PatrolAM < Commitment
-    def self.bootstrap_class_suffix() 'danger' end
-    def self.display_color() '#D9534F' end
-    def self.display_text() 'Patrol (AM)' end
-  end
-
   class PatrolPM < Commitment
     def self.display_color() '#D9534F' end
-    def self.display_text() 'Patrol (PM)' end
+    def self.display_text() 'Patrol (½)' end
     def self.bootstrap_class_suffix() 'danger' end
   end
 
@@ -35,5 +30,5 @@ module Commitments
     def self.bootstrap_class_suffix() 'info' end
   end
 
-  DISPLAY_ORDER = [Other, Patrol, PatrolAM, PatrolPM, Instructor, Candidate]
+  DISPLAY_ORDER = [Other, Patrol, PatrolPM, Instructor, Candidate]
 end
