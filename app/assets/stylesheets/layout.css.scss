@@ -4,6 +4,10 @@ body {
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
+
+  &.wait {
+    cursor: wait;
+  }
 }
 
 .navbar-brand {

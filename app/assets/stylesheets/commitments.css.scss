@@ -53,6 +53,12 @@
   }
 }
 
+body.wait {
+  .fc-day-grid {
+    cursor: inherit;
+  }
+}
+
 .fc-day-grid {
   cursor: pointer;
 }
