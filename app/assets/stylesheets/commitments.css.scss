@@ -6,6 +6,12 @@
   #calendar-container {
     display: none;
   }
+
+  .my-days {
+    .cancel {
+      display: none;
+    }
+  }
 }
 
 .date-input-container {
