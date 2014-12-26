@@ -15,7 +15,7 @@ gem 'strip_attributes', '~> 1.5.1'
 gem 'paper_trail', '~> 3.0.6'
 
 # Heroku stuff
-gem 'rails_12factor', '~> 0.0.3', group: :production
+gem 'rails_12factor', '~> 0.0.3', group: [:production, :staging]
 
 # Caching
 gem 'dalli'
