@@ -2,21 +2,8 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-.none {
-  color: #ececec;
-  font-size: 4em;
-  font-weight: bold;
-  text-align: center;
-}
-
 @media (max-width: 767px) {
   #calendar-container {
-    display: none;
-  }
-}
-
-@media (min-width: 768px) {
-  .date-input-container {
     display: none;
   }
 }
@@ -26,16 +13,23 @@
   margin-bottom: 15px;
 }
 
-.day {
-  .actions {
-    text-align: right;
+@media (min-width: 768px) {
+  .date-input-container {
+    display: none;
   }
+}
 
-  ul {
-    list-style-type: circle;
-    padding-left: 2em;
-    margin-top: 10px;
-  }
+.none {
+  color: #ececec;
+  font-size: 4em;
+  font-weight: bold;
+  text-align: center;
+}
+
+.commitment-list {
+  list-style-type: circle;
+  padding-left: 2em;
+  margin-top: 10px;
 
   li {
     margin-top: .25em;
@@ -50,6 +44,26 @@
       position: relative;
       top: -1px;
     }
+  }
+}
+
+.day {
+  .actions {
+    text-align: right;
+  }
+}
+
+.my-days {
+  .cancel {
+    color: tomato;
+
+    &:hover {
+      color: red;
+    }
+  }
+
+  .current {
+    font-weight: bold;
   }
 }
 

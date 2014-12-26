@@ -1,0 +1,38 @@
+<!-- Modal -->
+<div class="modal fade" id="signupModal" tabindex="-1" role="dialog"
+     aria-labelledby="signupModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <%= form_for locals.fetch(:new_commitment) do |f| %>
+        <%= f.hidden_field :user_id %>
+        <%= f.hidden_field :date %>
+
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="signupModalLabel">
+            <%= locals.fetch(:date).strftime('%A, %-m/%-d/%y') %>
+          </h4>
+        </div>
+        <div class="modal-body">
+          <% [Commitments::Patrol,
+              Commitments::PatrolPM,
+              Commitments::Instructor,
+              Commitments::Candidate].each_with_index do |klass, i| %>
+            <div class="radio">
+              <label>
+                <%= f.radio_button :type, klass.name, checked: i.zero? %>
+                <%= klass.display_text %>
+              </label>
+            </div>
+          <% end %>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default"
+                  data-dismiss="modal">Cancel</button>
+          <%= f.submit 'Confirm', class: 'btn btn-primary',
+            data: { disable_with: 'Confirming…' } %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

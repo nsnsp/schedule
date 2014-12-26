@@ -12,10 +12,10 @@ class CommitmentsController < ApplicationController
         @date = params[:date] ? Date.parse(params[:date]) :
           Time.now.hour < 12 ? Date.today : Date.tomorrow
         @new_commitment = Commitment.new(user: current_user, date: @date)
-        @commitments = Commitment.where(date: @date).includes(:user)
+        @date_commitments = Commitment.where(date: @date).includes(:user)
         # see if we have anything in here before sorting it into an array
-        @my_commitment = @commitments.find_by_user_id(current_user.id)
-        @commitments = @commitments.sort do |a, b|
+        @my_commitment = @date_commitments.find_by_user_id(current_user.id)
+        @date_commitments = @date_commitments.sort do |a, b|
           x = [[Commitments::DISPLAY_ORDER.index(a.class) -
                 Commitments::DISPLAY_ORDER.index(b.class),
                 1].min,
@@ -28,6 +28,7 @@ class CommitmentsController < ApplicationController
             start: key[0].strftime('%Y-%m-%d'),
             title: "#{commitment_class.display_text}: #{count}" }
         end
+        @my_commitments = Commitment.where(user: current_user).order(:date)
       end
     end
   end

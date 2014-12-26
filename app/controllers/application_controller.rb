@@ -3,7 +3,8 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
 
-  helper_method :current_identity, :current_user, :unavailable?, :uncapitalize
+  helper_method :current_identity, :current_user, :frozen?, :unavailable?,
+                :uncapitalize
 
   def authenticate_user!
     unless current_user
@@ -33,10 +34,10 @@ class ApplicationController < ActionController::Base
   end
 
   def frozen?(date)
-    date < 1.day.from_now
+    date.to_date < 1.day.from_now
   end
 
   def unavailable?(date)
-    frozen?(date) || date > 1.year.from_now
+    frozen?(date.to_date) || date.to_date > 1.year.from_now
   end
 end

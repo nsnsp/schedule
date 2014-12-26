@@ -25,6 +25,10 @@ class Commitment < ActiveRecord::Base
     "#{self.class.display_text} on #{date} for #{user}"
   end
 
+  def to_date
+    date
+  end
+
   def bootstrap_class_suffix
     self.class.bootstrap_class_suffix
   end

@@ -6,55 +6,15 @@
 
 <div class="row">
   <div class="col-md-4 col-md-push-8">
-    <div class="panel panel-default day">
-
-      <div class="panel-heading">
-        <h2 class="panel-title"><%= @date.strftime('%A, %-m/%-d/%y') %></h2>
-      </div>
-
-      <div class="panel-body">
-        <% if @commitments.present? %>
-          <ul>
-            <% @commitments.each do |commitment| %>
-              <li>
-                <span class="label label-<%= commitment.bootstrap_class_suffix %>"
-                      ><%= commitment.display_text %></span>
-                <%= commitment.user.name %>
-              </li>
-            <% end %>
-          </ul>
-        <% else %>
-          <p class="none">Nobody</p>
-        <% end %>
-      </div>
-
-      <div class="panel-footer">
-        <div class="actions">
-          <% if @my_commitment %>
-            <%= link_to commitment_path(@my_commitment),
-              method: :delete, class: 'btn btn-default', data: {
-                disable_with: 'Taking you off the list…',
-                confirm: "Do not #{uncapitalize @my_commitment.display_verb} " \
-                         "on #{@my_commitment.date.strftime('%A, %-m/%-d/%y')}?"
-              }, disabled: unavailable?(@date) do %>
-              <% if unavailable?(@date) %>
-                <span class="glyphicon glyphicon-lock"></span>
-              <% end %>
-              Take me off the list
-            <% end %>
-          <% else %>
-            <%= button_tag type: :button, class: 'btn btn-primary',
-                  data: { toggle: 'modal', target: '#signupModal' },
-                  disabled: unavailable?(@date) do %>
-              <% if unavailable?(@date) %>
-                <span class="glyphicon glyphicon-lock"></span>
-              <% end %>
-              Sign up
-            <% end %>
-          <% end %>
-        </div>
-      </div>
-    </div>
+    <%= render 'index_day', locals: {
+      commitments: @date_commitments,
+      date: @date,
+      my_commitment: @my_commitment
+    } %>
+    <%= render 'index_my_days', locals: {
+      commitments: @my_commitments,
+      date: @date
+    } %>
   </div>
 
   <div class="col-md-8 col-md-pull-4 invisible" id="calendar-container">
@@ -66,44 +26,10 @@
   </div>
 </div>
 
-<!-- Modal -->
-<div class="modal fade" id="signupModal" tabindex="-1" role="dialog"
-     aria-labelledby="signupModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <%= form_for @new_commitment do |f| %>
-        <%= f.hidden_field :user_id %>
-        <%= f.hidden_field :date %>
-
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-          <h4 class="modal-title" id="signupModalLabel">
-            <%= @date.try(:strftime, '%A, %-m/%-d/%y') %>
-          </h4>
-        </div>
-        <div class="modal-body">
-          <% [Commitments::Patrol,
-              Commitments::PatrolPM,
-              Commitments::Instructor,
-              Commitments::Candidate].each_with_index do |klass, i| %>
-            <div class="radio">
-              <label>
-                <%= f.radio_button :type, klass.name, checked: i.zero? %>
-                <%= klass.display_text %>
-              </label>
-            </div>
-          <% end %>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-default"
-                  data-dismiss="modal">Cancel</button>
-          <%= f.submit 'Confirm', class: 'btn btn-primary',
-            data: { disable_with: 'Confirming…' } %>
-        </div>
-      <% end %>
-    </div>
-  </div>
-</div>
+<%= render 'index_signup_modal', locals: {
+  date: @date,
+  new_commitment: @new_commitment
+} %>
 
 <%= javascript_tag do %>
   var NSNSP = NSNSP || {};
