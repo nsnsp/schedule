@@ -16,10 +16,10 @@ ActiveRecord::Schema.define(version: 20141201034435) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "commitments", force: true do |t|
+  create_table "commitments", force: :cascade do |t|
     t.integer  "user_id"
-    t.date     "date",       null: false
-    t.string   "type",       null: false
+    t.date     "date",                   null: false
+    t.string   "type",       limit: 255, null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -28,12 +28,12 @@ ActiveRecord::Schema.define(version: 20141201034435) do
   add_index "commitments", ["type"], name: "index_commitments_on_type", using: :btree
   add_index "commitments", ["user_id"], name: "index_commitments_on_user_id", using: :btree
 
-  create_table "identities", force: true do |t|
+  create_table "identities", force: :cascade do |t|
     t.integer  "user_id"
-    t.string   "auth0_uid",      null: false
-    t.string   "first_name"
-    t.string   "last_name"
-    t.string   "email"
+    t.string   "auth0_uid",      limit: 255, null: false
+    t.string   "first_name",     limit: 255
+    t.string   "last_name",      limit: 255
+    t.string   "email",          limit: 255
     t.text     "image_url"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -43,19 +43,19 @@ ActiveRecord::Schema.define(version: 20141201034435) do
   add_index "identities", ["auth0_uid"], name: "index_identities_on_auth0_uid", unique: true, using: :btree
   add_index "identities", ["user_id"], name: "index_identities_on_user_id", using: :btree
 
-  create_table "users", force: true do |t|
-    t.string   "first_name"
-    t.string   "last_name"
-    t.string   "email"
+  create_table "users", force: :cascade do |t|
+    t.string   "first_name", limit: 255
+    t.string   "last_name",  limit: 255
+    t.string   "email",      limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "versions", force: true do |t|
-    t.string   "item_type",  null: false
-    t.integer  "item_id",    null: false
-    t.string   "event",      null: false
-    t.string   "whodunnit"
+  create_table "versions", force: :cascade do |t|
+    t.string   "item_type",  limit: 255, null: false
+    t.integer  "item_id",                null: false
+    t.string   "event",      limit: 255, null: false
+    t.string   "whodunnit",  limit: 255
     t.text     "object"
     t.datetime "created_at"
   end
