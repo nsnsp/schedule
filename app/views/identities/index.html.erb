@@ -23,7 +23,8 @@
           <td><%= identity.email %></td>
           <td><%= bool_icon identity.email_trusted? %></td>
           <td class="<%= 'no-user' if identity.user.nil? %>">
-            <%= identity.user %>
+            <%= link_to identity.user, identity.user if
+              identity.user && can?(:show, identity.user) %>
           </td>
         </tr>
       <% end %>
