@@ -1,7 +1,7 @@
 class CommitmentsController < ApplicationController
-  before_action :set_commitment, only: [:show, :edit, :update, :destroy]
+  before_action :set_commitment, only: [:show, :destroy]
   before_filter :authenticate_user!
-  before_filter :authenticate_owner!, only: [:show, :edit, :update, :destroy]
+  before_filter :authenticate_owner!, only: [:show, :destroy]
 
   # GET /commitments
   # GET /commitments.json
@@ -38,19 +38,11 @@ class CommitmentsController < ApplicationController
   def show
   end
 
-  # GET /commitments/new
-  def new
-    @commitment = Commitment.new
-  end
-
-  # GET /commitments/1/edit
-  def edit
-  end
-
   # POST /commitments
   # POST /commitments.json
   def create
     @commitment = Commitment.new(commitment_params)
+    authenticate_owner!
 
     if unavailable?(@commitment.date)
       respond_to do |format|
@@ -78,20 +70,6 @@ class CommitmentsController < ApplicationController
             "#{@commitment.errors.full_messages.to_sentence.downcase}."
           redirect_to commitments_path(date: @commitment.date), alert: message
         end
-        format.json { render json: @commitment.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
-  # PATCH/PUT /commitments/1
-  # PATCH/PUT /commitments/1.json
-  def update
-    respond_to do |format|
-      if @commitment.update(commitment_params)
-        format.html { redirect_to @commitment, notice: 'Commitment was successfully updated.' }
-        format.json { render :show, status: :ok, location: @commitment }
-      else
-        format.html { render :edit }
         format.json { render json: @commitment.errors, status: :unprocessable_entity }
       end
     end
@@ -125,20 +103,21 @@ class CommitmentsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_commitment
-      @commitment = Commitment.find(params[:id])
-    end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def commitment_params
-      params.require(:commitment).permit(:user_id, :date, :type)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_commitment
+    @commitment = Commitment.find(params[:id])
+  end
 
-    def authenticate_owner!
-      unless @commitment.user_id == current_user.id
-        redirect_to :commitments, alert: "That doesn't belong to you."
-      end
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def commitment_params
+    params.require(:commitment).permit(:user_id, :date, :type)
+  end
+
+  def authenticate_owner!
+    unless @commitment.user_id == current_user.id
+      redirect_to :commitments, alert: "That doesn't belong to you."
     end
+  end
 
 end
