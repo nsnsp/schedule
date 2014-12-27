@@ -9,6 +9,8 @@ class IdentitiesController < ApplicationController
   # GET /identities/1
   # GET /identities/1.json
   def show
+    @suggested_users = User.where('first_name = ? OR last_name = ?',
+                                  @identity.first_name, @identity.last_name)
   end
 
   # PATCH/PUT /identities/1
@@ -33,6 +35,12 @@ class IdentitiesController < ApplicationController
       format.html { redirect_to identities_url, notice: 'Identity was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+
+  private
+
+  def identity_params
+    params.require(:identity).permit(:user_id)
   end
 
 end

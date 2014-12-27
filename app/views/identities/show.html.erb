@@ -1,5 +1,30 @@
 <div class="well">
-  <h1>Identity</h1>
+  <h1>Identity <%= @identity.id %></h1>
+
+  <% if @identity.user.nil? %>
+    <div class="well">
+      <h3>User</h3>
+      <% if @suggested_users.any? %>
+        <p>Suggestions:</p>
+        <ul>
+          <% @suggested_users.each do |user| %>
+            <li><%= "#{user.id}: #{user.name} (#{user.email})" %></li>
+          <% end %>
+        </ul>
+      <% end %>
+      <%= form_for @identity do |f| %>
+        <p>
+          <%= f.collection_select :user_id, User.all.order(:last_name), :id,
+            -> (user) { "#{user.id}: #{user.name} (#{user.email})" },
+            { prompt: '', order: :name }, required: true %>
+        </p>
+        <%= f.submit 'Assign user', class: 'btn btn-primary', data: {
+          confirm: 'Assign identity to user?',
+          disable_with: 'Assigning user…'
+        } %>
+      <% end %>
+    </div>
+  <% end %>
 
   <%= render 'shared/versions_table', locals: {
     object: @identity,

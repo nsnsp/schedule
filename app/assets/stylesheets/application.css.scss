@@ -23,6 +23,10 @@
 .well {
   background-color: white;
 
+  .well {
+    background-color: whiteSmoke;
+  }
+
   & > h1:first-child,
   & > h2:first-child,
   & > h3:first-child,
