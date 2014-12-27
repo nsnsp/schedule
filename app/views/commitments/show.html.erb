@@ -2,6 +2,11 @@
   <h1>Commitment</h1>
 
   <p>
+    <strong>ID:</strong>
+    <%= @commitment.id %>
+  </p>
+
+  <p>
     <strong>User:</strong>
     <%= @commitment.user %> (<%= @commitment.user.id %>)
   </p>
@@ -27,4 +32,6 @@
   </p>
 
   <%= link_to 'Back', commitments_path(date: @commitment.date) %>
+
+  <%= render 'shared/versions_table', object: @commitment %>
 </div>

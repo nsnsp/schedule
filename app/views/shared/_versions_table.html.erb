@@ -1,0 +1,51 @@
+<% versions = object.versions %>
+<% if versions.any? %>
+  <% timezone = Time.zone %>
+
+  <h3><%= title rescue 'Changes' %></h3>
+
+  <table class="versions frame">
+    <thead>
+      <tr>
+        <th>When</th>
+        <th>Who</th>
+        <th>What</th>
+        <th>Old Value</th>
+        <th>New Value</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% versions.each_with_index do |version, i| %>
+        <% user = User.find(version.whodunnit) rescue nil %>
+        <% name = user.name rescue version.whodunnit %>
+        <% roles = user.try(:roles).try(:to_sentence).try(:capitalize) %>
+        <% changes = version.changeset.to_a %>
+        <% even = (i % 2).zero? %>
+        <tr class="<%= even ? 'even' : 'odd' %>">
+          <td rowspan="<%= version.changeset.count %>">
+            <%= version.created_at.in_time_zone(timezone) %>
+          </td>
+          <td rowspan="<%= version.changeset.count %>">
+            <%= user ? link_to(name, user) : name %>
+          </td>
+          <td><%= changes.first[0].try(:to_s).try(:humanize) %></td>
+          <td><%= versions_table_value(changes.first[0],
+                                       changes.first[1].first, timezone) %></td>
+          <td><%= versions_table_value(changes.first[0],
+                                       changes.first[1].last, timezone) %></td>
+        </tr>
+        <% changes[1..-1].each do |change| %>
+          <tr class="<%= even ? 'even' : 'odd' %>">
+            <td><%= change[0].try(:to_s).try(:humanize) %></td>
+            <td><%= versions_table_value(change[0],
+                                         change[1].first, timezone) %></td>
+            <td><%= versions_table_value(change[0],
+                                         change[1].last, timezone) %></td>
+          </tr>
+        <% end %>
+      <% end %>
+    </tbody>
+  </table>
+
+  <br />
+<% end %>

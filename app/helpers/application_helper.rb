@@ -26,4 +26,24 @@ module ApplicationHelper
 
     flash_messages.join("\n").html_safe
   end
+
+  def versions_table_value(field_name, value, time_zone)
+    if field_name.ends_with?('_id')
+      begin
+        object_name = field_name[0..-4]
+        object = object_name.classify.constantize.find(value)
+
+        name = object.respond_to?(:name) ? object.try(:name) : nil
+        name = object.to_s if name.blank?
+        name = value if name.match(/\A#<.+>\z/)
+
+        return link_to(name, object)
+      rescue NameError, NoMethodError, ActiveRecord::RecordNotFound
+      end
+    end
+
+    value = value.in_time_zone(time_zone) if (value.is_a?(Time) ||
+                                              value.is_a?(DateTime))
+    value.try(:to_s)
+  end
 end
