@@ -33,6 +33,9 @@ module ApplicationHelper
   end
 
   def versions_table_value(field_name, value, time_zone)
+    field_name ||= ''
+    value ||= ''
+
     if field_name.ends_with?('_id')
       begin
         object_name = field_name[0..-4]

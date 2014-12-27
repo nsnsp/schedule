@@ -20,7 +20,7 @@
         <% name = user.name rescue version.whodunnit %>
         <% roles = user.try(:roles).try(:to_sentence).try(:capitalize) %>
         <% exclude = Array(locals[:exclude]).map { |x| x.to_s } %>
-        <% changes = version.changeset.reject { |key| key.in?(exclude) }.to_a %>
+        <% changes = Array(version.changeset).reject { |c| c[0].in? exclude } %>
         <% even = (i % 2).zero? %>
         <tr class="<%= even ? 'even' : 'odd' %>">
           <td rowspan="<%= changes.count %>">
@@ -29,13 +29,15 @@
           <td rowspan="<%= changes.count %>">
             <%= user ? link_to(name, user) : name %>
           </td>
-          <td><%= changes.first[0].try(:to_s).try(:humanize) %></td>
-          <td><%= versions_table_value(changes.first[0],
-                                       changes.first[1].first, timezone) %></td>
-          <td><%= versions_table_value(changes.first[0],
-                                       changes.first[1].last, timezone) %></td>
+          <td><%= changes.first.try(:[], 0).try(:to_s).try(:humanize) %></td>
+          <td><%= versions_table_value(changes.first.try(:[], 0),
+                                       changes.first.try(:[], 1).try(:first),
+                                       timezone) %></td>
+          <td><%= versions_table_value(changes.first.try(:[], 0),
+                                       changes.first.try(:[], 1).try(:last),
+                                       timezone) %></td>
         </tr>
-        <% changes[1..-1].each do |change| %>
+        <% Array(changes[1..-1]).each do |change| %>
           <tr class="<%= even ? 'even' : 'odd' %>">
             <td><%= change[0].try(:to_s).try(:humanize) %></td>
             <td><%= versions_table_value(change[0],
