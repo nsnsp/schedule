@@ -1,0 +1,13 @@
+<div class="well">
+  <h1>Identity</h1>
+
+  <%= render 'shared/versions_table', locals: {
+    object: @identity,
+    exclude: :image_url
+  } %>
+
+  <%= link_to 'Back', identities_path, class: 'btn btn-default' %>
+  <%= link_to 'Destroy', @identity, method: :delete,
+    data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %>
+
+</div>

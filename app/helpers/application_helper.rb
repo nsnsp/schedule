@@ -27,6 +27,11 @@ module ApplicationHelper
     flash_messages.join("\n").html_safe
   end
 
+  def bool_icon(bool)
+    klass = "glyphicon-#{bool ? 'ok' : 'remove'}"
+    "<span class='glyphicon #{klass} bool-icon #{!!bool}'></span>".html_safe
+  end
+
   def versions_table_value(field_name, value, time_zone)
     if field_name.ends_with?('_id')
       begin

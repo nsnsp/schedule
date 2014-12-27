@@ -18,7 +18,47 @@
 // "bootstrap-sprockets" must be imported before "bootstrap" and "bootstrap/variables"
 @import "bootstrap-sprockets";
 @import "bootstrap";
+@import "colors";
 
 .well {
   background-color: white;
+
+  & > h1:first-child,
+  & > h2:first-child,
+  & > h3:first-child,
+  & > h4:first-child,
+  & > h5:first-child,
+  & > h6:first-child {
+    margin-top: 0;
+  }
+}
+
+.bool-icon {
+  &.true {
+    color: yellowGreen;
+  }
+
+  &.false {
+    color: tomato;
+  }
+}
+
+table.generic {
+  background-color: white;
+  width: 100%;
+
+  tr.odd {
+    background-color: #e6e6e6;
+  }
+
+  th {
+    color: white;
+    background-color: $northstar_red;
+  }
+
+  td,
+  th {
+    padding: .25em .5em;
+    border: 1px #ccc solid;
+  }
 }

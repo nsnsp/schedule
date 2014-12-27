@@ -7,6 +7,8 @@ Rails.application.routes.draw do
   end
 
   resources :commitments, only: [:index, :show, :create, :destroy]
+  resources :identities, only: [:index, :show, :update, :destroy]
+  resources :users
 
   # auth0
   get '/auth/auth0/callback' => 'auth0#callback'

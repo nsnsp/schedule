@@ -5,8 +5,12 @@ class Identity < ActiveRecord::Base
 
   validates :auth0_uid, uniqueness: true
 
+  def provider
+    auth0_uid.split('|').first.capitalize
+  end
+
   def provider_is?(provider)
-    auth0_uid.split('|').first == provider.downcase
+    provider.downcase == provider.downcase
   end
 
   def email_trusted?

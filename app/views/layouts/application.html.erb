@@ -29,6 +29,9 @@
 
         <div class="navbar-collapse collapse navbar-responsive-collapse">
           <ul class="nav navbar-nav">
+            <% if can? :index, Identity %>
+              <li><%= link_to 'Identities', :identities %></li>
+            <% end %>
           </ul>
 
           <ul class="nav navbar-nav navbar-right">
