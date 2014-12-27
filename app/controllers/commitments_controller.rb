@@ -1,7 +1,6 @@
 class CommitmentsController < ApplicationController
-  before_action :set_commitment, only: [:show, :destroy]
-  before_filter :authenticate_user!
-  before_filter :authenticate_owner!, only: [:show, :destroy]
+  before_filter :build_resource, only: :create
+  load_and_authorize_resource
 
   # GET /commitments
   # GET /commitments.json
@@ -12,7 +11,7 @@ class CommitmentsController < ApplicationController
         @date = params[:date] ? Date.parse(params[:date]) :
           Time.now.hour < 12 ? Date.today : Date.tomorrow
         @new_commitment = Commitment.new(user: current_user, date: @date)
-        @date_commitments = Commitment.where(date: @date).includes(:user)
+        @date_commitments = @commitments.where(date: @date).includes(:user)
         # see if we have anything in here before sorting it into an array
         @my_commitment = @date_commitments.find_by_user_id(current_user.id)
         @date_commitments = @date_commitments.sort do |a, b|
@@ -41,9 +40,6 @@ class CommitmentsController < ApplicationController
   # POST /commitments
   # POST /commitments.json
   def create
-    @commitment = Commitment.new(commitment_params)
-    authenticate_owner!
-
     if unavailable?(@commitment.date)
       respond_to do |format|
         format.html do
@@ -104,20 +100,10 @@ class CommitmentsController < ApplicationController
 
   private
 
-  # Use callbacks to share common setup or constraints between actions.
-  def set_commitment
-    @commitment = Commitment.find(params[:id])
-  end
-
   # Never trust parameters from the scary internet, only allow the white list through.
-  def commitment_params
-    params.require(:commitment).permit(:user_id, :date, :type)
-  end
-
-  def authenticate_owner!
-    unless @commitment.user_id == current_user.id
-      redirect_to :commitments, alert: "That doesn't belong to you."
-    end
+  def build_resource
+    resource_params = params.require(:commitment).permit(:user_id, :date, :type)
+    @commitment = Commitment.new(resource_params)
   end
 
 end

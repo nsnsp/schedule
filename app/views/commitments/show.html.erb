@@ -1,19 +1,30 @@
-<p id="notice"><%= notice %></p>
+<div class="well">
+  <h1>Commitment</h1>
 
-<p>
-  <strong>User:</strong>
-  <%= @commitment.user %>
-</p>
+  <p>
+    <strong>User:</strong>
+    <%= @commitment.user %> (<%= @commitment.user.id %>)
+  </p>
 
-<p>
-  <strong>Date:</strong>
-  <%= @commitment.date %>
-</p>
+  <p>
+    <strong>Date:</strong>
+    <%= @commitment.date %>
+  </p>
 
-<p>
-  <strong>Type:</strong>
-  <%= @commitment.type %>
-</p>
+  <p>
+    <strong>Type:</strong>
+    <%= @commitment.type %>
+  </p>
 
-<%= link_to 'Edit', edit_commitment_path(@commitment) %> |
-<%= link_to 'Back', commitments_path %>
+  <p>
+    <strong>Created at:</strong>
+    <%= @commitment.created_at %>
+  </p>
+
+  <p>
+    <strong>Updated at:</strong>
+    <%= @commitment.created_at %>
+  </p>
+
+  <%= link_to 'Back', commitments_path(date: @commitment.date) %>
+</div>

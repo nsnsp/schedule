@@ -28,5 +28,13 @@ class Ability
     #
     # See the wiki for details:
     # https://github.com/ryanb/cancan/wiki/Defining-Abilities
+
+    user ||= User.new # guest user (not logged in)
+
+    can [:index], Commitment
+    can [:create, :destroy], Commitment, user_id: user.id
+    can :show, Commitment if user.name == 'Ross Dakin'
+
+    cannot :manage, :all if user.id.nil?
   end
 end

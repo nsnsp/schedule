@@ -6,11 +6,8 @@ class ApplicationController < ActionController::Base
   helper_method :current_identity, :current_user, :frozen?, :unavailable?,
                 :uncapitalize
 
-  def authenticate_user!
-    unless current_user
-      # Redirect to page that has the "login here"
-      redirect_to root_url, alert: 'You must be logged in to go there.'
-    end
+  rescue_from CanCan::AccessDenied do |exception|
+    redirect_to root_url, alert: exception.message
   end
 
   def after_sign_in_path_for(user)
