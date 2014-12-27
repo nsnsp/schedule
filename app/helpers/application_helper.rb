@@ -54,4 +54,8 @@ module ApplicationHelper
                                               value.is_a?(DateTime))
     value.try(:to_s)
   end
+
+  def even_odd(i)
+    (i % 2).zero? ? 'even' : 'odd'
+  end
 end

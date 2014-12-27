@@ -2,7 +2,7 @@
 
   <h1>Identities</h1>
 
-  <table class="generic">
+  <table class="generic identities">
     <thead>
       <tr>
         <th>ID</th>
@@ -15,14 +15,16 @@
     </thead>
 
     <tbody>
-      <% @identities.each do |identity| %>
-        <tr>
+      <% @identities.each.with_index do |identity, i| %>
+        <tr class="<%= even_odd(i) %>">
           <td><%= link_to identity.id, identity %></td>
           <td><%= identity.provider %></td>
           <td><%= identity.name %></td>
           <td><%= identity.email %></td>
           <td><%= bool_icon identity.email_trusted? %></td>
-          <td><%= identity.user %></td>
+          <td class="<%= 'no-user' if identity.user.nil? %>">
+            <%= identity.user %>
+          </td>
         </tr>
       <% end %>
     </tbody>
