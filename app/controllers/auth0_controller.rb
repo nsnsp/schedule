@@ -37,7 +37,13 @@ class Auth0Controller < ApplicationController
   end
 
   def failure
-    redirect_to root_url, alert: request.params['message']
+    Rollbar.info("Authentication error")
+
+    message = [request.params['message'].humanize,
+               uncapitalize(request.params['error_description'])
+              ].compact.join(' – ') + " (#{request.params['error_code']})"
+
+    redirect_to root_url, alert: message
   end
 
   def sign_out
