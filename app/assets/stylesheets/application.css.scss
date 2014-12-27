@@ -27,13 +27,12 @@
     background-color: whiteSmoke;
   }
 
-  & > h1:first-child,
-  & > h2:first-child,
-  & > h3:first-child,
-  & > h4:first-child,
-  & > h5:first-child,
-  & > h6:first-child {
+  & > :first-child {
     margin-top: 0;
+  }
+
+  & > :last-child {
+    margin-bottom: 0;
   }
 }
 
@@ -47,22 +46,16 @@
   }
 }
 
-table.generic {
-  background-color: white;
-  width: 100%;
+table.versions {
+  tr.even {
+    background-color: white;
+  }
 
   tr.odd {
-    background-color: #e6e6e6;
+    background-color: #f9f9f9;
   }
+}
 
-  th {
-    color: white;
-    background-color: $northstar_red;
-  }
-
-  td,
-  th {
-    padding: .25em .5em;
-    border: 1px #ccc solid;
-  }
+dt::after {
+  content: ':'
 }

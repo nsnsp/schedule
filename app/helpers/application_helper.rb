@@ -58,4 +58,8 @@ module ApplicationHelper
   def even_odd(i)
     (i % 2).zero? ? 'even' : 'odd'
   end
+
+  def dash(str)
+    str.blank? ? '--' : str
+  end
 end

@@ -1,4 +1,6 @@
 class User < ActiveRecord::Base
+  include Nameable
+
   has_paper_trail
 
   has_many :commitments, inverse_of: :user
@@ -10,14 +12,6 @@ class User < ActiveRecord::Base
   }
 
   strip_attributes collapse_spaces: true
-
-  def short_name
-    first_name || email
-  end
-
-  def name
-    [first_name, last_name].compact.join(' ')
-  end
 
   alias_method :to_s, :name
 end

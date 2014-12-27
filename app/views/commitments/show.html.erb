@@ -1,5 +1,34 @@
 <div class="well">
-  <h1>Commitment <%= @commitment.id %></h1>
+  <h1>Commitment</h1>
+
+  <dl class="dl-horizontal">
+    <dt>ID</dt>
+    <dd><%= @commitment.id %></dd>
+
+    <dt>Type</dt>
+    <dd><%= @commitment.class.name.demodulize %></dd>
+
+    <dt>Date</dt>
+    <dd><%= @commitment.date %></dd>
+
+    <dt>User</dt>
+    <dd>
+      <% if can? :show, @commitment.user %>
+        <%= link_to @commitment.user, @commitment.user %>
+      <% else %>
+        <%= @commitment.user %>
+      <% end %>
+    </dd>
+
+    <dt>Frozen</dt>
+    <dd><%= bool_icon frozen?(@commitment) %></dd>
+
+    <dt>Created</dt>
+    <dd><%= @commitment.created_at %></dd>
+
+    <dt>Updated</dt>
+    <dd><%= @commitment.updated_at %></dd>
+  </dl>
 
   <%= render 'shared/versions_table', locals: { object: @commitment } %>
 

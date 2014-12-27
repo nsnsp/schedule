@@ -1,5 +1,41 @@
 <div class="identity well">
-  <h1>Identity <%= @identity.id %></h1>
+  <h1>Identity</h1>
+
+  <dl class="dl-horizontal">
+    <dt>ID</dt>
+    <dd><%= @identity.id %></dd>
+
+    <dt>Provider</dt>
+    <dd><%= @identity.provider %></dd>
+
+    <dt>Name</dt>
+    <dd><%= dash @identity.name %></dd>
+
+    <dt>Email</dt>
+    <dd><%= @identity.email %></dd>
+
+    <dt>Email Trusted</dt>
+    <dd><%= bool_icon @identity.email_trusted? %></dd>
+
+    <dt>User</dt>
+    <dd>
+      <% if @identity.user %>
+        <% if can? :show, @identity.user %>
+          <%= link_to @identity.user, @identity.user %>
+        <% else %>
+          <%= @identity.user %>
+        <% end %>
+      <% else %>
+        --
+      <% end %>
+    </dd>
+
+    <dt>Created</dt>
+    <dd><%= @identity.created_at %></dd>
+
+    <dt>Updated</dt>
+    <dd><%= @identity.updated_at %></dd>
+  </dl>
 
   <% if @identity.user.nil? %>
     <div class="well">

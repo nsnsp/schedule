@@ -32,7 +32,7 @@ class Auth0Controller < ApplicationController
 
     handle_identity(
       identity,
-      success_message: -> (user) { "#{greeting}, #{user.short_name}." },
+      success_message: -> (user) { "#{greeting}, #{user.first_name}." },
       failure_message: failure_message)
   end
 

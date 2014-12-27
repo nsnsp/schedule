@@ -1,4 +1,6 @@
 class Identity < ActiveRecord::Base
+  include Nameable
+
   has_paper_trail
 
   belongs_to :user, inverse_of: :identities
@@ -17,10 +19,6 @@ class Identity < ActiveRecord::Base
     # explicitly verified Auth0 account, or any other account (implicitly
     # trust email addresses from other providers like Gmail, Facebook, Yahoo)
     email_verified || !provider_is?('auth0')
-  end
-
-  def name
-    [first_name, last_name].compact.join(' ')
   end
 
   def self.find_by_auth0_email(email)

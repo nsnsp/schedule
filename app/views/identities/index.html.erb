@@ -2,7 +2,7 @@
 
   <h1>Identities</h1>
 
-  <table class="generic identities">
+  <table class="table table-striped">
     <thead>
       <tr>
         <th>ID</th>
@@ -19,12 +19,19 @@
         <tr class="<%= even_odd(i) %>">
           <td><%= link_to identity.id, identity %></td>
           <td><%= identity.provider %></td>
-          <td><%= identity.name %></td>
-          <td><%= identity.email %></td>
+          <td><%= dash identity.name %></td>
+          <td><%= dash identity.email %></td>
           <td><%= bool_icon identity.email_trusted? %></td>
           <td class="<%= 'no-user' if identity.user.nil? %>">
-            <%= link_to identity.user, identity.user if
-              identity.user && can?(:show, identity.user) %>
+            <% if identity.user %>
+              <% if can? :show, identity.user %>
+                <%= link_to identity.user, identity.user %>
+              <% else %>
+                <%= identity.user %>
+              <% end %>
+            <% else %>
+              --
+            <% end %>
           </td>
         </tr>
       <% end %>
