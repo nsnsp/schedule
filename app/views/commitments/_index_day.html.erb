@@ -23,27 +23,37 @@
   <div class="panel-footer">
     <div class="actions">
       <% if locals.fetch(:my_commitment) %>
-        <%= link_to commitment_path(locals.fetch(:my_commitment)),
-          method: :delete, class: 'btn btn-default', data: {
-            disable_with: 'Taking you off the list…',
-            confirm: "Do not #{uncapitalize locals.fetch(:my_commitment).display_verb} " \
-                     "on #{locals.fetch(:my_commitment).date.strftime('%A, %-m/%-d/%y')}?"
-          }, disabled: frozen?(locals.fetch(:date)) do %>
-        <% if frozen?(locals.fetch(:date)) %>
-          <span class="glyphicon glyphicon-lock"></span>
-        <% end %>
-        Take me off the list
+        <div class="action" data-toggle="tooltip" data-placement="left"
+             title="<%= 'Too late to cancel' if frozen?(locals.fetch(:date)) %>"
+             >
+          <%= link_to commitment_path(locals.fetch(:my_commitment)),
+            method: :delete, class: 'btn btn-default', data: {
+              disable_with: 'Taking you off the list…',
+              confirm: "Do not #{uncapitalize locals.fetch(:my_commitment).display_verb} " \
+                       "on #{locals.fetch(:my_commitment).date.strftime('%A, %-m/%-d/%y')}?"
+            }, disabled: frozen?(locals.fetch(:date)) do %>
+            <% if frozen?(locals.fetch(:date)) %>
+              <span class="glyphicon glyphicon-lock"></span>
+            <% end %>
+            Take me off the list
+          <% end %>
+        </div>
+      <% else %>
+        <div class="action" data-toggle="tooltip" data-placement="left"
+             title="<%= locals.fetch(:date) > Date.today ?
+               "Can't sign up for #{locals.fetch(:date).strftime('%Y')} yet" :
+               'Too late to sign up' if
+                 unavailable?(locals.fetch(:date)) %>">
+          <%= button_tag type: :button, class: 'btn btn-primary',
+            data: { toggle: 'modal', target: '#signupModal' },
+            disabled: unavailable?(locals.fetch(:date)) do %>
+            <% if unavailable?(locals.fetch(:date)) %>
+              <span class="glyphicon glyphicon-lock"></span>
+            <% end %>
+            Sign up
+          <% end %>
+        </div>
       <% end %>
-    <% else %>
-      <%= button_tag type: :button, class: 'btn btn-primary',
-        data: { toggle: 'modal', target: '#signupModal' },
-        disabled: unavailable?(locals.fetch(:date)) do %>
-      <% if unavailable?(locals.fetch(:date)) %>
-        <span class="glyphicon glyphicon-lock"></span>
-      <% end %>
-      Sign up
-    <% end %>
-    <% end %>
     </div>
   </div>
 </div>

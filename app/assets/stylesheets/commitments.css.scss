@@ -56,6 +56,10 @@
 .day {
   .actions {
     text-align: right;
+
+    .action {
+      display: inline-block;
+    }
   }
 }
 
