@@ -1,4 +1,4 @@
-<div class="well">
+<div class="identity well">
   <h1>Identity <%= @identity.id %></h1>
 
   <% if @identity.user.nil? %>
@@ -6,9 +6,12 @@
       <h3>User</h3>
       <% if @suggested_users.any? %>
         <p>Suggestions:</p>
-        <ul>
+        <ul class="suggested-users">
           <% @suggested_users.each do |user| %>
-            <li><%= "#{user.id}: #{user.name} (#{user.email})" %></li>
+            <li>
+              <%= link_to "#{user.id}: #{user.name} (#{user.email})", '#',
+                data: { user_id: user.id } %>
+            </li>
           <% end %>
         </ul>
       <% end %>

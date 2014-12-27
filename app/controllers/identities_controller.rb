@@ -4,13 +4,21 @@ class IdentitiesController < ApplicationController
   # GET /identities
   # GET /identities.json
   def index
+    @identities = @identities.includes(:user).sort_by do
+      |identity| identity.user.try(:last_name) || ''
+    end
   end
 
   # GET /identities/1
   # GET /identities/1.json
   def show
-    @suggested_users = User.where('first_name = ? OR last_name = ?',
-                                  @identity.first_name, @identity.last_name)
+    @suggested_users = User.where(['email = :email',
+                                   'first_name = :first_name',
+                                   'last_name = :last_name'].join(' OR '), {
+                                    email: @identity.email,
+                                    first_name: @identity.first_name,
+                                    last_name: @identity.last_name,
+                                  })
   end
 
   # PATCH/PUT /identities/1
