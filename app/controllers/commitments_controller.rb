@@ -54,8 +54,10 @@ class CommitmentsController < ApplicationController
     respond_to do |format|
       if @commitment.save
         format.html do
+          name = @commitment.user == current_user ? "You're" :
+            "#{@commitment.user.name} is"
           redirect_to commitments_path(date: @commitment.date),
-            notice: "You're signed up to " \
+            notice: "#{name} signed up to " \
               "#{uncapitalize @commitment.display_verb} on " \
               "#{@commitment.date.strftime('%A, %-m/%-d/%Y')}."
         end
@@ -75,6 +77,7 @@ class CommitmentsController < ApplicationController
   # DELETE /commitments/1.json
   def destroy
     date = @commitment.date
+    user = @commitment.user
 
     if frozen?(date)
       respond_to do |format|
@@ -89,8 +92,9 @@ class CommitmentsController < ApplicationController
       @commitment.destroy
       respond_to do |format|
         format.html do
+          name = user == current_user ? "You're" : "#{user.name} is"
           flash[:info] =
-            "You're off the list for #{date.strftime('%A, %-m/%-d/%Y')}."
+            "#{name} off the list for #{date.strftime('%A, %-m/%-d/%Y')}."
           redirect_to commitments_path(date: date)
         end
         format.json { head :no_content }

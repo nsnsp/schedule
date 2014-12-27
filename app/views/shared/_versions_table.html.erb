@@ -1,4 +1,4 @@
-<% versions = object.versions %>
+<% versions = locals.fetch(:object).versions %>
 <% if versions.any? %>
   <% timezone = Time.zone %>
 
@@ -19,13 +19,14 @@
         <% user = User.find(version.whodunnit) rescue nil %>
         <% name = user.name rescue version.whodunnit %>
         <% roles = user.try(:roles).try(:to_sentence).try(:capitalize) %>
-        <% changes = version.changeset.to_a %>
+        <% exclude = Array(locals[:exclude]).map { |x| x.to_s } %>
+        <% changes = version.changeset.reject { |key| key.in?(exclude) }.to_a %>
         <% even = (i % 2).zero? %>
         <tr class="<%= even ? 'even' : 'odd' %>">
-          <td rowspan="<%= version.changeset.count %>">
+          <td rowspan="<%= changes.count %>">
             <%= version.created_at.in_time_zone(timezone) %>
           </td>
-          <td rowspan="<%= version.changeset.count %>">
+          <td rowspan="<%= changes.count %>">
             <%= user ? link_to(name, user) : name %>
           </td>
           <td><%= changes.first[0].try(:to_s).try(:humanize) %></td>

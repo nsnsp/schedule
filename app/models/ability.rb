@@ -31,10 +31,14 @@ class Ability
 
     user ||= User.new # guest user (not logged in)
 
+    # Commitment
     can [:index], Commitment
     can [:create, :destroy], Commitment, user_id: user.id
-    can :show, Commitment if user.name == 'Ross Dakin'
 
+    # Disallow everything to guests
     cannot :manage, :all if user.id.nil?
+
+    # God
+    can :manage, :all if user.name == 'Ross Dakin'
   end
 end

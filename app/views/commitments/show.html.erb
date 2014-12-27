@@ -1,37 +1,10 @@
 <div class="well">
   <h1>Commitment</h1>
 
-  <p>
-    <strong>ID:</strong>
-    <%= @commitment.id %>
-  </p>
+  <%= render 'shared/versions_table', locals: { object: @commitment } %>
 
-  <p>
-    <strong>User:</strong>
-    <%= @commitment.user %> (<%= @commitment.user.id %>)
-  </p>
-
-  <p>
-    <strong>Date:</strong>
-    <%= @commitment.date %>
-  </p>
-
-  <p>
-    <strong>Type:</strong>
-    <%= @commitment.type %>
-  </p>
-
-  <p>
-    <strong>Created at:</strong>
-    <%= @commitment.created_at %>
-  </p>
-
-  <p>
-    <strong>Updated at:</strong>
-    <%= @commitment.created_at %>
-  </p>
-
-  <%= link_to 'Back', commitments_path(date: @commitment.date) %>
-
-  <%= render 'shared/versions_table', object: @commitment %>
+  <%= link_to 'Back', commitments_path(date: @commitment.date),
+    class: 'btn btn-default' %>
+  <%= link_to 'Destroy', commitment_path(@commitment), method: :delete,
+    data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %>
 </div>
