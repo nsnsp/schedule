@@ -27,7 +27,9 @@ class CommitmentsController < ApplicationController
             start: key[0].strftime('%Y-%m-%d'),
             title: "#{commitment_class.display_text}: #{count}" }
         end
-        @my_commitments = Commitment.where(user: current_user).order(:date)
+        @season = Season.new
+        @my_commitments = Commitment.
+          where(date: @season.date_range, user: current_user).order(:date)
       end
     end
   end
