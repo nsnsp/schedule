@@ -35,10 +35,10 @@ class Ability
     can [:index], Commitment
     can [:create, :destroy], Commitment, user_id: user.id
 
-    # Disallow everything to guests
-    cannot :manage, :all if user.id.nil?
-
     # God
     can :manage, :all if user.name == 'Ross Dakin'
+
+    # Disallow everything to guests and suspended users (redundant, but safe)
+    cannot :manage, :all if user.id.nil? || user.suspended?
   end
 end

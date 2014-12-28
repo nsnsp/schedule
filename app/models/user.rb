@@ -11,6 +11,9 @@ class User < ActiveRecord::Base
     with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i
   }
 
+  scope :active, -> { where(suspended: false) }
+  scope :suspended, -> { where(suspended: true) }
+
   strip_attributes collapse_spaces: true
 
   alias_method :to_s, :name

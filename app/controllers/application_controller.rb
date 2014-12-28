@@ -10,6 +10,15 @@ class ApplicationController < ActionController::Base
     redirect_to root_url, alert: exception.message
   end
 
+  before_filter :punt_suspended_user, if: -> { current_user.try(:suspended?) }
+
+  def punt_suspended_user
+    message = ("I'm afraid your account has been suspended, " \
+               "#{current_user.first_name}.")
+    reset_session
+    redirect_to root_url, alert: message and return
+  end
+
   def after_sign_in_path_for(user)
     commitments_path
   end
