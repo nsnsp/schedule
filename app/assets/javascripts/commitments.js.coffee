@@ -11,8 +11,9 @@ jQuery ($) ->
   return unless $('#calendar').length
   $('.day h2').click ->
     $('input#date').focus().click()
-  $('input[type=date]').change ->
-    window.location = window.location.pathname + '?date=' + $(this).val()
+  $('.date-input-container button').click ->
+    date = $('input[type=date]').val()
+    window.location = window.location.pathname + '?date=' + date
   $('#calendar').fullCalendar
     dayClick: (date, jsEvent, view) ->
       onDateClick(date.format('YYYY-MM-DD'))
