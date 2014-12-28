@@ -54,6 +54,13 @@
   }
 }
 
+table.table.table-bordered {
+  th {
+    background-color: $northstar-red;
+    color: white;
+  }
+}
+
 table.versions {
   tr.even {
     background-color: white;
