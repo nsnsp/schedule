@@ -32,8 +32,14 @@ class Ability
     user ||= User.new # guest user (not logged in)
 
     # Commitment
-    can [:index], Commitment
+    can :index, Commitment
     can [:create, :destroy], Commitment, user_id: user.id
+    # TODO: disallow some users from creating commitments (e.g. Forrest)
+
+    # User
+    can :index, User
+    can [:show, :update], User, id: user.id
+    # TODO: allow some special'ish users to create new users
 
     # God
     can :manage, :all if user.name == 'Ross Dakin'

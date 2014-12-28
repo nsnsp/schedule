@@ -21,6 +21,10 @@ class Commitment < ActiveRecord::Base
     display_text
   end
 
+  def self.day_multiplier
+    1
+  end
+
   def to_s
     "#{self.class.display_text} on #{date} for #{user}"
   end

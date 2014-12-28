@@ -29,6 +29,12 @@
 
         <div class="navbar-collapse collapse navbar-responsive-collapse">
           <ul class="nav navbar-nav">
+            <% if can? :index, Commitment %>
+              <li><%= link_to 'Schedule', :commitments %></li>
+            <% end %>
+            <% if can? :index, User %>
+              <li><%= link_to 'Roster', :users %></li>
+            <% end %>
             <% if can? :index, Identity %>
               <li><%= link_to 'Identities', :identities %></li>
             <% end %>

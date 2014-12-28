@@ -9,6 +9,7 @@ module Commitments
     def self.display_color() '#D9534F' end
     def self.display_text() 'Patrol (½)' end
     def self.bootstrap_class_suffix() 'danger' end
+    def self.day_multiplier() 0.5 end
   end
 
   class Instructor < Commitment

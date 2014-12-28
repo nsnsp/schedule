@@ -1,0 +1,46 @@
+<div class="well">
+  <div class="page-header">
+    <h1>Roster</h1>
+  </div>
+
+  <div class="table-responsive">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <% if can? :manage, User %><th>ID</th><% end %>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Days <small>(<%= @season %>)</small></th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% @users.each.with_index do |user, i| %>
+          <tr class="<%= 'danger' if user.suspended? %>"
+              itemscope itemtype="http://data-vocabulary.org/Person">
+            <% if can? :manage, User %>
+              <td><%= link_to user.id, user %></td>
+            <% end %>
+            <td itemprop="name"><%= user.name %></td>
+            <td><%= mail_to user.email %></td>
+            <td>
+              <% @commitment_classes.each do |klass| %>
+                <% count = @commitment_counts[[user.id, klass.name]] %>
+                <% if count.try(:>, 0) %>
+                  <span class="label label-<%= klass.bootstrap_class_suffix %>"
+                        data-toggle="tooltip"
+                        data-placement="top"
+                        title="<%= klass.display_text %>"><%= count %></span>
+                <% end %>
+              <% end %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+
+  <% if can? :create, User %>
+    <%= link_to 'New user', new_user_path, class: 'btn btn-primary' %>
+  <% end %>
+</div>
