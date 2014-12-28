@@ -1,5 +1,8 @@
 class User < ActiveRecord::Base
   include Nameable
+  include RoleModel
+
+  roles :admin
 
   has_paper_trail
 

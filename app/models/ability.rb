@@ -42,7 +42,7 @@ class Ability
     # TODO: allow some special'ish users to create new users
 
     # God
-    can :manage, :all if user.name == 'Ross Dakin'
+    can :manage, :all if user.is?(:admin)
 
     # Disallow everything to guests and suspended users (redundant, but safe)
     cannot :manage, :all if user.id.nil? || user.suspended?
