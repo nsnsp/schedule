@@ -44,9 +44,9 @@
         </div>
       <% else %>
         <div class="action" data-toggle="tooltip" data-placement="left"
-             title="<%= locals.fetch(:date) > Date.today ?
-               "Can't sign up for #{locals.fetch(:date).strftime('%Y')} yet" :
-               'Too late to sign up' if
+             title="<%= frozen?(locals.fetch(:date)) ?
+               'Too late to sign up' :
+               "Can't sign up for #{locals.fetch(:date).strftime('%Y')} yet" if
                  unavailable?(locals.fetch(:date)) %>">
           <%= button_tag type: :button, class: 'btn btn-primary',
             data: { toggle: 'modal', target: '#signupModal' },
