@@ -9,6 +9,12 @@ class UsersController < ApplicationController
     @season = Season.new
     @commitment_classes =
       Commitment.select(:type).uniq.pluck(:type).map { |type| type.constantize }
+    @commitment_classes.sort! do |a, b|
+      [[Commitments::DISPLAY_ORDER.index(a) -
+        Commitments::DISPLAY_ORDER.index(b),
+        1].min,
+       -1].max
+    end
     @commitment_counts =
       Commitment.where(date: @season.date_range).group(:user_id, :type).count
 
