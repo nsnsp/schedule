@@ -4,7 +4,7 @@ class UsersController < ApplicationController
   # GET /users
   # GET /users.json
   def index
-    @users = @users.order(:last_name)
+    @users = @users.order(:suspended, :last_name)
     @users = @users.active unless can? :manage, User
     @season = Season.new
     @commitment_classes =
