@@ -61,7 +61,7 @@ class CommitmentsController < ApplicationController
           redirect_to commitments_path(date: @commitment.date),
             notice: "#{name} signed up to " \
               "#{uncapitalize @commitment.display_verb} on " \
-              "#{@commitment.date.strftime('%A, %-m/%-d/%Y')}."
+              "#{@commitment.date.strftime('%A, %-m/%-d/%y')}."
         end
         format.json { render :show, status: :created, location: @commitment }
       else
@@ -85,7 +85,7 @@ class CommitmentsController < ApplicationController
       respond_to do |format|
         format.html do
           flash[:alert] =
-            "It's too late to cancel for #{date.strftime('%A, %-m/%-d/%Y')}."
+            "It's too late to cancel for #{date.strftime('%A, %-m/%-d/%y')}."
           redirect_to commitments_path(date: date)
         end
         format.json { head :no_content }
@@ -96,7 +96,7 @@ class CommitmentsController < ApplicationController
         format.html do
           name = user == current_user ? "You're" : "#{user.name} is"
           flash[:info] =
-            "#{name} off the list for #{date.strftime('%A, %-m/%-d/%Y')}."
+            "#{name} off the list for #{date.strftime('%A, %-m/%-d/%y')}."
           redirect_to commitments_path(date: date)
         end
         format.json { head :no_content }
