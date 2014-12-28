@@ -14,7 +14,7 @@
     <%= render 'index_my_days', locals: {
       commitments: @my_commitments,
       date: @date
-    } %>
+    } if @my_commitments.any? %>
   </div>
 
   <div class="col-md-8 col-md-pull-4 invisible" id="calendar-container">

@@ -33,8 +33,8 @@ class Ability
 
     # Commitment
     can :index, Commitment
-    can [:create, :destroy], Commitment, user_id: user.id
-    # TODO: disallow some users from creating commitments (e.g. Forrest)
+    can :create, Commitment, user_id: user.id if user.is?(:national)
+    can :destroy, Commitment, user_id: user.id
 
     # User
     can :index, User

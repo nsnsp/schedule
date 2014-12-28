@@ -24,9 +24,9 @@
     <% end %>
   </div>
 
-  <div class="panel-footer">
-    <div class="actions">
-      <% if locals.fetch(:my_commitment) %>
+  <% if locals.fetch(:my_commitment) %>
+    <div class="panel-footer">
+      <div class="actions">
         <div class="action" data-toggle="tooltip" data-placement="left"
              title="<%= 'Too late to cancel' if frozen?(locals.fetch(:date)) %>"
              >
@@ -42,7 +42,11 @@
             Take me off the list
           <% end %>
         </div>
-      <% else %>
+      </div>
+    </div>
+  <% elsif can? :create, Commitment %>
+    <div class="panel-footer">
+      <div class="actions">
         <div class="action" data-toggle="tooltip" data-placement="left"
              title="<%= frozen?(locals.fetch(:date)) ?
                'Too late to sign up' :
@@ -57,7 +61,7 @@
             Sign up
           <% end %>
         </div>
-      <% end %>
+      </div>
     </div>
-  </div>
+  <% end %>
 </div>

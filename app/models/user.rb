@@ -2,7 +2,7 @@ class User < ActiveRecord::Base
   include Nameable
   include RoleModel
 
-  roles :admin
+  roles :admin, :national
 
   has_paper_trail
 
