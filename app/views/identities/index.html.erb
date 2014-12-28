@@ -2,40 +2,42 @@
 
   <h1>Identities</h1>
 
-  <table class="table table-striped">
-    <thead>
-      <tr>
-        <th>ID</th>
-        <th>Provider</th>
-        <th>Name</th>
-        <th>Email</th>
-        <th>Email Trusted</th>
-        <th>User</th>
-      </tr>
-    </thead>
-
-    <tbody>
-      <% @identities.each.with_index do |identity, i| %>
-        <tr class="<%= even_odd(i) %>">
-          <td><%= link_to identity.id, identity %></td>
-          <td><%= identity.provider %></td>
-          <td><%= dash identity.name %></td>
-          <td><%= dash identity.email %></td>
-          <td><%= bool_icon identity.email_trusted? %></td>
-          <td class="<%= 'no-user' if identity.user.nil? %>">
-            <% if identity.user %>
-              <% if can? :show, identity.user %>
-                <%= link_to identity.user, identity.user %>
-              <% else %>
-                <%= identity.user %>
-              <% end %>
-            <% else %>
-              --
-            <% end %>
-          </td>
+  <div class="table-responsive">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Provider</th>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Email Trusted</th>
+          <th>User</th>
         </tr>
-      <% end %>
-    </tbody>
-  </table>
+      </thead>
+
+      <tbody>
+        <% @identities.each.with_index do |identity, i| %>
+          <tr class="<%= 'warning' if identity.user.nil? %>">
+            <td><%= link_to identity.id, identity %></td>
+            <td><%= identity.provider %></td>
+            <td><%= dash identity.name %></td>
+            <td><%= dash identity.email %></td>
+            <td><%= bool_icon identity.email_trusted? %></td>
+            <td>
+              <% if identity.user %>
+                <% if can? :show, identity.user %>
+                  <%= link_to identity.user, identity.user %>
+                <% else %>
+                  <%= identity.user %>
+                <% end %>
+              <% else %>
+                --
+              <% end %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
 
 </div>

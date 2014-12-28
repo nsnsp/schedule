@@ -4,50 +4,52 @@
 
   <h3><%= title rescue 'Changes' %></h3>
 
-  <table class="table versions">
-    <thead>
-      <tr>
-        <th>When</th>
-        <th>Who</th>
-        <th>What</th>
-        <th>Old Value</th>
-        <th>New Value</th>
-      </tr>
-    </thead>
-    <tbody>
-      <% versions.each_with_index do |version, i| %>
-        <% user = User.find(version.whodunnit) rescue nil %>
-        <% name = user.name rescue version.whodunnit %>
-        <% roles = user.try(:roles).try(:to_sentence).try(:capitalize) %>
-        <% exclude = Array(locals[:exclude]).map { |x| x.to_s } %>
-        <% changes = Array(version.changeset).reject { |c| c[0].in? exclude } %>
-        <tr class="<%= even_odd(i) %>">
-          <td rowspan="<%= changes.count %>">
-            <%= version.created_at.in_time_zone(timezone) %>
-          </td>
-          <td rowspan="<%= changes.count %>">
-            <%= user ? link_to(name, user) : name %>
-          </td>
-          <td><%= changes.first.try(:[], 0).try(:to_s).try(:humanize) %></td>
-          <td><%= versions_table_value(changes.first.try(:[], 0),
-                                       changes.first.try(:[], 1).try(:first),
-                                       timezone) %></td>
-          <td><%= versions_table_value(changes.first.try(:[], 0),
-                                       changes.first.try(:[], 1).try(:last),
-                                       timezone) %></td>
+  <div class="table-responsive">
+    <table class="table table-bordered versions">
+      <thead>
+        <tr>
+          <th>When</th>
+          <th>Who</th>
+          <th>What</th>
+          <th>Old Value</th>
+          <th>New Value</th>
         </tr>
-        <% Array(changes[1..-1]).each do |change| %>
+      </thead>
+      <tbody>
+        <% versions.each_with_index do |version, i| %>
+          <% user = User.find(version.whodunnit) rescue nil %>
+          <% name = user.name rescue version.whodunnit %>
+          <% roles = user.try(:roles).try(:to_sentence).try(:capitalize) %>
+          <% exclude = Array(locals[:exclude]).map { |x| x.to_s } %>
+          <% changes = Array(version.changeset).reject { |c| c[0].in? exclude } %>
           <tr class="<%= even_odd(i) %>">
-            <td><%= change[0].try(:to_s).try(:humanize) %></td>
-            <td><%= versions_table_value(change[0],
-                                         change[1].first, timezone) %></td>
-            <td><%= versions_table_value(change[0],
-                                         change[1].last, timezone) %></td>
+            <td rowspan="<%= changes.count %>">
+              <%= version.created_at.in_time_zone(timezone) %>
+            </td>
+            <td rowspan="<%= changes.count %>">
+              <%= user ? link_to(name, user) : name %>
+            </td>
+            <td><%= changes.first.try(:[], 0).try(:to_s).try(:humanize) %></td>
+            <td><%= versions_table_value(changes.first.try(:[], 0),
+                                         changes.first.try(:[], 1).try(:first),
+                                         timezone) %></td>
+            <td><%= versions_table_value(changes.first.try(:[], 0),
+                                         changes.first.try(:[], 1).try(:last),
+                                         timezone) %></td>
           </tr>
+          <% Array(changes[1..-1]).each do |change| %>
+            <tr class="<%= even_odd(i) %>">
+              <td><%= change[0].try(:to_s).try(:humanize) %></td>
+              <td><%= versions_table_value(change[0],
+                                           change[1].first, timezone) %></td>
+              <td><%= versions_table_value(change[0],
+                                           change[1].last, timezone) %></td>
+            </tr>
+          <% end %>
         <% end %>
-      <% end %>
-    </tbody>
-  </table>
+      </tbody>
+    </table>
+  </div>
 
   <br />
 <% end %>

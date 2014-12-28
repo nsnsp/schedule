@@ -1,5 +1,7 @@
 <div class="identity well">
-  <h1>Identity</h1>
+  <div class="page-header">
+    <h1>Identity <small><%= @identity.id %></small></h1>
+  </div>
 
   <dl class="dl-horizontal">
     <dt>ID</dt>
@@ -38,29 +40,37 @@
   </dl>
 
   <% if @identity.user.nil? %>
-    <div class="well">
-      <h3>User</h3>
-      <% if @suggested_users.any? %>
-        <p>Suggestions:</p>
-        <ul class="suggested-users">
-          <% @suggested_users.each do |user| %>
-            <li>
-              <%= link_to "#{user.id}: #{user.name} (#{user.email})", '#',
-                data: { user_id: user.id } %>
-            </li>
-          <% end %>
-        </ul>
-      <% end %>
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">User</h3>
+      </div>
+
       <%= form_for @identity do |f| %>
-        <p>
-          <%= f.collection_select :user_id, User.all.order(:last_name), :id,
-            -> (user) { "#{user.id}: #{user.name} (#{user.email})" },
-            { prompt: '', order: :name }, required: true %>
-        </p>
-        <%= f.submit 'Assign user', class: 'btn btn-primary', data: {
-          confirm: 'Assign identity to user?',
-          disable_with: 'Assigning user…'
-        } %>
+        <div class="panel-body">
+          <% if @suggested_users.any? %>
+            <p>Suggestions:</p>
+            <ul class="suggested-users">
+              <% @suggested_users.each do |user| %>
+                <li>
+                  <%= link_to "#{user.id}: #{user.name} (#{user.email})", '#',
+                    data: { user_id: user.id } %>
+                </li>
+              <% end %>
+            </ul>
+          <% end %>
+          <p>
+            <%= f.collection_select :user_id, User.all.order(:last_name), :id,
+              -> (user) { "#{user.id}: #{user.name} (#{user.email})" },
+              { prompt: '', order: :name }, required: true %>
+          </p>
+        </div>
+
+        <div class="panel-footer">
+          <%= f.submit 'Assign user', class: 'btn btn-primary', data: {
+            confirm: 'Assign identity to user?',
+            disable_with: 'Assigning user…'
+          } %>
+        </div>
       <% end %>
     </div>
   <% end %>
