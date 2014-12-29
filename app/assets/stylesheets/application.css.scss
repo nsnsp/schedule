@@ -64,6 +64,12 @@ table.versions {
   }
 }
 
+.alert {
+  .glyphicon {
+    margin-right: .5em;
+  }
+}
+
 dt::after {
   content: ':'
 }

@@ -8,6 +8,12 @@ module ApplicationHelper
     flash.each do |type, message|
       next if message.blank?
 
+      glyphicon_map = {
+        success: 'ok-sign',
+        warning: 'warning-sign',
+        danger: 'exclamation-sign',
+      }
+
       type = type.to_sym
       type = :success if type == :notice
       type = :danger  if type == :alert
@@ -15,12 +21,24 @@ module ApplicationHelper
       next unless ALERT_TYPES.include?(type)
 
       Array(message).each do |msg|
-        text = content_tag(:div,
-                           content_tag(:button, raw("&times;"),
-                                       class: "close",
-                                       "data-dismiss" => "alert") + msg,
-                           class: "alert fade in alert-#{type} #{options[:class]}")
-        flash_messages << text if msg
+        next unless msg
+        content = ''
+
+        if glyphicon_map.key?(type)
+          content +=
+            content_tag(:span, nil,
+                        class: "glyphicon glyphicon-#{glyphicon_map[type]}",
+                        'aria-hidden' => true) +
+            content_tag(:span, "#{type.to_s.titleize}:",
+                        class: 'sr-only')
+        end
+
+        content += content_tag(:button, raw('&times;'),
+                               class: 'close', 'data-dismiss' => 'alert') + msg
+
+        flash_messages << content_tag(:div, raw(content),
+                                      class: ("alert fade in alert-#{type} " \
+                                              "#{options[:class]}"))
       end
     end
 
