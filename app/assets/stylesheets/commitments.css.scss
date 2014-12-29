@@ -6,12 +6,6 @@
   #calendar-container {
     display: none;
   }
-
-  .my-days {
-    .cancel {
-      display: none;
-    }
-  }
 }
 
 .date-input-container {
@@ -60,20 +54,6 @@
     .action {
       display: inline-block;
     }
-  }
-}
-
-.my-days {
-  .cancel {
-    color: tomato;
-
-    &:hover {
-      color: red;
-    }
-  }
-
-  .current {
-    font-weight: bold;
   }
 }
 

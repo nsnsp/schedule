@@ -12,10 +12,11 @@
       date: @date,
       my_commitment: @my_commitment
     } %>
-    <%= render 'index_my_days', locals: {
-      commitments: @my_commitments,
-      date: @date
-    } if @my_commitments.any? %>
+    <%= render 'user_commitments', locals: {
+      highlight_date: @date,
+      season: Season.new,
+      user: current_user
+    } %>
   </div>
 
   <div class="col-md-8 col-md-pull-4 invisible" id="calendar-container">

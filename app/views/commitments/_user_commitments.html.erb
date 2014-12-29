@@ -1,0 +1,52 @@
+<%
+  highlight_date = locals[:highlight_date]
+  season = locals[:season]
+  user = locals.fetch(:user)
+  commitments = Commitment.where(user: user).order(:date)
+  commitments = commitments.where(date: season.date_range) if season
+
+  if commitments.any? || locals[:show_none]
+%>
+  <div class="panel panel-default user-commitments">
+    <div class="panel-heading">
+      <h2 class="panel-title">
+        <%= user == current_user ? 'My' : "#{user.first_name}'s" %> Days
+        <% if season %><small><%= season %></small><% end %>
+      </h2>
+    </div>
+
+    <div class="panel-body">
+      <% if commitments.any? %>
+        <ul class="commitment-list">
+          <% commitments.each do |commitment| %>
+            <li>
+              <span class="label label-<%= commitment.bootstrap_class_suffix %>"
+                    ><%= commitment.display_text %></span>
+              <%= link_to commitment.date.strftime('%A, %-m/%-d/%y'),
+                commitments_path(date: commitment.date),
+                class: ('current' if highlight_date == commitment.date) %>
+              <%= link_to commitment_path(commitment), method: :delete, data: {
+                    confirm:
+                      (user == current_user ?
+                       "Do not #{uncapitalize commitment.display_verb} " :
+                       "Remove #{user} from the list ") +
+                      "on #{commitment.date.strftime('%A, %-m/%-d/%y')}?"
+                  } do %>
+                <span class="glyphicon glyphicon-remove-circle cancel"
+                      data-toggle="tooltip" data-placement="right"
+                      <% if user == current_user %>
+                        title="Take me off the list"
+                      <% else %>
+                        title="Remove from the list"
+                      <% end %>
+                      ></span>
+              <% end if can? :destroy, commitment && !frozen?(commitment) %>
+            </li>
+          <% end %>
+        </ul>
+      <% else %>
+        <p class="none">None</p>
+      <% end %>
+    </div>
+  </div>
+<% end %>
