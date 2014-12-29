@@ -42,7 +42,7 @@ class Ability
     can [:create, :suspend, :unsuspend], User if user.is?(:user_manager)
 
     # God
-#    can :manage, :all if user.is?(:admin)
+    can :manage, :all if user.is?(:admin)
 
     # Disallow everything to guests and suspended users (redundant, but safe)
     cannot :manage, :all if user.id.nil? || user.suspended?
