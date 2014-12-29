@@ -26,7 +26,7 @@ class User < ActiveRecord::Base
   alias_method :to_s, :name
 
   def image_url
-    all = identities.select(:image_url).pluck(:image_url).compact
+    all = identities.map { |identity| identity.image_url }.compact
     desirable = all.reject { |url| URI(url).path.include?('silhouette') }
     desirable.first || all.first
   end
