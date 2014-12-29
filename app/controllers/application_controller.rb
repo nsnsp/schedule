@@ -12,6 +12,10 @@ class ApplicationController < ActionController::Base
 
   before_filter :punt_suspended_user, if: -> { current_user.try(:suspended?) }
 
+  def flashify_errors(object)
+    flash.now[:error] = object.errors.full_messages.join(', ')
+  end
+
   def punt_suspended_user
     message = ("I'm afraid your account has been suspended, " \
                "#{current_user.first_name}.")

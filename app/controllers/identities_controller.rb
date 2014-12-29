@@ -29,7 +29,8 @@ class IdentitiesController < ApplicationController
         format.html { redirect_to @identity, notice: 'Identity was successfully updated.' }
         format.json { render :show, status: :ok, location: @identity }
       else
-        format.html { render :edit }
+        flashify_errors(@identity)
+        format.html { render :show }
         format.json { render json: @identity.errors, status: :unprocessable_entity }
       end
     end
@@ -38,10 +39,15 @@ class IdentitiesController < ApplicationController
   # DELETE /identities/1
   # DELETE /identities/1.json
   def destroy
-    @identity.destroy
     respond_to do |format|
-      format.html { redirect_to identities_url, notice: 'Identity was successfully destroyed.' }
-      format.json { head :no_content }
+      if @identity.destroy
+        format.html { redirect_to identities_url, notice: 'Identity was successfully destroyed.' }
+        format.json { head :no_content }
+      else
+        flashify_errors(@identity)
+        format.html { render :show }
+        format.json { render json: @identity.errors, status: :unprocessable_entity }
+      end
     end
   end
 
