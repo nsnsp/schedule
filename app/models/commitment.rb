@@ -3,11 +3,18 @@ class Commitment < ActiveRecord::Base
 
   belongs_to :user, inverse_of: :commitments
 
+  validate :day_not_frozen, on: :create
+  validates :date, inclusion: {
+    in: Season.new.date_range,
+    message: "is not in the #{Season.new} season"
+  }, on: :create
   validates :user, :date, presence: true
   validates :user, uniqueness: {
     scope: :date,
     message: "can't sign up twice on the same day"
   }
+
+  before_destroy :verify_destruction_allowed
 
   def self.to_s
     name.demodulize.underscore.humanize.titleize
@@ -63,6 +70,20 @@ class Commitment < ActiveRecord::Base
 
   def frozen?
     self.class.frozen?(self)
+  end
+
+  private
+
+  def verify_destruction_allowed
+    return true unless frozen?
+    errors[:base] <<
+      "It's too late to cancel for #{date.strftime('%A, %-m/%-d/%y')}"
+    false
+  end
+
+  def day_not_frozen
+    message = "It's too late to sign up for #{date.strftime('%A, %-m/%-d/%y')}"
+    errors[:base] << message if frozen?
   end
 
 end

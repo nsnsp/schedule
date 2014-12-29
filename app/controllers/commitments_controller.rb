@@ -41,33 +41,21 @@ class CommitmentsController < ApplicationController
   # POST /commitments
   # POST /commitments.json
   def create
-    if unavailable?(@commitment.date)
-      respond_to do |format|
-        format.html do
-          message = 'Sign up failed: the date is too soon or too far away.'
-          redirect_to commitments_path(date: @commitment.date), alert: message
-        end
-        format.json { render json: @commitment.errors, status: :unprocessable_entity }
-      end
-      return
-    end
-
     respond_to do |format|
       if @commitment.save
         format.html do
           name = @commitment.user == current_user ? "You're" :
             "#{@commitment.user.name} is"
-          redirect_to commitments_path(date: @commitment.date),
-            notice: "#{name} signed up to " \
-              "#{uncapitalize @commitment.display_verb} on " \
-              "#{@commitment.date.strftime('%A, %-m/%-d/%y')}."
+          notice = "#{name} signed up to " \
+            "#{uncapitalize @commitment.display_verb} on " \
+            "#{@commitment.date.strftime('%A, %-m/%-d/%y')}."
+          redirect_to commitments_path(date: @commitment.date), notice: notice
         end
         format.json { render :show, status: :created, location: @commitment }
       else
         format.html do
-          message = 'Sign up failed: ' \
-            "#{@commitment.errors.full_messages.to_sentence.downcase}."
-          redirect_to commitments_path(date: @commitment.date), alert: message
+          flashify_errors(@commitment)
+          redirect_to commitments_path(date: @commitment.date)
         end
         format.json { render json: @commitment.errors, status: :unprocessable_entity }
       end
@@ -80,18 +68,8 @@ class CommitmentsController < ApplicationController
     date = @commitment.date
     user = @commitment.user
 
-    if frozen?(date)
-      respond_to do |format|
-        format.html do
-          flash[:alert] =
-            "It's too late to cancel for #{date.strftime('%A, %-m/%-d/%y')}."
-          redirect_to commitments_path(date: date)
-        end
-        format.json { head :no_content }
-      end
-    else
-      @commitment.destroy
-      respond_to do |format|
+    respond_to do |format|
+      if @commitment.destroy
         format.html do
           name = user == current_user ? "You're" : "#{user.name} is"
           flash[:info] =
@@ -99,6 +77,10 @@ class CommitmentsController < ApplicationController
           redirect_to commitments_path(date: date)
         end
         format.json { head :no_content }
+      else
+        flashify_errors(@commitment)
+        format.html { redirect_to commitments_path(date: date) }
+        format.json { render json: @commitment.errors, status: :unprocessable_entity }
       end
     end
   end
