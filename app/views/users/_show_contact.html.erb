@@ -8,30 +8,39 @@
     </h1>
   </div>
 
-  <dl class="dl-horizontal">
-    <dt>First name</dt>
-    <dd><%= user.first_name %></dd>
+  <div class="row">
+    <div class="col-sm-9">
+      <dl class="dl-horizontal">
+        <dt>First name</dt>
+        <dd><%= user.first_name %></dd>
 
-    <dt>Last name</dt>
-    <dd><%= user.last_name %></dd>
+        <dt>Last name</dt>
+        <dd><%= user.last_name %></dd>
 
-    <dt>Email</dt>
-    <dd><%= mail_to user.email %></dd>
+        <dt>Email</dt>
+        <dd><%= mail_to user.email %></dd>
 
-    <dt>Phone</dt>
-    <dd><%= dash number_to_phone user.phone, area_code: true %></dd>
+        <dt>Phone</dt>
+        <dd><%= dash number_to_phone user.phone, area_code: true %></dd>
 
-    <% if can? :manage, user %>
-      <dt>ID</dt>
-      <dd><%= user.id %></dd>
+        <% if can? :manage, user %>
+          <dt>ID</dt>
+          <dd><%= user.id %></dd>
 
-      <dt>Created</dt>
-      <dd><%= user.created_at %></dd>
+          <dt>Created</dt>
+          <dd><%= user.created_at %></dd>
 
-      <dt>Updated</dt>
-      <dd><%= user.updated_at %></dd>
-    <% end %>
-  </dl>
+          <dt>Updated</dt>
+          <dd><%= user.updated_at %></dd>
+        <% end %>
+      </dl>
+    </div>
+
+    <div class="col-sm-3">
+      <%= image_tag user.image_url, class: 'pull-right',
+        style: 'max-width: 100%; margin-bottom: 15px' if user.image_url %>
+    </div>
+  </div>
 
   <%= link_to 'Edit profile', edit_user_path(user),
     class: 'btn btn-primary' if can? :edit, user %>
