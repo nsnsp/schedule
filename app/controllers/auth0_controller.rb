@@ -21,18 +21,9 @@ class Auth0Controller < ApplicationController
       failure_message = 'Please ask an administrator to approve your account.'
     end
 
-    greeting = case Time.now.hour
-               when 0...12
-                 'Good morning'
-               when 12...17
-                 'Good afternoon'
-               else
-                 'Good evening'
-               end
-
     handle_identity(
       identity,
-      success_message: -> (user) { "#{greeting}, #{user.first_name}." },
+      success_message: nil,
       failure_message: failure_message)
   end
 
@@ -47,7 +38,6 @@ class Auth0Controller < ApplicationController
   end
 
   def sign_out
-    flash[:info] = 'See you later!'
     redirect_to root_url
   end
 
