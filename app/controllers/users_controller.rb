@@ -100,7 +100,10 @@ class UsersController < ApplicationController
       @user.suspended = true
 
       if @user.save
-        format.html { redirect_to @user, notice: "#{@user.name} has been suspended." }
+        format.html do
+          flash[:warning] = "#{@user.name} has been suspended."
+          redirect_to @user
+        end
         format.json { render :show, status: :ok, location: @user }
       else
         flashify_errors(@user, now: true)
