@@ -10,8 +10,9 @@ class User < ActiveRecord::Base
   has_many :commitments, inverse_of: :user, dependent: :restrict_with_error
   has_many :identities, inverse_of: :user, dependent: :destroy
 
+  validate :unique_name
   validates :first_name, :last_name, presence: true
-  validates :email, format: {
+  validates :email, uniqueness: true, format: {
     with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i
   }
 
@@ -21,4 +22,12 @@ class User < ActiveRecord::Base
   strip_attributes collapse_spaces: true
 
   alias_method :to_s, :name
+
+  private
+
+  def unique_name
+    errors[:base] << "A user named #{name} already exists." if self.class.
+      where(first_name: first_name, last_name: last_name).
+      where.not(id: id).exists?
+  end
 end
