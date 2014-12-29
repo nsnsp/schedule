@@ -3,41 +3,51 @@
     <h1>Identity <%= @identity.id %></h1>
   </div>
 
-  <dl class="dl-horizontal">
-    <dt>ID</dt>
-    <dd><%= @identity.id %></dd>
+  <div class="row">
+    <div class="col-sm-10">
+      <dl class="dl-horizontal">
+        <dt>ID</dt>
+        <dd><%= @identity.id %></dd>
 
-    <dt>Provider</dt>
-    <dd><%= @identity.provider %></dd>
+        <dt>Provider</dt>
+        <dd><%= @identity.provider %></dd>
 
-    <dt>Name</dt>
-    <dd><%= dash @identity.name %></dd>
+        <dt>Name</dt>
+        <dd><%= dash @identity.name %></dd>
 
-    <dt>Email</dt>
-    <dd><%= @identity.email %></dd>
+        <dt>Email</dt>
+        <dd><%= @identity.email %></dd>
 
-    <dt>Email Trusted</dt>
-    <dd><%= bool_icon @identity.email_trusted? %></dd>
+        <dt>Email Trusted</dt>
+        <dd><%= bool_icon @identity.email_trusted? %></dd>
 
-    <dt>User</dt>
-    <dd>
-      <% if @identity.user %>
-        <% if can? :show, @identity.user %>
-          <%= link_to @identity.user, @identity.user %>
-        <% else %>
-          <%= @identity.user %>
-        <% end %>
-      <% else %>
-        --
-      <% end %>
-    </dd>
+        <dt>User</dt>
+        <dd>
+          <% if @identity.user %>
+            <% if can? :show, @identity.user %>
+              <%= link_to @identity.user, @identity.user %>
+            <% else %>
+              <%= @identity.user %>
+            <% end %>
+          <% else %>
+            --
+          <% end %>
+        </dd>
 
-    <dt>Created</dt>
-    <dd><%= @identity.created_at %></dd>
+        <dt>Created</dt>
+        <dd><%= @identity.created_at %></dd>
 
-    <dt>Updated</dt>
-    <dd><%= @identity.updated_at %></dd>
-  </dl>
+        <dt>Updated</dt>
+        <dd><%= @identity.updated_at %></dd>
+      </dl>
+
+    </div>
+
+    <div class="col-sm-2">
+      <%= image_tag @identity.image_url, class: 'pull-right',
+        style: 'max-width: 100%; margin-bottom: 15px' %>
+    </div>
+  </div>
 
   <% if @identity.user.nil? %>
     <div class="panel panel-default">
@@ -61,7 +71,8 @@
           <p>
             <%= f.collection_select :user_id, User.all.order(:last_name), :id,
               -> (user) { "#{user.id}: #{user.name} (#{user.email})" },
-              { prompt: '', order: :name }, required: true %>
+              { prompt: '', order: :name }, required: true,
+              class: 'form-control' %>
           </p>
         </div>
 
