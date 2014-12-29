@@ -37,8 +37,8 @@ class Ability
     can :destroy, Commitment, user_id: user.id
 
     # User
-    can :index, User
-    can [:show, :update], User, id: user.id
+    can :read, User
+    can :update, User, id: user.id
     # TODO: allow some special'ish users to create new users
 
     # God

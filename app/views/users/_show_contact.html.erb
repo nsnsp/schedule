@@ -1,0 +1,29 @@
+<% user = locals.fetch(:user) %>
+
+<div class="well">
+  <div class="page-header">
+    <h1><%= user.name %></h1>
+  </div>
+
+  <dl class="dl-horizontal">
+    <% if can? :manage, user %>
+      <dt>ID</dt>
+      <dd><%= user.id %></dd>
+    <% end %>
+
+    <dt>Email</dt>
+    <dd><%= mail_to user.email %></dd>
+
+    <% if can? :manage, user %>
+      <dt>Created</dt>
+      <dd><%= user.created_at %></dd>
+
+      <dt>Updated</dt>
+      <dd><%= user.updated_at %></dd>
+    <% end %>
+  </dl>
+
+  <%= link_to 'Destroy', user, method: :delete,
+    class: 'btn btn-danger', data: { confirm: "Destroy user #{user}?" } if
+      can? :destroy, user %>
+</div>

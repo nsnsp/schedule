@@ -11,11 +11,7 @@
           <li>
             <span class="label label-<%= commitment.bootstrap_class_suffix %>"
                   ><%= commitment.display_text %></span>
-            <% if can? :show, commitment %>
-              <%= link_to commitment.user.name, commitment_path(commitment) %>
-            <% else %>
-              <%= commitment.user.name %>
-            <% end %>
+            <%= link_to commitment.user.name, commitment.user %>
           </li>
         <% end %>
       </ul>

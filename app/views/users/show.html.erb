@@ -1,4 +1,23 @@
-<p id="notice"><%= notice %></p>
+<div class="row">
+  <div class="col-md-8">
+    <%= render 'show_contact', locals: { user: @user } %>
+  </div>
+  <div class="col-md-4">
+    <%= render 'commitments/user_commitments', locals: {
+      season: Season.new,
+      show_none: true,
+      user: @user
+    } %>
+  </div>
+</div>
 
-<%= link_to 'Edit', edit_user_path(@user) %> |
-<%= link_to 'Back', users_path %>
+<% if can? :manage, @user %>
+  <div class="well">
+    <h2>Identities <small><%= @user.identities.count %></small></h2>
+    <%= render 'identities/list', locals: { identities: @user.identities } %>
+  </div>
+
+  <div class="well">
+    <%= render 'shared/versions_table', locals: { object: @user } %>
+  </div>
+<% end %>

@@ -21,7 +21,7 @@
             <% if can? :manage, User %>
               <td><%= link_to user.id, user %></td>
             <% end %>
-            <td itemprop="name"><%= user.name %></td>
+            <td itemprop="name"><%= link_to user.name, user %></td>
             <td><%= mail_to user.email %></td>
             <td>
               <% @commitment_classes.each do |klass| %>
