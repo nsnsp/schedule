@@ -25,6 +25,18 @@ class Commitment < ActiveRecord::Base
     1
   end
 
+  def self.last_frozen_date
+    Date.tomorrow
+  end
+
+  def self.frozen?(date)
+    date.to_date <= last_frozen_date
+  end
+
+  def self.unavailable?(date)
+    frozen?(date.to_date) || !Season.new.include?(date)
+  end
+
   def to_s
     "#{self.class.display_text} on #{date} for #{user}"
   end
@@ -47,6 +59,10 @@ class Commitment < ActiveRecord::Base
 
   def display_verb
     self.class.display_verb
+  end
+
+  def frozen?
+    self.class.frozen?(self)
   end
 
 end

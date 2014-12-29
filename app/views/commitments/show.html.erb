@@ -23,7 +23,7 @@
     </dd>
 
     <dt>Frozen</dt>
-    <dd><%= bool_icon frozen?(@commitment) %></dd>
+    <dd><%= bool_icon @commitment.frozen? %></dd>
 
     <dt>Created</dt>
     <dd><%= @commitment.created_at %></dd>

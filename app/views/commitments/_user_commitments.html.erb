@@ -40,7 +40,7 @@
                         title="Remove from the list"
                       <% end %>
                       ></span>
-              <% end if can? :destroy, commitment && !frozen?(commitment) %>
+              <% end if can?(:destroy, commitment) && !commitment.frozen? %>
             </li>
           <% end %>
         </ul>

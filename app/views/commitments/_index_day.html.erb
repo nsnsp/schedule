@@ -1,13 +1,19 @@
+<%
+  date = locals.fetch(:date)
+  my_commitment = locals.fetch(:my_commitment)
+  commitments = locals.fetch(:commitments)
+%>
+
 <div class="panel panel-default day">
 
   <div class="panel-heading">
-    <h2 class="panel-title"><%= locals[:date].strftime('%A, %-m/%-d/%y') %></h2>
+    <h2 class="panel-title"><%= date.strftime('%A, %-m/%-d/%y') %></h2>
   </div>
 
   <div class="panel-body">
-    <% if locals.fetch(:commitments).present? %>
+    <% if commitments.present? %>
       <ul class="commitment-list">
-        <% locals.fetch(:commitments).each do |commitment| %>
+        <% commitments.each do |commitment| %>
           <li>
             <span class="label label-<%= commitment.bootstrap_class_suffix %>"
                   ><%= commitment.display_text %></span>
@@ -20,19 +26,19 @@
     <% end %>
   </div>
 
-  <% if locals.fetch(:my_commitment) %>
+  <% if my_commitment %>
     <div class="panel-footer">
       <div class="actions">
         <div class="action" data-toggle="tooltip" data-placement="left"
-             title="<%= 'Too late to cancel' if frozen?(locals.fetch(:date)) %>"
+             title="<%= 'Too late to cancel' if frozen?(date) %>"
              >
-          <%= link_to commitment_path(locals.fetch(:my_commitment)),
+          <%= link_to commitment_path(my_commitment),
             method: :delete, class: 'btn btn-default', data: {
               disable_with: 'Taking you off the list…',
-              confirm: "Do not #{uncapitalize locals.fetch(:my_commitment).display_verb} " \
-                       "on #{locals.fetch(:my_commitment).date.strftime('%A, %-m/%-d/%y')}?"
-            }, disabled: frozen?(locals.fetch(:date)) do %>
-            <% if frozen?(locals.fetch(:date)) %>
+              confirm: "Do not #{uncapitalize my_commitment.display_verb} " \
+                       "on #{my_commitment.date.strftime('%A, %-m/%-d/%y')}?"
+            }, disabled: frozen?(date) do %>
+            <% if frozen?(date) %>
               <span class="glyphicon glyphicon-lock"></span>
             <% end %>
             Take me off the list
@@ -44,14 +50,12 @@
     <div class="panel-footer">
       <div class="actions">
         <div class="action" data-toggle="tooltip" data-placement="left"
-             title="<%= frozen?(locals.fetch(:date)) ?
-               'Too late to sign up' :
-               "Can't sign up for #{locals.fetch(:date).strftime('%Y')} yet" if
-                 unavailable?(locals.fetch(:date)) %>">
+             title="<%= frozen?(date) ? 'Too late to sign up' :
+                         'This date is out of season' if unavailable?(date) %>">
           <%= button_tag type: :button, class: 'btn btn-primary',
             data: { toggle: 'modal', target: '#signupModal' },
-            disabled: unavailable?(locals.fetch(:date)) do %>
-            <% if unavailable?(locals.fetch(:date)) %>
+            disabled: unavailable?(date) do %>
+            <% if unavailable?(date) %>
               <span class="glyphicon glyphicon-lock"></span>
             <% end %>
             Sign up

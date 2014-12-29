@@ -16,6 +16,10 @@ class Season
       Date.new(starting_year + 1, BOUNDARY_MONTH, 1)
   end
 
+  def include?(date)
+    date_range.include?(date.to_date)
+  end
+
   def to_s
     "#{starting_year}/#{starting_year + 1}"
   end

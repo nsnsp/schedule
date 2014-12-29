@@ -44,10 +44,10 @@ class ApplicationController < ActionController::Base
   end
 
   def frozen?(date)
-    date.to_date < 1.day.from_now
+    Commitment.frozen?(date)
   end
 
   def unavailable?(date)
-    frozen?(date.to_date) || date.to_date > 1.year.from_now
+    Commitment.unavailable?(date)
   end
 end
