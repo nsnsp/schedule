@@ -32,10 +32,13 @@
     <dd><%= @commitment.updated_at %></dd>
   </dl>
 
-  <%= render 'shared/versions_table', locals: { object: @commitment } %>
-
   <%= link_to 'Back', commitments_path(date: @commitment.date),
     class: 'btn btn-default' %>
   <%= link_to 'Destroy', commitment_path(@commitment), method: :delete,
-    data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %>
+    data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' if
+      can? :destroy, @commitment %>
+</div>
+
+<div class="well">
+  <%= render 'shared/versions_table', locals: { object: @commitment } %>
 </div>
