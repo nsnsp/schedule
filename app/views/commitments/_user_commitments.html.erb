@@ -22,25 +22,46 @@
             <li>
               <span class="label label-<%= commitment.bootstrap_class_suffix %>"
                     ><%= commitment.display_text %></span>
-              <%= link_to commitment.date.strftime('%A, %-m/%-d/%y'),
-                commitments_path(date: commitment.date),
-                class: ('current' if highlight_date == commitment.date) %>
-              <%= link_to commitment_path(commitment), method: :delete, data: {
-                    confirm:
-                      (user == current_user ?
-                       "Do not #{uncapitalize commitment.display_verb} " :
-                       "Remove #{user} from the list ") +
-                      "on #{commitment.date.strftime('%A, %-m/%-d/%y')}?"
+
+              <% if highlight_date == commitment.date %>
+                <mark>
+                  <strong>
+                    <%= link_to commitment.date.strftime('%A, %-m/%-d/%y'),
+                      commitments_path(date: commitment.date) %>
+                  </strong>
+                </mark>
+              <% else %>
+                <%= link_to commitment.date.strftime('%A, %-m/%-d/%y'),
+                  commitments_path(date: commitment.date) %>
+              <% end %>
+
+              <%= link_to commitment_path(commitment) do %>
+                <span class="glyphicon glyphicon-info-sign pull-right hidden-xs"></span>
+              <% end if can? :manage, commitment %>
+
+              <% if can? :destroy, commitment %>
+                <% if commitment.frozen? %>
+                  <span class="glyphicon glyphicon-lock locked hidden-xs"></span>
+                <% else %>
+                  <%= link_to commitment_path(commitment), method: :delete,
+                    data: {
+                      confirm:
+                        (user == current_user ?
+                          "Do not #{uncapitalize commitment.display_verb} " :
+                          "Remove #{user} from the list ") +
+                        "on #{commitment.date.strftime('%A, %-m/%-d/%y')}?"
                   } do %>
-                <span class="glyphicon glyphicon-remove-circle cancel hidden-xs"
-                      data-toggle="tooltip" data-placement="right"
-                      <% if user == current_user %>
-                        title="Take me off the list"
-                      <% else %>
-                        title="Remove from the list"
-                      <% end %>
-                      ></span>
-              <% end if can?(:destroy, commitment) && !commitment.frozen? %>
+                    <span class="glyphicon glyphicon-remove-circle cancel hidden-xs"
+                          data-toggle="tooltip" data-placement="left"
+                          <% if user == current_user %>
+                            title="Take me off the list"
+                          <% else %>
+                            title="Remove from the list"
+                          <% end %>
+                    ></span>
+                  <% end %>
+                <% end %>
+              <% end %>
             </li>
           <% end %>
         </ul>

@@ -1,4 +1,9 @@
 .user-commitments {
+  li .glyphicon {
+    float: right;
+    margin-left: .25em;
+  }
+
   .cancel {
     color: tomato;
 
@@ -7,7 +12,7 @@
     }
   }
 
-  .current {
-    font-weight: bold;
+  .locked {
+    color: darkGray;
   }
 }
