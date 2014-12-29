@@ -1,6 +1,5 @@
-<!-- Modal -->
-<div class="modal fade" id="signupModal" tabindex="-1" role="dialog"
-     aria-labelledby="signupModalLabel" aria-hidden="true">
+<div class="modal fade" id="commitmentCreationModal" tabindex="-1" role="dialog"
+     aria-labelledby="commitmentCreationModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <%= form_for locals.fetch(:new_commitment) do |f| %>
@@ -9,8 +8,8 @@
 
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-          <h4 class="modal-title" id="signupModalLabel">
-            <%= locals.fetch(:date).strftime('%A, %-m/%-d/%y') %>
+          <h4 class="modal-title" id="commitmentCreationModalLabel">
+            <%= locals.fetch(:new_commitment).date.strftime('%A, %-m/%-d/%y') %>
           </h4>
         </div>
         <div class="modal-body">

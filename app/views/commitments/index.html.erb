@@ -28,11 +28,6 @@
   </div>
 </div>
 
-<%= render 'index_signup_modal', locals: {
-  date: @date,
-  new_commitment: @new_commitment
-} %>
-
 <%= javascript_tag do %>
   var NSNSP = NSNSP || {};
   NSNSP.commitments = NSNSP.commitments || {

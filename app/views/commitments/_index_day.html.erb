@@ -53,7 +53,7 @@
              title="<%= frozen?(date) ? 'Too late to sign up' :
                          'This date is out of season' if unavailable?(date) %>">
           <%= button_tag type: :button, class: 'btn btn-primary',
-            data: { toggle: 'modal', target: '#signupModal' },
+            data: { toggle: 'modal', target: '#commitmentCreationModal' },
             disabled: unavailable?(date) do %>
             <% if unavailable?(date) %>
               <span class="glyphicon glyphicon-lock"></span>
@@ -65,3 +65,6 @@
     </div>
   <% end %>
 </div>
+
+<%= render 'creation_modal', locals: { new_commitment: @new_commitment } if
+  can? :create, Commitment %>
