@@ -31,6 +31,9 @@ class Ability
 
     user ||= User.new # guest user (not logged in)
 
+    # God (but allow to be overridden by subsequent 'cannot' invocations)
+    can :manage, :all if user.is?(:admin)
+
     # Commitment
     can :index, Commitment
     can :create, Commitment, user_id: user.id if user.is?(:national)
@@ -39,10 +42,8 @@ class Ability
     # User
     can :read, User
     can :update, User, id: user.id
-    can [:create, :suspend, :unsuspend], User if user.is?(:user_manager)
-
-    # God
-    can :manage, :all if user.is?(:admin)
+    can :manage, User if user.is?(:user_manager)
+    cannot [:destroy, :suspend, :unsuspend], User, id: user.id
 
     # Disallow everything to guests and suspended users (redundant, but safe)
     cannot :manage, :all if user.id.nil? || user.suspended?
