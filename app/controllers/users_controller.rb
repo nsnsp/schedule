@@ -56,7 +56,7 @@ class UsersController < ApplicationController
         format.html { redirect_to @user, notice: 'User was successfully created.' }
         format.json { render :show, status: :created, location: @user }
       else
-        flashify_errors(@user)
+        flashify_errors(@user, now: true)
         format.html { render :new }
         format.json { render json: @user.errors, status: :unprocessable_entity }
       end
@@ -71,7 +71,7 @@ class UsersController < ApplicationController
         format.html { redirect_to @user, notice: 'User was successfully updated.' }
         format.json { render :show, status: :ok, location: @user }
       else
-        flashify_errors(@user)
+        flashify_errors(@user, now: true)
         format.html { render :edit }
         format.json { render json: @user.errors, status: :unprocessable_entity }
       end
@@ -86,7 +86,7 @@ class UsersController < ApplicationController
         format.html { redirect_to users_url, notice: 'User was successfully destroyed.' }
         format.json { head :no_content }
       else
-        flashify_errors(@user)
+        flashify_errors(@user, now: true)
         format.html { render :show }
         format.json { render json: @user.errors, status: :unprocessable_entity }
       end
@@ -103,7 +103,7 @@ class UsersController < ApplicationController
         format.html { redirect_to @user, notice: "#{@user.name} has been suspended." }
         format.json { render :show, status: :ok, location: @user }
       else
-        flashify_errors(@user)
+        flashify_errors(@user, now: true)
         format.html { render :show }
         format.json { render json: @user.errors, status: :unprocessable_entity }
       end
@@ -120,7 +120,7 @@ class UsersController < ApplicationController
         format.html { redirect_to @user, notice: "#{@user.name} has been unsuspended." }
         format.json { render :show, status: :ok, location: @user }
       else
-        flashify_errors(@user)
+        flashify_errors(@user, now: true)
         format.html { render :show }
         format.json { render json: @user.errors, status: :unprocessable_entity }
       end

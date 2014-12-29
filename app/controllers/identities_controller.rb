@@ -29,7 +29,7 @@ class IdentitiesController < ApplicationController
         format.html { redirect_to @identity, notice: 'Identity was successfully updated.' }
         format.json { render :show, status: :ok, location: @identity }
       else
-        flashify_errors(@identity)
+        flashify_errors(@identity, now: true)
         format.html { render :show }
         format.json { render json: @identity.errors, status: :unprocessable_entity }
       end
@@ -44,7 +44,7 @@ class IdentitiesController < ApplicationController
         format.html { redirect_to identities_url, notice: 'Identity was successfully destroyed.' }
         format.json { head :no_content }
       else
-        flashify_errors(@identity)
+        flashify_errors(@identity, now: true)
         format.html { render :show }
         format.json { render json: @identity.errors, status: :unprocessable_entity }
       end
