@@ -2,21 +2,9 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-@media (max-width: 767px) {
-  #calendar-container {
-    display: none;
-  }
-}
-
 .date-input-container {
   text-align: right;
   margin-bottom: 15px;
-}
-
-@media (min-width: 768px) {
-  .date-input-container {
-    display: none;
-  }
 }
 
 .none {
