@@ -20,8 +20,8 @@
           <% user = User.find(version.whodunnit) rescue nil %>
           <% name = user.name rescue version.whodunnit %>
           <% roles = user.try(:roles).try(:to_sentence).try(:capitalize) %>
-          <% exclude = Array(locals[:exclude]).map { |x| x.to_s } %>
-          <% changes = Array(version.changeset).reject { |c| c[0].in? exclude } %>
+          <% ex = Array(locals[:exclude]).map { |x| x.to_s } << 'updated_at' %>
+          <% changes = Array(version.changeset).reject { |c| c[0].in? ex } %>
           <tr class="<%= even_odd(i) %>">
             <td rowspan="<%= changes.count %>">
               <%= version.created_at.in_time_zone(timezone) %>
