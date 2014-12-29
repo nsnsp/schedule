@@ -1,4 +1,4 @@
-<div class="row date-input-container visible-xs-block">
+<div class="row date-input-container visible-xs-block hidden-print">
   <div class="col-sm-12">
     <%= date_field_tag :date, @date %>
     <%= button_tag 'Go', class: 'btn btn-default' %>
@@ -12,14 +12,17 @@
       date: @date,
       my_commitment: @my_commitment
     } %>
-    <%= render 'user_commitments', locals: {
-      highlight_date: @date,
-      season: Season.new,
-      user: current_user
-    } %>
+
+    <div class="hidden-print">
+      <%= render 'user_commitments', locals: {
+        highlight_date: @date,
+        season: Season.new,
+        user: current_user
+      } %>
+    </div>
   </div>
 
-  <div class="col-md-8 col-md-pull-4 hidden-xs invisible"
+  <div class="col-md-8 col-md-pull-4 hidden-xs hidden-print invisible"
        id="calendar-container">
     <div class="panel panel-default">
       <div class="panel-body">

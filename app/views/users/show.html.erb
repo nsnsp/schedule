@@ -11,12 +11,14 @@
   </div>
 </div>
 
-<% if can? :manage, @user %>
+<% if can? :read, Identity %>
   <div class="well">
     <h2>Identities <small><%= @user.identities.count %></small></h2>
     <%= render 'identities/list', locals: { identities: @user.identities } %>
   </div>
+<% end %>
 
+<% if can? :manage, @user %>
   <div class="well">
     <%= render 'shared/versions_table', locals: { object: @user } %>
   </div>

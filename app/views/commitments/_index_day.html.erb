@@ -4,10 +4,26 @@
   commitments = locals.fetch(:commitments)
 %>
 
+<div class="page-header visible-print-block">
+  <h1>
+    National Schedule
+    <small><%= Time.now.strftime('as of %-l:%M%P, %-m/%-d/%y') %></small>
+  </h1>
+</div>
+
 <div class="panel panel-default day">
 
   <div class="panel-heading">
-    <h2 class="panel-title"><%= date.strftime('%A, %-m/%-d/%y') %></h2>
+    <h2 class="panel-title">
+      <%= date.strftime('%A, %-m/%-d/%y') %>
+      <%= link_to 'javascript:window.print()', id: 'print-schedule',
+        class: 'pull-right hidden-xs hidden-print', title: 'Print schedule',
+        data: {
+          toggle: 'tooltip', placement: 'left', container: '#print-schedule'
+        } do %>
+        <span class="glyphicon glyphicon-print"></span>
+      <% end %>
+    </h2>
   </div>
 
   <div class="panel-body">
@@ -17,7 +33,11 @@
           <li>
             <span class="label label-<%= commitment.bootstrap_class_suffix %>"
                   ><%= commitment.display_text %></span>
-            <%= link_to commitment.user.name, commitment.user %>
+            <span class="visible-print-inline">
+              <%= commitment.user.name %>
+            </span>
+            <%= link_to commitment.user.name, commitment.user,
+              class: 'hidden-print' %>
           </li>
         <% end %>
       </ul>
@@ -27,7 +47,7 @@
   </div>
 
   <% if my_commitment %>
-    <div class="panel-footer">
+    <div class="panel-footer hidden-print">
       <div class="actions">
         <div class="action" data-toggle="tooltip" data-placement="left"
              title="<%= 'Too late to cancel' if frozen?(date) %>"
@@ -47,7 +67,7 @@
       </div>
     </div>
   <% elsif can? :create, Commitment %>
-    <div class="panel-footer">
+    <div class="panel-footer hidden-print">
       <div class="actions">
         <div class="action" data-toggle="tooltip" data-placement="left"
              title="<%= frozen?(date) ? 'Too late to sign up' :
