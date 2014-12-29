@@ -2,7 +2,8 @@ class User < ActiveRecord::Base
   include Nameable
   include RoleModel
 
-  roles :admin, :national
+  # do not reorder this array (only add new members to the end)
+  roles :admin, :national, :user_manager
 
   has_paper_trail
 

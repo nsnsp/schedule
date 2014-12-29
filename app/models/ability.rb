@@ -39,10 +39,10 @@ class Ability
     # User
     can :read, User
     can :update, User, id: user.id
-    # TODO: allow some special'ish users to create new users
+    can [:create, :suspend, :unsuspend], User if user.is?(:user_manager)
 
     # God
-    can :manage, :all if user.is?(:admin)
+#    can :manage, :all if user.is?(:admin)
 
     # Disallow everything to guests and suspended users (redundant, but safe)
     cannot :manage, :all if user.id.nil? || user.suspended?

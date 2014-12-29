@@ -5,7 +5,7 @@ class UsersController < ApplicationController
   # GET /users.json
   def index
     @users = @users.order(:suspended, :last_name)
-    @users = @users.active unless can? :manage, User
+    @users = @users.active unless can? :unsuspend, User
     @season = Season.new
     @commitment_classes =
       Commitment.select(:type).uniq.pluck(:type).map { |type| type.constantize }
@@ -84,6 +84,40 @@ class UsersController < ApplicationController
       if @user.destroy
         format.html { redirect_to users_url, notice: 'User was successfully destroyed.' }
         format.json { head :no_content }
+      else
+        flashify_errors(@user)
+        format.html { render :show }
+        format.json { render json: @user.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  # PUT /users/1/suspend
+  # PUT /users/1/suspend.json
+  def suspend
+    respond_to do |format|
+      @user.suspended = true
+
+      if @user.save
+        format.html { redirect_to @user, notice: "#{@user.name} has been suspended." }
+        format.json { render :show, status: :ok, location: @user }
+      else
+        flashify_errors(@user)
+        format.html { render :show }
+        format.json { render json: @user.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  # PUT /users/1/unsuspend
+  # PUT /users/1/unsuspend.json
+  def unsuspend
+    respond_to do |format|
+      @user.suspended = false
+
+      if @user.save
+        format.html { redirect_to @user, notice: "#{@user.name} has been unsuspended." }
+        format.json { render :show, status: :ok, location: @user }
       else
         flashify_errors(@user)
         format.html { render :show }

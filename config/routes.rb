@@ -8,7 +8,12 @@ Rails.application.routes.draw do
 
   resources :commitments, only: [:index, :show, :create, :destroy]
   resources :identities, only: [:index, :show, :update, :destroy]
-  resources :users
+  resources :users do
+    member do
+      put 'suspend'
+      put 'unsuspend'
+    end
+  end
 
   # auth0
   get '/auth/auth0/callback' => 'auth0#callback'
