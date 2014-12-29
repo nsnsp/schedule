@@ -18,15 +18,18 @@
     <dt>Email</dt>
     <dd><%= mail_to user.email %></dd>
 
+    <dt>Phone</dt>
+    <dd><%= dash number_to_phone user.phone, area_code: true %></dd>
+
     <% if can? :manage, user %>
+      <dt>ID</dt>
+      <dd><%= user.id %></dd>
+
       <dt>Created</dt>
       <dd><%= user.created_at %></dd>
 
       <dt>Updated</dt>
       <dd><%= user.updated_at %></dd>
-
-      <dt>ID</dt>
-      <dd><%= user.id %></dd>
     <% end %>
   </dl>
 

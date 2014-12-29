@@ -9,6 +9,7 @@
         <tr>
           <% if can? :manage, User %><th>ID</th><% end %>
           <th>Name</th>
+          <th>Phone</th>
           <th>Email</th>
           <th>Days <small>(<%= @season %>)</small></th>
         </tr>
@@ -22,6 +23,7 @@
               <td><%= link_to user.id, user %></td>
             <% end %>
             <td itemprop="name"><%= link_to user.name, user %></td>
+            <td><%= number_to_phone user.phone, area_code: true %></td>
             <td><%= mail_to user.email %></td>
             <td>
               <% @commitment_classes.each do |klass| %>

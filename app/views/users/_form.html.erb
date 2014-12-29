@@ -3,7 +3,7 @@
     <%= f.label :first_name, class: 'col-sm-2 control-label' %>
     <div class="col-sm-10">
       <%= f.text_field :first_name, class: 'form-control',
-        placeholder: true, required: true %>
+        placeholder: 'John', required: true %>
     </div>
   </div>
 
@@ -11,7 +11,7 @@
     <%= f.label :last_name, class: 'col-sm-2 control-label' %>
     <div class="col-sm-10">
       <%= f.text_field :last_name, class: 'form-control',
-        placeholder: true, required: true %>
+        placeholder: 'Doe', required: true %>
     </div>
   </div>
 
@@ -19,7 +19,16 @@
     <%= f.label :email, class: 'col-sm-2 control-label' %>
     <div class="col-sm-10">
       <%= f.email_field :email, class: 'form-control',
-        placeholder: true, required: true %>
+        placeholder: 'john@acme.com', required: true %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :phone, class: 'col-sm-2 control-label' %>
+    <div class="col-sm-10">
+      <%= f.phone_field :phone, class: 'form-control',
+        value: number_to_phone(@user.phone, area_code: true),
+        placeholder: '(888) 555-1212', pattern: '^\D*(?:\d\D*){10}$' %>
     </div>
   </div>
 

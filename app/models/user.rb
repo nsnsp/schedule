@@ -12,6 +12,7 @@ class User < ActiveRecord::Base
 
   validate :unique_name
   validates :first_name, :last_name, presence: true
+  validates :phone, format: { with: /\A\D*(?:\d\D*){10}\z/ }, allow_nil: true
   validates :email, uniqueness: true, format: {
     with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i
   }
@@ -20,6 +21,7 @@ class User < ActiveRecord::Base
   scope :suspended, -> { where(suspended: true) }
 
   strip_attributes collapse_spaces: true
+  strip_attributes only: [:phone], regex: /\D/
 
   alias_method :to_s, :name
 
