@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+  before_filter :build_user, only: :create
   load_and_authorize_resource
 
   # GET /users
@@ -68,7 +69,12 @@ class UsersController < ApplicationController
   def update
     respond_to do |format|
       if @user.update(user_params)
-        format.html { redirect_to @user, notice: 'User was successfully updated.' }
+        format.html do
+          message = @user == current_user ?
+            'Your information has been updated.' :
+            "#{@user.name}'s information has been updated."
+          redirect_to @user, notice: message
+        end
         format.json { render :show, status: :ok, location: @user }
       else
         flashify_errors(@user, now: true)
@@ -131,8 +137,14 @@ class UsersController < ApplicationController
   end
 
   private
+
     # Never trust parameters from the scary internet, only allow the white list through.
-    def user_params
-      params[:user]
-    end
+  def user_params
+     params.require(:user).permit(:email, :first_name, :last_name)
+  end
+
+  def build_user
+    @user = User.new(user_params)
+  end
+
 end

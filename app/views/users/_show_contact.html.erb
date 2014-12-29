@@ -3,16 +3,17 @@
 <div class="well">
   <div class="page-header">
     <h1>
-      <%= user.name %>
+      <%= user == current_user ? 'My Profile' : user.name %>
       <% if user.suspended? %><small>Suspended</small><% end %>
     </h1>
   </div>
 
   <dl class="dl-horizontal">
-    <% if can? :manage, user %>
-      <dt>ID</dt>
-      <dd><%= user.id %></dd>
-    <% end %>
+    <dt>First name</dt>
+    <dd><%= user.first_name %></dd>
+
+    <dt>Last name</dt>
+    <dd><%= user.last_name %></dd>
 
     <dt>Email</dt>
     <dd><%= mail_to user.email %></dd>
@@ -23,20 +24,35 @@
 
       <dt>Updated</dt>
       <dd><%= user.updated_at %></dd>
+
+      <dt>ID</dt>
+      <dd><%= user.id %></dd>
     <% end %>
   </dl>
 
+  <%= link_to 'Edit profile', edit_user_path(user),
+    class: 'btn btn-primary' if can? :edit, user %>
+
   <% if user.suspended? %>
     <%= link_to 'Unsuspend', unsuspend_user_path(user), method: :put,
-      class: 'btn btn-success', data: { confirm: "Unsuspend user #{user}?" } if
-        can? :unsuspend, user %>
+      class: 'btn btn-success',
+      data: {
+        confirm: "Unsuspend #{user}'s account?",
+        disable_with: "Unsuspending…"
+      } if can? :unsuspend, user %>
   <% else %>
     <%= link_to 'Suspend', suspend_user_path(user), method: :put,
-      class: 'btn btn-warning', data: { confirm: "Suspend user #{user}?" } if
-        can? :suspend, user %>
+      class: 'btn btn-warning',
+      data: {
+        confirm: "Suspend #{user}'s account?",
+        disable_with: "Suspending…"
+      } if can? :suspend, user %>
   <% end %>
 
   <%= link_to 'Destroy', user, method: :delete,
-    class: 'btn btn-danger', data: { confirm: "Destroy user #{user}?" } if
-      can? :destroy, user %>
+    class: 'btn btn-danger',
+    data: {
+      confirm: "Destroy #{user}'s account?",
+      disable_with: "Destroying…"
+    } if can?(:destroy, user) && user.commitments.empty? %>
 </div>
