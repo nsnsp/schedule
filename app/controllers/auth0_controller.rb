@@ -72,8 +72,8 @@ class Auth0Controller < ApplicationController
 
     handle_identity(identity,
                     success_message: "Email address verified – you're all set!",
-                    failure_message: 'Email address verified – please ask ' \
-                                     'an administrator to approve your account')
+                    failure_message: 'Email address verified – please ask an ' \
+                                     'administrator to approve your account.')
   end
 
   def password_reset
