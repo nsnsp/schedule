@@ -11,7 +11,10 @@
     <table class="table table-striped table-condensed table-compact">
       <thead>
         <tr>
-          <% if can? :manage, User %><th class="hidden-print">ID</th><% end %>
+          <% if can? :manage, User %>
+            <th class="hidden-print">ID</th>
+            <th class="hidden-print">Roles</th>
+          <% end %>
           <th>Name</th>
           <th>Phone</th>
           <th class="hidden-print">Email</th>
@@ -26,6 +29,7 @@
               itemscope itemtype="http://data-vocabulary.org/Person">
             <% if can? :manage, User %>
               <td class="hidden-print"><%= link_to user.id, user %></td>
+              <td class="hidden-print"><%= roles(user) %></td>
             <% end %>
             <td itemprop="name">
               <span class="visible-print-inline"><%= user.name %></span>

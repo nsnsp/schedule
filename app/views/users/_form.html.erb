@@ -32,6 +32,24 @@
     </div>
   </div>
 
+  <% if can? :manage, @user %>
+    <div class="form-group">
+      <%= f.label :roles, class: 'col-sm-2 control-label' %>
+      <div class="col-sm-10">
+        <%= f.fields_for :roles do |roles| %>
+          <% User.valid_roles.sort.each do |role| %>
+            <div class="checkbox">
+              <%= roles.label role do %>
+                <%= roles.check_box role, checked: @user.is?(role) %>
+                <%= role.to_s.humanize %>
+              <% end %>
+            </div>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+
   <div class="form-group">
     <div class="col-sm-offset-2 col-sm-10">
       <%= f.submit @user.new_record? ? 'Create user' : 'Save profile',

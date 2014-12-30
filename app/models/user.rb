@@ -3,7 +3,7 @@ class User < ActiveRecord::Base
   include RoleModel
 
   # do not reorder this array (only add new members to the end)
-  roles :admin, :national, :user_manager
+  roles :admin, :national, :user_manager, :paid_staff
 
   has_paper_trail
 

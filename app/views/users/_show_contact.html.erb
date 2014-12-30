@@ -24,6 +24,9 @@
         <dd><%= dash number_to_phone user.phone, area_code: true %></dd>
 
         <% if can? :manage, user %>
+          <dt>Roles</dt>
+          <dd><%= roles(user) %></dd>
+
           <dt>ID</dt>
           <dd><%= user.id %></dd>
 
