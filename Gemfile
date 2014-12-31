@@ -74,5 +74,6 @@ gem 'omniauth-auth0', '~> 1.1'
 gem 'cancan'
 gem 'role_model'
 
+gem 'icalendar'
 gem 'fullcalendar-rails'
 gem 'momentjs-rails'

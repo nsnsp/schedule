@@ -12,6 +12,15 @@
       <h2 class="panel-title">
         <%= user == current_user ? 'My' : "#{user.first_name}'s" %> Days
         <% if season %><small><%= season %></small><% end %>
+        <% if can?(:commitments_ics, user) && user == current_user %>
+          <%= link_to commitments_webcal_path(user),
+            title: 'iCal format', id: 'ics-container',
+            class: 'pull-right hidden-print', data: {
+              toggle: 'tooltip', placement: 'left', container: '#ics-container'
+            } do %>
+            <span class="glyphicon glyphicon-calendar"></span>
+          <% end %>
+        <% end %>
       </h2>
     </div>
 

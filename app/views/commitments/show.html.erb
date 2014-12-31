@@ -30,6 +30,9 @@
 
     <dt>Updated</dt>
     <dd><%= @commitment.updated_at %></dd>
+
+    <dt>UUID</dt>
+    <dd><%= @commitment.uuid %></dd>
   </dl>
 
   <%= link_to 'Back', commitments_path(date: @commitment.date),

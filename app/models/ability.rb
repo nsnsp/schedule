@@ -40,8 +40,8 @@ class Ability
     can :destroy, Commitment, user_id: user.id
 
     # User
-    can :read, User
-    can :update, User, id: user.id
+    can [:read, :commitments], User
+    can [:update, :commitments_ics], User, id: user.id
     can :manage, User if user.is?(:user_manager)
     cannot [:destroy, :suspend, :unsuspend], User, id: user.id
 

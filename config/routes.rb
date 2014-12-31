@@ -10,6 +10,8 @@ Rails.application.routes.draw do
   resources :identities, only: [:index, :show, :update, :destroy]
   resources :users do
     member do
+      get 'commitments'
+      get 'commitments_ics'
       put 'suspend'
       put 'unsuspend'
     end

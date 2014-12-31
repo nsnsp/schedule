@@ -8,12 +8,13 @@ class Commitment < ActiveRecord::Base
     in: Season.new.date_range,
     message: "is not in the #{Season.new} season"
   }, on: :create
-  validates :user, :date, presence: true
+  validates :user, :date, :uuid, presence: true
   validates :user, uniqueness: {
     scope: :date,
     message: "can't sign up twice on the same day"
   }
 
+  after_initialize :set_defaults
   before_destroy :verify_destruction_allowed
 
   def self.to_s
@@ -70,6 +71,10 @@ class Commitment < ActiveRecord::Base
 
   def frozen?
     self.class.frozen?(self)
+  end
+
+  def set_defaults
+    self.uuid ||= SecureRandom.uuid.upcase
   end
 
   private

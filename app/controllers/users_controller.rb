@@ -2,6 +2,9 @@ class UsersController < ApplicationController
   before_filter :build_user, only: :create
   load_and_authorize_resource
 
+  # authorize via auth token for commitments.ics
+  skip_authorize_resource only: :commitments_ics
+
   # GET /users
   # GET /users.json
   def index
@@ -99,6 +102,29 @@ class UsersController < ApplicationController
     end
   end
 
+  # GET /commitments
+  # GET /commitments.json
+  def commitments
+    @commitments = Commitment.where(user: @user).order(:date)
+
+    respond_to do |format|
+      format.html { redirect_to :root, alert: 'Not implemented yet' }
+      format.json { render json: @commitments }
+    end
+  end
+
+  # GET /commitments.ics
+  def commitments_ics
+    verify_auth_token(@user)
+
+    @commitments = Commitment.where(user: @user).order(:date)
+
+    respond_to do |format|
+      format.ics { render text: ics }
+      format.html { render text: ics }
+    end
+  end
+
   # PUT /users/1/suspend
   # PUT /users/1/suspend.json
   def suspend
@@ -154,6 +180,51 @@ class UsersController < ApplicationController
 
   def build_user
     @user = User.new(user_params)
+  end
+
+  def ics
+    cal = Icalendar::Calendar.new
+
+    cal.prodid = '-//National Ski Patrol//Northstar California//EN'
+    cal.x_wr_calname = "NSNSP (#{@user.name})"
+    cal.x_wr_timezone = 'America/Los_Angeles'
+    cal.x_wr_caldesc = "#{@user.name}'s committed days with Northstar NSP."
+
+    cal.timezone do |t|
+      t.tzid = 'America/Los_Angeles'
+
+      t.daylight do |d|
+        d.tzoffsetfrom = '-0800'
+        d.tzoffsetto   = '-0700'
+        d.tzname       = 'PDT'
+        d.dtstart      = '19700308T020000'
+        d.rrule        = 'FREQ=YEARLY;BYMONTH=3;BYDAY=2SU'
+      end
+
+      t.standard do |s|
+        s.tzoffsetfrom = '-0700'
+        s.tzoffsetto   = '-0800'
+        s.tzname       = 'PST'
+        s.dtstart      = '19701101T020000'
+        s.rrule        = 'FREQ=YEARLY;BYMONTH=11;BYDAY=1SU'
+      end
+    end
+
+    @commitments.each do |c|
+      cal.event do |e|
+        e.uid = c.uuid
+        e.dtstart = Icalendar::Values::Date.new(c.date)
+        e.summary = "NSNSP #{c.display_text}"
+        e.description = "#{c.display_text} with Northstar NSP (#{c.user})."
+        e.created =
+          Icalendar::Values::DateTime.new(c.created_at.utc, 'tzid' => 'UTC')
+        e.last_modified =
+          Icalendar::Values::DateTime.new(c.updated_at.utc, 'tzid' => 'UTC')
+      end
+    end
+
+    cal.publish
+    cal.to_ical
   end
 
 end
