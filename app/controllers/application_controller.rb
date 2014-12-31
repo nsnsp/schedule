@@ -31,6 +31,10 @@ class ApplicationController < ActionController::Base
     redirect_to root_url, alert: message and return
   end
 
+  def verify_auth_token(user)
+    raise CanCan::AccessDenied unless user.auth_token == params[:auth_token]
+  end
+
   def after_sign_in_path_for(user)
     commitments_path
   end

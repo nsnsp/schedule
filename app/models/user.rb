@@ -10,8 +10,10 @@ class User < ActiveRecord::Base
   has_many :commitments, inverse_of: :user, dependent: :restrict_with_error
   has_many :identities, inverse_of: :user, dependent: :destroy
 
+  after_initialize :set_defaults
+
   validate :unique_name
-  validates :first_name, :last_name, presence: true
+  validates :first_name, :last_name, :auth_token, presence: true
   validates :phone, format: { with: /\A\D*(?:\d\D*){10}\z/ }, allow_nil: true
   validates :email, uniqueness: true, format: {
     with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i
@@ -29,6 +31,14 @@ class User < ActiveRecord::Base
     all = identities.map { |identity| identity.image_url }.compact
     desirable = all.reject { |url| URI(url).path.include?('silhouette') }
     desirable.first || all.first
+  end
+
+  def set_defaults
+    self.auth_token ||= self.class.generate_auth_token
+  end
+
+  def self.generate_auth_token
+    SecureRandom::urlsafe_base64
   end
 
   private
