@@ -36,7 +36,14 @@
               <li><%= link_to 'Roster', :users %></li>
             <% end %>
             <% if can? :index, Identity %>
-              <li><%= link_to 'Identities', :identities %></li>
+              <li>
+                <%= link_to :identities do %>
+                  Identities
+                  <% unless (count = Identity.where(user: nil).count).zero? %>
+                    <span class="badge"><%= count %></span>
+                  <% end %>
+                <% end %>
+              </li>
             <% end %>
           </ul>
 
