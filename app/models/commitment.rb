@@ -34,7 +34,7 @@ class Commitment < ActiveRecord::Base
   end
 
   def self.last_frozen_date
-    Date.tomorrow
+    Date.today
   end
 
   def self.frozen?(date)
