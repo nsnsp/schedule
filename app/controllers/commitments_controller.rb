@@ -13,15 +13,7 @@ class CommitmentsController < ApplicationController
         @new_commitment = Commitment.new(user: current_user, date: @date)
         @date_commitments = @commitments.includes(:user).
           where(date: @date, users: { suspended: false })
-        # see if we have anything in here before sorting it into an array
         @my_commitment = @date_commitments.find_by_user_id(current_user.id)
-        @date_commitments = @date_commitments.sort do |a, b|
-          x = [[Commitments::DISPLAY_ORDER.index(a.class) -
-                Commitments::DISPLAY_ORDER.index(b.class),
-                1].min,
-               -1].max
-          x.zero? ? (a.user.last_name > b.user.last_name ? 1 : -1) : x
-        end
         @events = Commitment.joins(:user).where(users: { suspended: false }).
           group([:date, :type]).count.map do |key, count|
           commitment_class = key[1].constantize

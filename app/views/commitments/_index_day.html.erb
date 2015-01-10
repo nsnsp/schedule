@@ -29,7 +29,7 @@
   <div class="panel-body">
     <% if commitments.present? %>
       <ul class="commitment-list">
-        <% commitments.each do |commitment| %>
+        <% in_display_order(commitments).each do |commitment| %>
           <li>
             <span class="label label-<%= commitment.bootstrap_class_suffix %>"
                   ><%= commitment.display_text %></span>
