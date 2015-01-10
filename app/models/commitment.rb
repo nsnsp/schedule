@@ -1,4 +1,6 @@
 class Commitment < ActiveRecord::Base
+  LOCAL_FREEZE_HOUR = 4
+
   has_paper_trail
 
   belongs_to :user, inverse_of: :commitments
@@ -33,12 +35,8 @@ class Commitment < ActiveRecord::Base
     1
   end
 
-  def self.last_frozen_date
-    Date.today
-  end
-
   def self.frozen?(date)
-    date.to_date <= last_frozen_date
+    Time.now > date.to_date.to_time + LOCAL_FREEZE_HOUR.hours
   end
 
   def self.unavailable?(date)
