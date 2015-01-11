@@ -6,7 +6,12 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :commitments, only: [:index, :show, :create, :destroy]
+  resources :commitments, only: [:index, :show, :create, :destroy] do
+    collection do
+      post 'notify_today'
+    end
+  end
+
   resources :identities, only: [:index, :show, :update, :destroy]
   resources :users do
     member do

@@ -35,6 +35,11 @@ class ApplicationController < ActionController::Base
     raise CanCan::AccessDenied unless user.auth_token == params[:auth_token]
   end
 
+  def verify_temporize_token
+    raise CanCan::AccessDenied unless
+      ENV['TEMPORIZE_TOKEN'] == params[:temporize_token]
+  end
+
   def after_sign_in_path_for(user)
     commitments_path
   end

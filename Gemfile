@@ -77,3 +77,8 @@ gem 'role_model'
 gem 'icalendar'
 gem 'fullcalendar-rails'
 gem 'momentjs-rails'
+
+gem 'httparty'
+
+gem 'nokogiri'
+gem 'premailer-rails'

@@ -2,6 +2,9 @@ class CommitmentsController < ApplicationController
   before_filter :build_resource, only: :create
   load_and_authorize_resource
 
+  # authorize via temporize token for notify_today.json
+  skip_authorize_resource only: :notify_today
+
   # GET /commitments
   # GET /commitments.json
   def index
@@ -73,6 +76,19 @@ class CommitmentsController < ApplicationController
         flashify_errors(@commitment)
         format.html { redirect_to commitments_path(date: date) }
         format.json { render json: @commitment.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  # POST /commitments/notify_today.json
+  def notify_today
+    verify_temporize_token
+
+    CommitmentMailer.notify_today.deliver_later
+
+    respond_to do |format|
+      format.json do
+        render json: @commitments
       end
     end
   end
