@@ -85,7 +85,9 @@ class CommitmentsController < ApplicationController
   def notify_today
     verify_temporize_token
 
-    CommitmentMailer.notify_today.deliver_later
+    User.where(daily_schedule_notification: true).each do |recipient|
+      CommitmentMailer.notify_today.deliver_later(recipient)
+    end
 
     respond_to do |format|
       format.json do
