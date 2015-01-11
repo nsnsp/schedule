@@ -25,7 +25,7 @@ Rails.application.routes.draw do
   get '/auth/auth0/password_reset' => 'auth0#password_reset'
 
   # static
-  get '/*id' => 'pages#show', as: :page, format: false
+  # get '/*id' => 'pages#show', as: :page, format: false
 
   # root
   root 'pages#show', id: 'home'
