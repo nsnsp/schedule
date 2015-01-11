@@ -8,12 +8,6 @@ Bundler.require(*Rails.groups)
 
 module Nsnsp
   class Application < Rails::Application
-    # https://gist.github.com/mattheworiordan/9828493
-    # https://gist.github.com/mattheworiordan/9024372
-    require "#{Rails.root}/lib/cloud_flare_middleware"
-    config.middleware.insert_before(ActionDispatch::RemoteIp,
-                                    Rack::CloudFlareMiddleware)
-
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.
