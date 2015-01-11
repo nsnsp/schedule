@@ -17,9 +17,8 @@ class CommitmentMailer < ApplicationMailer
       @quote = JSON.parse(HTTParty.get(quote_url).body).with_indifferent_access
     end
 
-    recipients = [User.find_by_email('rossdakin@gmail.com')]
-    recipients.each do |user|
-      @user = user
+    User.where(daily_schedule_notification: true).each do |recipient|
+      @user = recipient
       email_with_name = %("#{@user.name}" <#{@user.email}>)
       mail(to: email_with_name, subject: subject)
     end

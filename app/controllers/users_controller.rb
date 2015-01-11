@@ -174,6 +174,8 @@ class UsersController < ApplicationController
 
     permitted = :email, :first_name, :last_name, :phone
     permitted << { roles: User.valid_roles } if can? :manage, User
+    permitted << :daily_schedule_notification if
+      can? :manage_daily_schedule_notification, User.find(params[:id])
 
     params.require(:user).permit(permitted)
   end

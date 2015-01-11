@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141231130308) do
+ActiveRecord::Schema.define(version: 20150111061549) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -46,17 +46,19 @@ ActiveRecord::Schema.define(version: 20141231130308) do
   add_index "identities", ["user_id"], name: "index_identities_on_user_id", using: :btree
 
   create_table "users", force: :cascade do |t|
-    t.string   "first_name", limit: 255
-    t.string   "last_name",  limit: 255
-    t.string   "email",      limit: 255
+    t.string   "first_name",                  limit: 255
+    t.string   "last_name",                   limit: 255
+    t.string   "email",                       limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "suspended",              default: false, null: false
+    t.boolean  "suspended",                               default: false, null: false
     t.integer  "roles_mask"
     t.string   "phone"
     t.string   "auth_token"
+    t.boolean  "daily_schedule_notification",             default: false
   end
 
+  add_index "users", ["daily_schedule_notification"], name: "index_users_on_daily_schedule_notification", using: :btree
   add_index "users", ["suspended"], name: "index_users_on_suspended", using: :btree
 
   create_table "versions", force: :cascade do |t|
