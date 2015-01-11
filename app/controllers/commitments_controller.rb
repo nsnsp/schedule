@@ -4,6 +4,7 @@ class CommitmentsController < ApplicationController
 
   # authorize via temporize token for notify_today.json
   skip_authorize_resource only: :notify_today
+  skip_before_filter :verify_authenticity_token, only: :nofity_today
 
   # GET /commitments
   # GET /commitments.json
