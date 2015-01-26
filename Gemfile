@@ -11,7 +11,7 @@ gem 'sucker_punch', '~> 1.0'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 4.2'
-gem 'strip_attributes', '~> 1.5.1'
+gem 'strip_attributes', '~> 1.6.0'
 gem 'paper_trail', '~> 3.0.6'
 
 # Heroku stuff
@@ -26,11 +26,11 @@ gem 'postmark-rails'
 # Use postgresql as the database for Active Record
 gem 'pg'
 # Use SCSS for stylesheets
-gem 'sass-rails', '~> 4.0.3'
+gem 'sass-rails', '~> 5.0.1'
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
 # Use CoffeeScript for .js.coffee assets and views
-gem 'coffee-rails', '~> 4.0.0'
+gem 'coffee-rails', '~> 4.1.0'
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
@@ -64,7 +64,7 @@ gem 'web-console', '~> 2.0', group: :development
 gem 'therubyracer'
 gem 'bootstrap-sass', '~> 3.3.1'
 gem 'autoprefixer-rails'
-gem 'sprockets-rails', '>= 2.1.4'
+gem 'sprockets-rails', '~> 2.1.4'
 
 gem 'high_voltage', '~> 2.2.1'
 
