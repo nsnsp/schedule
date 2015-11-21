@@ -27,7 +27,7 @@
               <%= version.created_at.in_time_zone(timezone) %>
             </td>
             <td rowspan="<%= changes.count %>">
-              <%= user ? link_to(name, user) : name %>
+              <%= user ? link_to(h(name), user) : h(name) %>
             </td>
             <td><%= changes.first.try(:[], 0).try(:to_s).try(:humanize) %></td>
             <td><%= versions_table_value(changes.first.try(:[], 0),
