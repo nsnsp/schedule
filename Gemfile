@@ -64,7 +64,7 @@ gem 'web-console', '~> 2.0', group: :development
 gem 'therubyracer'
 gem 'bootstrap-sass', '~> 3.3.1'
 gem 'autoprefixer-rails'
-gem 'sprockets-rails', '~> 2.2.4'
+gem 'sprockets-rails', '~> 2.3.3'
 
 gem 'high_voltage', '~> 2.4.0'
 
