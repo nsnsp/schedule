@@ -1,5 +1,5 @@
 class Season
-  BOUNDARY_MONTH = 5
+  BOUNDARY_MONTH = 6
 
   attr_reader :starting_year
 
