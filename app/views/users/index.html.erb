@@ -15,6 +15,9 @@
             <th class="hidden-print">ID</th>
             <th class="hidden-print">Roles</th>
           <% end %>
+          <% if can? :manage_daily_schedule_notification, User %>
+            <th class="hidden-print">Daily Email</th>
+          <% end %>
           <th>Name</th>
           <th>Phone</th>
           <th class="hidden-print">Email</th>
@@ -30,6 +33,9 @@
             <% if can? :manage, User %>
               <td class="hidden-print"><%= link_to user.id, user %></td>
               <td class="hidden-print"><%= roles(user) %></td>
+            <% end %>
+            <% if can? :manage_daily_schedule_notification, User %>
+              <td class="hidden-print"><%= '✓' if user.daily_schedule_notification %></td>
             <% end %>
             <td itemprop="name">
               <span class="visible-print-inline"><%= user.name %></span>
