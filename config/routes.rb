@@ -23,6 +23,7 @@ Rails.application.routes.draw do
   end
 
   # auth0
+  get '/auth/auth0/callback_cross_auth' => 'auth0#callback_cross_auth'
   get '/auth/auth0/callback' => 'auth0#callback'
   get '/auth/failure' => 'auth0#failure'
   get '/auth/signout' => 'auth0#sign_out'

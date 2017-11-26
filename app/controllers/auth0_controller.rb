@@ -2,6 +2,10 @@
 class Auth0Controller < ApplicationController
   before_filter :reset_session
 
+  def callback_cross_auth
+    render layout: false
+  end
+
   def callback
     auth = request.env['omniauth.auth']
 
