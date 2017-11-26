@@ -21,7 +21,7 @@ gem 'rails_12factor', '~> 0.0.3', group: [:production, :staging]
 gem 'dalli'
 
 # Mail
-gem 'postmark-rails'
+gem 'sendgrid-ruby'
 
 # Use postgresql as the database for Active Record
 gem 'pg'
