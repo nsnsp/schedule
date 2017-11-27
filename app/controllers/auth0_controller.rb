@@ -55,7 +55,8 @@ class Auth0Controller < ApplicationController
     end
 
     # We configure this param to be present in the Auth0 callback URL, to ensure
-    # that a malicious user can't manually craft a fake email verification GET.
+    # that a malicious user can less easily craft a fake email verification GET.
+    # NOTE: someone could still easily obtain this value from a legit registration.
     unless params[:secret_key] == ENV['AUTH0_VERIFY_EMAIL_CALLBACK_SECRET_KEY']
       redirect_to root_url, alert: 'Email verification failed – bad secret key'
       return
