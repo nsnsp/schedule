@@ -20,7 +20,13 @@ module Commitments
 
   class Instructor < Commitment
     def self.display_color() '#5CB85C' end
-    def self.display_verb() 'Instruct' end
+    def self.display_text() 'Instruct (OEC)' end
+    def self.bootstrap_class_suffix() 'success' end
+  end
+
+  class InstructorTransport < Commitment
+    def self.display_color() '#5CB85C' end
+    def self.display_text() 'Instruct (OET)' end
     def self.bootstrap_class_suffix() 'success' end
   end
 
@@ -37,6 +43,6 @@ module Commitments
     def self.bootstrap_class_suffix() 'info' end
   end
 
-  DISPLAY_ORDER = [Other, Patrol, PatrolPM, PatrolAuxiliary, Instructor,
-                   Candidate]
+  DISPLAY_ORDER = [Other, Patrol, PatrolPM, PatrolAuxiliary,
+                   Instructor, InstructorTransport, Candidate]
 end
