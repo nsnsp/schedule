@@ -18,7 +18,7 @@ jQuery ($) ->
     dayClick: (date, jsEvent, view) ->
       onDateClick(date.format('YYYY-MM-DD'))
     dayRender: (date, cell) ->
-      cell.addClass('selected') if date.isSame(NSNSP.commitments.defaultDate)
+      cell.addClass('selected') if date.isSame(NSNSP.commitments.defaultDate, 'day')
     eventClick: (event, jsEvent, view) ->
       onDateClick(event.start.format('YYYY-MM-DD'))
     defaultDate: NSNSP.commitments.defaultDate
