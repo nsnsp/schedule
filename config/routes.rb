@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   # static redirects
-  get '/shadow', to: redirect('https://airtable.com/shriJDxEwrORVr9El')
+  get '/shadow-log/patroller', to: redirect('https://airtable.com/shriJDxEwrORVr9El')
+  get '/shadow-log/candidate', to: redirect('https://airtable.com/shrRpyRyxydNcLuEf')
 
   # always use www (makes the Auto0 stuff work a little better)
   unless Rails.env.development?
