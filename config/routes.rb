@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  # static redirects
+  get '/shadow', to: redirect('https://airtable.com/shriJDxEwrORVr9El')
+
   # always use www (makes the Auto0 stuff work a little better)
   unless Rails.env.development?
     constraints subdomain: false do
