@@ -1,10 +1,8 @@
 # -*- coding: utf-8 -*-
+require 'uri'
+
 class Auth0Controller < ApplicationController
   before_filter :reset_session
-
-  def callback_cross_auth
-    render layout: false
-  end
 
   def callback
     auth = request.env['omniauth.auth']
@@ -41,8 +39,26 @@ class Auth0Controller < ApplicationController
     redirect_to root_url, alert: message
   end
 
-  def sign_out
-    redirect_to root_url
+  def login
+    uri = URI::HTTPS.build(host: ENV['AUTH0_DOMAIN'], path: "/authorize")
+    uri.query = {
+      client_id: ENV['AUTH0_CLIENT_ID'],
+      response_type: "code",
+      redirect_uri: ENV['AUTH0_CALLBACK_URL'],
+      scope: "openid profile email"
+    }.to_query
+
+    redirect_to uri.to_s
+  end
+
+  def logout
+    uri = URI::HTTPS.build(host: ENV['AUTH0_DOMAIN'], path: "/v2/logout")
+    uri.query = {
+      client_id: ENV['AUTH0_CLIENT_ID'],
+      returnTo: root_url
+    }.to_query
+
+    redirect_to uri.to_s
   end
 
   def verify_email

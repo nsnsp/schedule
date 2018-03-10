@@ -27,10 +27,10 @@ Rails.application.routes.draw do
   end
 
   # auth0
-  get '/auth/auth0/callback_cross_auth' => 'auth0#callback_cross_auth'
+  get '/login' => 'auth0#login'
+  get '/logout' => 'auth0#logout'
   get '/auth/auth0/callback' => 'auth0#callback'
   get '/auth/failure' => 'auth0#failure'
-  get '/auth/signout' => 'auth0#sign_out'
   get '/auth/auth0/verify_email' => 'auth0#verify_email'
   get '/auth/auth0/password_reset' => 'auth0#password_reset'
 
