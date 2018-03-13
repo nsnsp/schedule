@@ -3,10 +3,10 @@ Rails.application.routes.draw do
   get '/shadow-log/patroller', to: redirect('https://airtable.com/shriJDxEwrORVr9El')
   get '/shadow-log/candidate', to: redirect('https://airtable.com/shrRpyRyxydNcLuEf')
 
-  # always use www (makes the Auto0 stuff work a little better)
+  # always use schedule (makes the Auto0 stuff work a little better)
   unless Rails.env.development?
     constraints subdomain: false do
-      get ':any', to: redirect(subdomain: 'www', path: '/%{any}'), any: /.*/
+      get ':any', to: redirect(subdomain: 'schedule', path: '/%{any}'), any: /.*/
     end
   end
 
