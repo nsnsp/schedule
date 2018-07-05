@@ -3,7 +3,6 @@ ruby '2.4.2'
 
 # Monitoring
 gem 'newrelic_rpm'
-gem 'librato-rails'
 
 # Error reporting
 gem 'rollbar', '~> 2.6'
