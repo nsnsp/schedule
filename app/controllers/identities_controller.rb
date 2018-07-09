@@ -4,9 +4,7 @@ class IdentitiesController < ApplicationController
   # GET /identities
   # GET /identities.json
   def index
-    @identities = @identities.includes(:user).sort_by do
-      |identity| identity.user.try(:last_name) || ''
-    end
+    @identities = @identities.includes(:user).order('users.suspended ASC NULLS FIRST', 'users.last_name')
   end
 
   # GET /identities/1

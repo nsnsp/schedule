@@ -13,7 +13,8 @@
 
     <tbody>
       <% locals.fetch(:identities).each.with_index do |identity, i| %>
-        <tr class="<%= 'warning' if identity.user.nil? %>">
+        <tr class="<%= 'warning' if identity.user.nil? %>
+                   <%= 'danger' if identity.user.try(:suspended?) %>">
           <td><%= link_to identity.id, identity %></td>
           <td><%= identity.provider %></td>
           <td><%= dash identity.name %></td>
