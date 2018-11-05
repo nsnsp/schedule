@@ -7,6 +7,8 @@ The official website of Northstar National Ski Patrol.
 
 **TODO**
 
+Hello world!
+
 Clean up daily email notifications
 - move `CommitmentsController::notify_today` into a rake task
 - modify Heroku Scheduler to run the rake task rather than curl a magic URL
