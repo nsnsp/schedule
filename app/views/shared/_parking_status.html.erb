@@ -1,0 +1,9 @@
+<%
+  date = locals.fetch(:date)
+  style = locals.fetch(:style)
+%>
+<% if date.saturday? || date.sunday? %>
+  <%= render 'shared/no_e_parking', locals: { style: style } %>
+<% else %>
+  <%= render 'shared/e_parking', locals: { style: style } %>
+<% end %>

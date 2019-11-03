@@ -18,11 +18,10 @@
       <%= date.strftime('%A, %-m/%-d/%y') %>
       <%= link_to 'javascript:window.print()', id: 'print-schedule',
         class: 'pull-right hidden-xs hidden-print', title: 'Print schedule',
-        data: {
-          toggle: 'tooltip', placement: 'left', container: '#print-schedule'
-        } do %>
+        style: 'margin-left: .5em' do %>
         <span class="glyphicon glyphicon-print"></span>
       <% end %>
+      <%= render 'shared/parking_status', locals: { date: date, style: nil } %>
     </h2>
   </div>
 
