@@ -5,13 +5,13 @@ ruby '2.5.7'
 gem 'newrelic_rpm'
 
 # Error reporting
-gem 'rollbar', '~> 2.6'
+gem 'rollbar', '~> 2'
 gem 'sucker_punch', '~> 1.0'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 4.2'
 gem 'strip_attributes', '~> 1.7.1'
-gem 'paper_trail', '~> 4.0.0'
+gem 'paper_trail', '~> 10'
 
 # Heroku stuff
 gem 'rails_12factor', '~> 0.0.3', group: [:production, :staging]
@@ -57,11 +57,11 @@ gem 'unicorn'
 # Use debugger
 # gem 'debugger', group: [:development, :test]
 gem 'awesome_print'
-gem 'web-console', '~> 2.0', group: :development
+gem 'web-console', '~> 3.2', group: :development
 
 # Bootstrap
 gem 'mini_racer'
-gem 'bootstrap-sass', '~> 3.3.1'
+gem 'bootstrap-sass', '~> 3.4.1'
 gem 'autoprefixer-rails'
 gem 'sprockets-rails', '~> 2.3.3'
 
