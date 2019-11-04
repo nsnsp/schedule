@@ -112,7 +112,7 @@ GEM
     json (1.8.6)
     jwt (2.1.0)
     kgio (2.11.2)
-    libv8 (3.16.14.19)
+    libv8 (7.3.492.27.1)
     lodash-rails (4.17.10)
       railties (>= 3.1)
     loofah (2.2.3)
@@ -125,6 +125,8 @@ GEM
     mime-types-data (3.2018.0812)
     mini_mime (1.0.1)
     mini_portile2 (2.3.0)
+    mini_racer (0.2.6)
+      libv8 (>= 6.9.411)
     minitest (5.11.3)
     momentjs-rails (2.20.1)
       railties (>= 3.1)
@@ -201,7 +203,6 @@ GEM
     rb-inotify (0.9.10)
       ffi (>= 0.5.0, < 2)
     rdoc (4.3.0)
-    ref (2.0.0)
     request_store (1.4.1)
       rack (>= 1.4)
     role_model (0.8.2)
@@ -242,9 +243,6 @@ GEM
       activemodel (>= 3.0, < 5.0)
     sucker_punch (1.6.0)
       celluloid (~> 0.17.2)
-    therubyracer (0.12.3)
-      libv8 (~> 3.16.14.15)
-      ref
     thor (0.20.3)
     thread_safe (0.3.6)
     tilt (2.0.9)
@@ -280,6 +278,7 @@ DEPENDENCIES
   jbuilder (~> 2.0)
   jquery-rails
   lodash-rails
+  mini_racer
   momentjs-rails
   newrelic_rpm
   nokogiri
@@ -299,7 +298,6 @@ DEPENDENCIES
   sprockets-rails (~> 2.3.3)
   strip_attributes (~> 1.7.1)
   sucker_punch (~> 1.0)
-  therubyracer
   uglifier (~> 2.7.2)
   unicorn
   web-console (~> 2.0)
@@ -308,4 +306,4 @@ RUBY VERSION
    ruby 2.4.2p198
 
 BUNDLED WITH
-   1.16.2
+   1.17.3
