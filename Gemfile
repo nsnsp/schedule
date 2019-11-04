@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
-ruby '2.4.2'
+ruby '2.4.9'
 
 # Monitoring
 gem 'newrelic_rpm'
