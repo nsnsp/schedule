@@ -5,8 +5,6 @@
 jQuery ($) ->
   onDateClick = (dateString) ->
     $('body').addClass 'wait'
-    $('.fc-day').removeClass('selected').
-      filter('[data-date=' + dateString + ']').addClass('selected')
     window.location = window.location.pathname + '?date=' + dateString
   return unless $('#calendar').length
   $('.day h2').click ->
