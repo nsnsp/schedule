@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
-ruby '2.5.7'
+ruby File.read('.ruby-version').strip
 
 # Monitoring
 gem 'newrelic_rpm'
