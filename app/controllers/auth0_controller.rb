@@ -55,7 +55,7 @@ class Auth0Controller < ApplicationController
     uri = URI::HTTPS.build(host: ENV['AUTH0_DOMAIN'], path: "/v2/logout")
     uri.query = {
       client_id: ENV['AUTH0_CLIENT_ID'],
-      returnTo: ENV['AUTH0_LOGOUT_URL']
+      returnTo: params[:from_www] ? ENV['AUTH0_LOGOUT_URL'] : "#{ENV['AUTH0_LOGOUT_WWW_URL']}&_wpnonce=#{SecureRandom.hex(10)}"
     }.to_query
 
     redirect_to uri.to_s
