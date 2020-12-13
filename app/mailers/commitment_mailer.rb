@@ -4,10 +4,9 @@ class CommitmentMailer < ApplicationMailer
 
   def notify_day(recipient, date = Date.today, day_description = TODAY)
     @user = recipient
-    @date = date
     @day_description = day_description
     @commitments =
-      Commitment.includes(:user).where(date: @date, users: { suspended: false })
+      Commitment.includes(:user).where(date: date, users: { suspended: false })
 
     title_day_description = day_description == TODAY ? TODAY.titlecase : day_description
 
