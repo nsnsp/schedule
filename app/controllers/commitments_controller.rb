@@ -100,11 +100,13 @@ class CommitmentsController < ApplicationController
   def notify_early
     verify_temporize_token
 
-    date = Date.today + 2.days
+    days_away = 2
+
+    date = Date.today + days_away.days
     day_description = "on #{date.to_formatted_s(:early_schedule_notification)}"
 
     User.where(early_schedule_notification: true).each do |recipient|
-      CommitmentMailer.notify_day(recipient, date, day_description).deliver_later
+      CommitmentMailer.notify_day(recipient, days_away, day_description).deliver_later
     end
 
     respond_to do |format|

@@ -2,11 +2,12 @@ class CommitmentMailer < ApplicationMailer
   add_template_helper(CommitmentsHelper)
   TODAY = 'today'
 
-  def notify_day(recipient, date = Date.today, day_description = TODAY)
+  def notify_day(recipient, days_away = 0, day_description = TODAY)
     @user = recipient
+    @date = Date.today + days_away.days
     @day_description = day_description
     @commitments =
-      Commitment.includes(:user).where(date: date, users: { suspended: false })
+      Commitment.includes(:user).where(date: @date, users: { suspended: false })
 
     title_day_description = day_description == TODAY ? TODAY.titlecase : day_description
 
