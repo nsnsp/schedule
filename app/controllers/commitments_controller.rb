@@ -86,7 +86,7 @@ class CommitmentsController < ApplicationController
     verify_temporize_token
 
     User.where(daily_schedule_notification: true).each do |recipient|
-      CommitmentMailer.notify_today(recipient).deliver_later
+      CommitmentMailer.notify_day(recipient).deliver_later
     end
 
     respond_to do |format|
@@ -104,7 +104,7 @@ class CommitmentsController < ApplicationController
     day_description = "on #{date.to_formatted_s(:early_schedule_notification)}"
 
     User.where(early_schedule_notification: true).each do |recipient|
-      CommitmentMailer.notify_today(recipient, date, day_description).deliver_later
+      CommitmentMailer.notify_day(recipient, date, day_description).deliver_later
     end
 
     respond_to do |format|
