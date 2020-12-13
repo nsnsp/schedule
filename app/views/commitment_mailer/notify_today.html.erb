@@ -2,7 +2,7 @@
 
 <% if @commitments.any? %>
   <p class="lead">
-    You have <%= pluralize @commitments.count, 'National' %> coming in today:
+    You have <%= pluralize @commitments.count, 'National' %> coming in <%= @day_description %>:
   </p>
 
   <ul>
@@ -11,7 +11,7 @@
     <% end %>
   </ul>
 <% else %>
-  <p class="lead">No Nationals are signed up for today, but here's a great quote:</p>
+  <p class="lead">No Nationals are signed up <%= @day_description %>, but here's a great quote:</p>
 
   <p class="callout">
     "<%= @quote[:quoteText].strip %>"
