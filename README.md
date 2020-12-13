@@ -14,3 +14,11 @@ Clean up daily email notifications
 - modify Heroku Scheduler to run the rake task rather than curl a magic URL
 - modify Dead Man's Snitch to receive ping from their Ruby gem rather than curl
 - clean up: get rid of the magic URL, temporatize plugin and config token, etc.
+
+**Notes**
+
+Deployment
+- production: push to `master`
+- staging: push to `staging`
+
+Running migrations: `heroku run -a nsnsp rake --trace db:migrate`

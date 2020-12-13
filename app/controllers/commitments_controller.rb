@@ -2,9 +2,9 @@ class CommitmentsController < ApplicationController
   before_filter :build_resource, only: :create
   load_and_authorize_resource
 
-  # authorize via temporize token for notify_today.json
-  skip_authorize_resource only: :notify_today
-  protect_from_forgery with: :null_session, only: :notify_today
+  # authorize via temporize token for notify_early.json, notify_today.json
+  skip_authorize_resource only: [:notify_early, :notify_today]
+  protect_from_forgery with: :null_session, only: [:notify_early, :notify_today]
 
   # GET /commitments
   # GET /commitments.json
@@ -87,6 +87,24 @@ class CommitmentsController < ApplicationController
 
     User.where(daily_schedule_notification: true).each do |recipient|
       CommitmentMailer.notify_today(recipient).deliver_later
+    end
+
+    respond_to do |format|
+      format.json do
+        render json: @commitments
+      end
+    end
+  end
+
+  # POST /commitments/notify_early.json
+  def notify_early
+    verify_temporize_token
+
+    date = Date.today + 2.days
+    day_description = "on #{date.to_formatted_s(:early_schedule_notification)}"
+
+    User.where(early_schedule_notification: true).each do |recipient|
+      CommitmentMailer.notify_today(recipient, date, day_description).deliver_later
     end
 
     respond_to do |format|

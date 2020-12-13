@@ -12,6 +12,7 @@ Rails.application.routes.draw do
 
   resources :commitments, only: [:index, :show, :create, :destroy] do
     collection do
+      post 'notify_early'
       post 'notify_today'
     end
   end

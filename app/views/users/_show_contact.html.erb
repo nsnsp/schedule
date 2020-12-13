@@ -24,10 +24,18 @@
         <dd><%= dash number_to_phone user.phone, area_code: true %></dd>
 
         <% if can? :manage_daily_schedule_notification, user %>
-          <dt>Emails</dt>
+          <dt>Daily Emails</dt>
           <dd>
             <%= bool_icon user.daily_schedule_notification %>
             Receive daily schedule email
+          </dd>
+        <% end %>
+
+        <% if can? :manage_early_schedule_notification, user %>
+          <dt>Early Emails</dt>
+          <dd>
+            <%= bool_icon user.early_schedule_notification %>
+            Receive early schedule email
           </dd>
         <% end %>
 

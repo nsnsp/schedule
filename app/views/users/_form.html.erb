@@ -34,12 +34,26 @@
 
   <% if can? :manage_daily_schedule_notification, @user %>
     <div class="form-group">
-      <%= f.label :emails, class: 'col-sm-2 control-label' %>
+      <%= f.label :daily_emails, class: 'col-sm-2 control-label' %>
       <div class="col-sm-10">
         <div class="checkbox">
           <%= f.label :daily_schedule_notification do %>
             <%= f.check_box :daily_schedule_notification %>
             Receive daily schedule email
+          <% end %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+
+  <% if can? :manage_early_schedule_notification, @user %>
+    <div class="form-group">
+      <%= f.label :early_emails, class: 'col-sm-2 control-label' %>
+      <div class="col-sm-10">
+        <div class="checkbox">
+          <%= f.label :early_schedule_notification do %>
+            <%= f.check_box :early_schedule_notification %>
+            Receive early schedule email
           <% end %>
         </div>
       </div>

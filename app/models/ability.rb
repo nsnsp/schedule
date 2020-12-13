@@ -45,6 +45,8 @@ class Ability
     can :manage, User if user.is?(:user_manager)
     can :manage_daily_schedule_notification, User, id: user.id if
       user.is?(:paid_staff)
+    can :manage_early_schedule_notification, User, id: user.id if
+      user.is?(:paid_staff)
     cannot [:destroy, :suspend, :unsuspend], User, id: user.id
 
     # Disallow everything to guests and suspended users (redundant, but safe)

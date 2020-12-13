@@ -1,16 +1,16 @@
 class CommitmentMailer < ApplicationMailer
   add_template_helper(CommitmentsHelper)
 
-  def notify_today(recipient, date = Date.today)
+  def notify_today(recipient, date = Date.today, day_description = 'Today')
     @user = recipient
     @date = date
     @commitments =
       Commitment.includes(:user).where(date: @date, users: { suspended: false })
 
     if @commitments.any?
-      subject = "#{pluralize @commitments.count, 'National'} Today"
+      subject = "#{pluralize @commitments.count, 'National'} #{day_description}"
     else
-      subject = 'No Nationals Today'
+      subject = "No Nationals #{day_description}"
 
       # get a random quote
       quote_url =
