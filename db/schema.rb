@@ -56,9 +56,11 @@ ActiveRecord::Schema.define(version: 20150111061549) do
     t.string   "phone"
     t.string   "auth_token"
     t.boolean  "daily_schedule_notification",             default: false
+    t.boolean  "early_schedule_notification",             default: false
   end
 
   add_index "users", ["daily_schedule_notification"], name: "index_users_on_daily_schedule_notification", using: :btree
+  add_index "users", ["early_schedule_notification"], name: "index_users_on_early_schedule_notification", using: :btree
   add_index "users", ["suspended"], name: "index_users_on_suspended", using: :btree
 
   create_table "versions", force: :cascade do |t|
