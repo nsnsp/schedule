@@ -100,7 +100,7 @@ class CommitmentsController < ApplicationController
   def notify_early
     verify_temporize_token
 
-    days_away = 2
+    days_away = 1
 
     date = Date.today + days_away.days
     day_description = "on #{date.to_formatted_s(:early_schedule_notification)}"
