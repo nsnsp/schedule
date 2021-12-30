@@ -22,3 +22,4 @@ Deployment
 - staging: push to `staging`
 
 Running migrations: `heroku run -a nsnsp rake --trace db:migrate`
+
