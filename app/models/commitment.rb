@@ -1,4 +1,4 @@
-class Commitment < ActiveRecord::Base
+class Commitment < ApplicationRecord
   LOCAL_FREEZE_HOUR = 4
 
   has_paper_trail
