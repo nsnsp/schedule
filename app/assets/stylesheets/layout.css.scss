@@ -20,7 +20,17 @@ body {
 }
 
 footer {
-  color: white;
   font-weight: 300;
   text-shadow: 0px 0px 2px #000;
+}
+
+footer,
+footer .links a {
+  color: white;
+}
+
+@media (min-width: 768px) {
+  footer .links {
+    float: right;
+  }
 }
