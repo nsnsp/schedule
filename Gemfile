@@ -65,10 +65,10 @@ gem 'bootstrap-sass', '~> 3.4'
 gem 'autoprefixer-rails'
 gem 'sprockets-rails', '~> 2.3'
 
-gem 'high_voltage', '~> 3.1'
+gem 'high_voltage'
 
-gem 'omniauth', '~> 1.2'
-gem 'omniauth-auth0', '~> 1.1'
+gem 'omniauth-auth0'
+#gem 'omniauth-rails_csrf_protection'
 
 gem 'cancan'
 gem 'role_model'
