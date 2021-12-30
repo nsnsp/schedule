@@ -13,7 +13,9 @@ module Rack
         env['REMOTE_ADDR'] = env['HTTP_CF_CONNECTING_IP']
         env['HTTP_X_FORWARDED_FOR'] = env['HTTP_CF_CONNECTING_IP']
       end
-      @app.call(env)
+
+      status, headers, body = @app.call(env)
+      [status, headers, body]
     end
   end
 end
