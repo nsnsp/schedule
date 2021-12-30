@@ -109,7 +109,7 @@ GEM
     json (1.8.6)
     jwt (2.2.2)
     kgio (2.11.3)
-    libv8 (8.4.255.0)
+    libv8-node (16.10.0.0)
     lodash-rails (4.17.15)
       railties (>= 3.1)
     loofah (2.7.0)
@@ -122,8 +122,8 @@ GEM
     mime-types-data (3.2020.0512)
     mini_mime (1.0.2)
     mini_portile2 (2.4.0)
-    mini_racer (0.3.1)
-      libv8 (~> 8.4.255)
+    mini_racer (0.5.0)
+      libv8-node (~> 16.10.0.0)
     minitest (5.14.2)
     momentjs-rails (2.20.1)
       railties (>= 3.1)
@@ -258,7 +258,7 @@ DEPENDENCIES
   jbuilder (~> 2.0)
   jquery-rails
   lodash-rails
-  mini_racer
+  mini_racer (~> 0.5.0)
   momentjs-rails
   newrelic_rpm
   nokogiri
@@ -283,7 +283,7 @@ DEPENDENCIES
   web-console (~> 3.2)
 
 RUBY VERSION
-   ruby 2.6.6p146
+   ruby 2.6.9p207
 
 BUNDLED WITH
    1.17.3
