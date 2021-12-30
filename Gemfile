@@ -65,7 +65,7 @@ gem 'bootstrap-sass', '~> 3.4'
 gem 'autoprefixer-rails'
 gem 'sprockets-rails', '~> 2.3'
 
-gem 'high_voltage', '~> 2.4'
+gem 'high_voltage', '~> 3.1'
 
 gem 'omniauth', '~> 1.2'
 gem 'omniauth-auth0', '~> 1.1'
