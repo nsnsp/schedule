@@ -131,6 +131,8 @@ GEM
     jwt (2.3.0)
     kgio (2.11.4)
     libv8-node (16.10.0.0-x86_64-darwin)
+    libv8-node (16.10.0.0-x86_64-linux)
+    libv8-node (16.10.0.0-x86_64-linux-musl)
     lodash-rails (4.17.21)
       railties (>= 3.1)
     loofah (2.13.0)
@@ -154,6 +156,8 @@ GEM
     newrelic_rpm (8.2.0)
     nio4r (2.5.8)
     nokogiri (1.12.5-x86_64-darwin)
+      racc (~> 1.4)
+    nokogiri (1.12.5-x86_64-linux)
       racc (~> 1.4)
     oauth2 (1.4.7)
       faraday (>= 0.8, < 2.0)
@@ -265,6 +269,7 @@ GEM
 
 PLATFORMS
   x86_64-darwin-21
+  x86_64-linux
 
 DEPENDENCIES
   autoprefixer-rails
