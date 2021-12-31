@@ -8,7 +8,7 @@ class Auth0Controller < ApplicationController
     auth = request.env['omniauth.auth']
 
     puts "Fiding/creating identity: #{auth[:uid]}"
-    identity = Identity.find_or_create_by!(auth0_uid: auth[:uid]) do |identity|
+    identity = Identity.find_or_create_by(auth0_uid: auth[:uid]) do |identity|
       identity.first_name = auth[:info][:first_name]
       identity.last_name = auth[:info][:last_name]
       identity.email = auth[:info][:email]
