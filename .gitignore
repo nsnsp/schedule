@@ -29,3 +29,10 @@ config/initializers/secret_token.rb
 /vendor/assets/bower_components
 *.bowerrc
 bower.json
+
+# node stuff
+node_modules/
+yarn.lock
+
+# precompiled assets
+public/assets/
