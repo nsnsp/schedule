@@ -69,7 +69,7 @@ gem 'role_model'
 
 gem 'icalendar'
 gem 'fullcalendar-rails'
-gem 'momentjs-rails', '~> 2.20.1'
+gem 'momentjs-rails', '~> 2.20.1' # JS console error in newer versions ("export default")
 gem 'terser'
 
 gem 'httparty'
