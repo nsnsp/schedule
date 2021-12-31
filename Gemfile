@@ -9,9 +9,9 @@ gem 'rollbar', '~> 3.3'
 gem 'sucker_punch', '~> 3.0'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 5.1.7'
-gem 'strip_attributes', '~> 1.7'
-gem 'paper_trail', '~> 10.3.1'
+gem 'rails', '~> 5.2.6'
+gem 'strip_attributes', '~> 1.12.0'
+gem 'paper_trail', '~> 12.1.0'
 
 # Heroku stuff
 #gem 'rails_12factor', '~> 0.0.3', group: [:production, :staging]
@@ -29,7 +29,7 @@ gem 'sassc-rails', '~> 2.1'
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '~> 4.2'
 # Use CoffeeScript for .js.coffee assets and views
-gem 'coffee-rails', '~> 4.2'
+gem 'coffee-rails', '~> 5.0.0'
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
@@ -64,7 +64,7 @@ gem 'awesome_print'
 gem 'mini_racer', '~> 0.5.0'
 gem 'bootstrap-sass', '~> 3.4'
 gem 'autoprefixer-rails'
-gem 'sprockets-rails', '~> 3.2'
+gem 'sprockets-rails', '~> 3.4'
 
 gem 'high_voltage'
 
