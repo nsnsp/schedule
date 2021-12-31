@@ -35,18 +35,6 @@ class Auth0Controller < ApplicationController
     redirect_to root_url, alert: request.params['message'].humanize
   end
 
-  def login
-    uri = URI::HTTPS.build(host: ENV['AUTH0_DOMAIN'], path: "/authorize")
-    uri.query = {
-      client_id: ENV['AUTH0_CLIENT_ID'],
-      response_type: "code",
-      redirect_uri: ENV['AUTH0_CALLBACK_URL'],
-      scope: "openid profile email"
-    }.to_query
-
-    redirect_to uri.to_s
-  end
-
   def logout
     uri = URI::HTTPS.build(host: ENV['AUTH0_DOMAIN'], path: "/v2/logout")
     uri.query = {
