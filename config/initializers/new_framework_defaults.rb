@@ -23,3 +23,4 @@ Rails.application.config.action_controller.forgery_protection_origin_check = fal
 
 # Do not halt callback chains when a callback returns false. Previous versions had true.
 # ActiveSupport.halt_callback_chains_on_return_false = true
+
