@@ -3,7 +3,7 @@ class Identity < ApplicationRecord
 
   has_paper_trail
 
-  belongs_to :user, inverse_of: :identities
+  belongs_to :user, inverse_of: :identities, optional: true
 
   validates :auth0_uid, uniqueness: true
 
