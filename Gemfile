@@ -69,7 +69,7 @@ gem 'role_model'
 
 gem 'icalendar'
 gem 'fullcalendar-rails'
-gem 'momentjs-rails'
+gem 'momentjs-rails', '~> 2.20.1'
 gem 'terser'
 
 gem 'httparty'

@@ -131,7 +131,7 @@ GEM
     mime-types-data (3.2021.1115)
     mini_mime (1.1.2)
     minitest (5.15.0)
-    momentjs-rails (2.29.1)
+    momentjs-rails (2.20.1)
       railties (>= 3.1)
     multi_json (1.15.0)
     multi_xml (0.6.0)
@@ -274,7 +274,7 @@ DEPENDENCIES
   jquery-rails
   listen
   lodash-rails
-  momentjs-rails
+  momentjs-rails (~> 2.20.1)
   newrelic_rpm
   nokogiri
   omniauth-auth0
