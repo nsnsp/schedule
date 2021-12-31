@@ -1,5 +1,5 @@
 class CommitmentsController < ApplicationController
-  before_filter :build_resource, only: :create
+  before_action :build_resource, only: :create
   load_and_authorize_resource
 
   # authorize via temporize token for notify_early.json, notify_today.json

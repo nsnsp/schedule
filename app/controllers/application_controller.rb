@@ -10,7 +10,7 @@ class ApplicationController < ActionController::Base
     redirect_to root_url, alert: exception.message
   end
 
-  before_filter :punt_suspended_user, if: -> { current_user.try(:suspended?) }
+  before_action :punt_suspended_user, if: -> { current_user.try(:suspended?) }
 
   def flashify_errors(object, params = {})
     message = object.errors.full_messages.to_sentence

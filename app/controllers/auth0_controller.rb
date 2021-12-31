@@ -2,7 +2,7 @@
 require 'uri'
 
 class Auth0Controller < ApplicationController
-  before_filter :reset_session
+  before_action :reset_session
 
   def callback
     auth = request.env['omniauth.auth']

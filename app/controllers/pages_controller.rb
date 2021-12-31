@@ -1,7 +1,7 @@
 class PagesController < ApplicationController
   include HighVoltage::StaticPage
 
-  before_filter :forward_from_root_if_logged_in
+  before_action :forward_from_root_if_logged_in
 
   private
 

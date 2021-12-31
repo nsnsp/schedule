@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_filter :build_user, only: :create
+  before_action :build_user, only: :create
   load_and_authorize_resource
 
   # authorize via auth token for commitments.ics

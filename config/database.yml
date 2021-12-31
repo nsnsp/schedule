@@ -13,16 +13,13 @@
 #
 # Configure Using Gemfile
 # gem 'pg'
-#
-default: &default
+
+development:
   adapter: postgresql
   encoding: unicode
   # For details on connection pooling, see rails configuration guide
   # http://guides.rubyonrails.org/configuring.html#database-pooling
   pool: 5
-
-development:
-  <<: *default
   database: nsnsp_development
 
   # The specified database role being used to connect to postgres.
@@ -56,7 +53,11 @@ development:
 # re-generated from your development database when you run "rake".
 # Do not set this db to the same as development or production.
 test:
-  <<: *default
+  adapter: postgresql
+  encoding: unicode
+  # For details on connection pooling, see rails configuration guide
+  # http://guides.rubyonrails.org/configuring.html#database-pooling
+  pool: 5
   database: nsnsp_test
 
 # As with config/secrets.yml, you never want to store sensitive information,
@@ -79,7 +80,17 @@ test:
 #     url: <%= ENV['DATABASE_URL'] %>
 #
 production:
+  adapter: postgresql
+  encoding: unicode
+  # For details on connection pooling, see rails configuration guide
+  # http://guides.rubyonrails.org/configuring.html#database-pooling
+  pool: 5
   url: <%= ENV['DATABASE_URL'] %>
 
 staging:
+  adapter: postgresql
+  encoding: unicode
+  # For details on connection pooling, see rails configuration guide
+  # http://guides.rubyonrails.org/configuring.html#database-pooling
+  pool: 5
   url: <%= ENV['DATABASE_URL'] %>
