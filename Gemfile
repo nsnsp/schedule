@@ -60,7 +60,6 @@ gem 'awesome_print'
 # gem 'web-console', '~> 4.2', group: :development
 
 # Bootstrap
-gem 'mini_racer', '~> 0.5.0'
 gem 'bootstrap-sass', '~> 3.4'
 gem 'autoprefixer-rails'
 gem 'sprockets-rails', '~> 3.4'
