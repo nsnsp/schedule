@@ -114,10 +114,8 @@ GEM
     jquery-ui-rails (6.0.1)
       railties (>= 3.2.16)
     jwt (2.3.0)
-    kgio (2.11.4)
     libv8-node (16.10.0.0-x86_64-darwin)
     libv8-node (16.10.0.0-x86_64-linux)
-    libv8-node (16.10.0.0-x86_64-linux-musl)
     listen (3.7.0)
       rb-fsevent (~> 0.10, >= 0.10.3)
       rb-inotify (~> 0.9, >= 0.9.10)
@@ -178,6 +176,8 @@ GEM
     psych (4.0.3)
       stringio
     public_suffix (4.0.6)
+    puma (5.5.2)
+      nio4r (~> 2.0)
     racc (1.6.0)
     rack (2.2.3)
     rack-protection (2.1.0)
@@ -208,7 +208,6 @@ GEM
       method_source
       rake (>= 0.8.7)
       thor (>= 0.19.0, < 2.0)
-    raindrops (0.20.0)
     rake (13.0.6)
     rb-fsevent (0.11.0)
     rb-inotify (0.10.1)
@@ -253,9 +252,6 @@ GEM
       thread_safe (~> 0.1)
     uglifier (4.2.0)
       execjs (>= 0.3.0, < 3)
-    unicorn (6.1.0)
-      kgio (~> 2.6)
-      raindrops (~> 0.7)
     websocket-driver (0.7.5)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.5)
@@ -287,6 +283,7 @@ DEPENDENCIES
   paper_trail (~> 12.1.0)
   pg (~> 1.2)
   premailer-rails
+  puma
   rails (~> 5.2.6)
   role_model
   rollbar (~> 3.3)
@@ -298,7 +295,6 @@ DEPENDENCIES
   strip_attributes (~> 1.12.0)
   sucker_punch (~> 3.0)
   uglifier (~> 4.2)
-  unicorn
 
 RUBY VERSION
    ruby 2.6.9p207
