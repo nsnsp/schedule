@@ -13,9 +13,6 @@ gem 'rails', '~> 5.2.6'
 gem 'strip_attributes', '~> 1.12.0'
 gem 'paper_trail', '~> 12.1.0'
 
-# Heroku stuff
-#gem 'rails_12factor', '~> 0.0.3', group: [:production, :staging]
-
 # Caching
 gem 'dalli'
 
@@ -73,6 +70,7 @@ gem 'role_model'
 gem 'icalendar'
 gem 'fullcalendar-rails'
 gem 'momentjs-rails'
+gem 'terser'
 
 gem 'httparty'
 gem 'nokogiri'
