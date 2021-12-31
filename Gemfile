@@ -62,7 +62,7 @@ gem 'sprockets-rails', '~> 3.4'
 gem 'high_voltage'
 
 gem 'omniauth-auth0'
-# gem 'omniauth-rails_csrf_protection'
+gem 'omniauth-rails_csrf_protection'
 
 gem 'cancancan'
 gem 'role_model'
