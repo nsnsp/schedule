@@ -32,7 +32,6 @@ bower.json
 
 # node stuff
 node_modules/
-yarn.lock
 
 # precompiled assets
 public/assets/
