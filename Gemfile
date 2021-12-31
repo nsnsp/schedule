@@ -69,7 +69,7 @@ gem 'high_voltage'
 gem 'omniauth-auth0'
 #gem 'omniauth-rails_csrf_protection'
 
-gem 'cancan'
+gem 'cancancan'
 gem 'role_model'
 
 gem 'icalendar'

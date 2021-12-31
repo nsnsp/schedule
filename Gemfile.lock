@@ -52,7 +52,7 @@ GEM
       autoprefixer-rails (>= 5.2.1)
       sassc (>= 2.0.0)
     builder (3.2.4)
-    cancan (1.6.10)
+    cancancan (3.3.0)
     coffee-rails (5.0.0)
       coffee-script (>= 2.2.0)
       railties (>= 5.2.0)
@@ -260,7 +260,7 @@ DEPENDENCIES
   autoprefixer-rails
   awesome_print
   bootstrap-sass (~> 3.4)
-  cancan
+  cancancan
   coffee-rails (~> 5.0.0)
   dalli
   fullcalendar-rails
