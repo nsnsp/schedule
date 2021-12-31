@@ -12,7 +12,7 @@ class UsersController < ApplicationController
     @users = @users.active unless can? :unsuspend, User
     @season = Season.new
     @commitment_classes =
-      Commitment.select(:type).uniq.pluck(:type).map { |type| type.constantize }
+      Commitment.distinct.pluck(:type).map { |type| type.constantize }
     @commitment_classes.sort! do |a, b|
       [[Commitments::DISPLAY_ORDER.index(a) -
         Commitments::DISPLAY_ORDER.index(b),
