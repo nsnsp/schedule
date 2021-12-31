@@ -11,7 +11,7 @@ gem 'sucker_punch', '~> 3.0'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.2.6'
 gem 'strip_attributes', '~> 1.12.0'
-gem 'paper_trail', '~> 12.1.0'
+gem 'paper_trail', '~> 10.3.1'
 
 # Caching
 gem 'dalli'
