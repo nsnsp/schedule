@@ -120,8 +120,8 @@ class UsersController < ApplicationController
     @commitments = Commitment.where(user: @user).order(:date)
 
     respond_to do |format|
-      format.ics { render text: ics }
-      format.html { render text: ics }
+      format.ics { render plain: ics }
+      format.html { render plain: ics }
     end
   end
 
