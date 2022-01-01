@@ -71,6 +71,10 @@ class UsersController < ApplicationController
   # PATCH/PUT /users/1.json
   def update
     respond_to do |format|
+      if user_params.roles
+        # user_params.roles is a ActionController::Parameters
+        user_params.roles = user_params.roles.select{ |key, val| val == "1" }.keys
+      end
       puts user_params
       if @user.update(user_params)
         format.html do
