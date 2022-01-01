@@ -71,6 +71,7 @@ class UsersController < ApplicationController
   # PATCH/PUT /users/1.json
   def update
     respond_to do |format|
+      ap user_params
       if @user.update(user_params)
         format.html do
           message = @user == current_user ?
