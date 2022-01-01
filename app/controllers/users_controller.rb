@@ -77,12 +77,13 @@ class UsersController < ApplicationController
       puts "user_params.has_key?(:roles): #{user_params.has_key?(:roles)}"
       puts user_params[:roles] if user_params.has_key?(:roles)
 
-      puts "user_params.has_key?(\"roles\"): #{user_params.has_key?("roles")}"
-      puts user_params["roles"] if user_params.has_key?("roles")
-
       # roles is a ActionController::Parameters
-      user_params["roles"] = user_params["roles"].select{ |key, val| val.eql?("1") }.keys
-      # puts user_params
+      new_roles = user_params[:roles].select{ |key, val| val.eql?("1") }.keys
+      user_params[:roles] = new_roles
+      
+      puts "new_roles: #{new_roles}"
+      puts "user_params: #{user_params}"
+
       if @user.update(user_params)
         format.html do
           message = @user == current_user ?
