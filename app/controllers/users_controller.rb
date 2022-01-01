@@ -71,10 +71,21 @@ class UsersController < ApplicationController
   # PATCH/PUT /users/1.json
   def update
     respond_to do |format|
-      puts user_params[:user]
+
+      puts "user_params:"
+      puts user_params
+
+      puts "user_params.has_key?(:user)"
+      puts user_params.has_key?(:user)
+      puts user_params[:user] if user_params.has_key?(:user)
+
+      puts 'user_params.has_key?("user")'
+      puts user_params.has_key?("user")
+      puts user_params["user"] if user_params.has_key?("user")
+
       # roles is a ActionController::Parameters
       user_params[:user][:roles] = user_params[:user][:roles].select{ |key, val| val.eql?("1") }.keys
-      puts user_params
+      # puts user_params
       if @user.update(user_params)
         format.html do
           message = @user == current_user ?
