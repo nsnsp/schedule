@@ -21,6 +21,13 @@ class User < ApplicationRecord
 
   scope :active, -> { where(suspended: false) }
   scope :suspended, -> { where(suspended: true) }
+  scope :role, -> (role) {
+    # ActiveRecord doesn't natively support bitwise operators
+    where(
+      "\"#{table_name}\".\"#{roles_attribute_name}\" & :role_bit = :role_bit",
+      role_bit: 2 ** valid_roles.index(role)
+    )
+  }
 
   strip_attributes collapse_spaces: true
   strip_attributes only: [:phone], regex: /\D/

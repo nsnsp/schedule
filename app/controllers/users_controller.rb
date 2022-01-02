@@ -5,17 +5,11 @@ class UsersController < ApplicationController
   # authorize via auth token for commitments.ics
   skip_authorize_resource only: :commitments_ics
 
-  NATIONALS_BIT = 2 ** User.valid_roles.index(:national)
-  NATIONALS_QUERY = [
-    "\"#{User.table_name}\".\"#{User.roles_attribute_name}\" & :roles_bit = :roles_bit",
-    roles_bit: NATIONALS_BIT
-  ];
-
   # GET /users
   # GET /users.json
   def index
     @users = @users.order(:suspended, :last_name)
-    @users = @users.where(NATIONALS_QUERY).active unless can? :unsuspend, User
+    @users = @users.role(:national).active unless can? :unsuspend, User
     @season = Season.new
     @commitment_classes =
       Commitment.distinct.pluck(:type).map { |type| type.constantize }
