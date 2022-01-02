@@ -31,20 +31,14 @@
               <%= user ? link_to(h(name), user) : h(name) %>
             </td>
             <td><%= changes.first.try(:[], 0).try(:to_s).try(:humanize) %></td>
-            <td><%= versions_table_value(changes.first.try(:[], 0),
-                                         changes.first.try(:[], 1).try(:first),
-                                         timezone) %></td>
-            <td><%= versions_table_value(changes.first.try(:[], 0),
-                                         changes.first.try(:[], 1).try(:last),
-                                         timezone) %></td>
+            <td><%= versions_table_value(changes.first, :first, timezone) %></td>
+            <td><%= versions_table_value(changes.first, :last, timezone) %></td>
           </tr>
           <% Array(changes[1..-1]).each do |change| %>
             <tr class="<%= even_odd(i) %>">
               <td><%= change[0].try(:to_s).try(:humanize) %></td>
-              <td><%= versions_table_value(change[0],
-                                           change[1].first, timezone) %></td>
-              <td><%= versions_table_value(change[0],
-                                           change[1].last, timezone) %></td>
+              <td><%= versions_table_value(change, :first, timezone) %></td>
+              <td><%= versions_table_value(change, :last, timezone) %></td>
             </tr>
           <% end %>
         <% end %>

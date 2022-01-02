@@ -50,9 +50,9 @@ module ApplicationHelper
     "<span class='glyphicon #{klass} bool-icon #{!!bool}'></span>".html_safe
   end
 
-  def versions_table_value(field_name, value, time_zone)
-    field_name ||= ''
-    value ||= ''
+  def versions_table_value(change, which, time_zone)
+    field_name = change.try(:[], 0) || '';
+    value = change.try(:[], 1).try(which) || '';
 
     if field_name.ends_with?('_id')
       begin
