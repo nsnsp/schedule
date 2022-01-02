@@ -88,7 +88,7 @@ class UsersController < ApplicationController
       user_params[:roles] = new_roles
       
       puts "new_roles:", new_roles
-      puts "user_params:", user_params.merge(new_roles)
+      # puts "user_params:", user_params.merge(new_roles)
 
       if @user.update(user_params.merge(new_roles))
         format.html do
