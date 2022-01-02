@@ -17,6 +17,11 @@ Clean up daily email notifications
 
 **Notes**
 
+Januacy, 2022 Update
+- Updated Heroku from buildpack 18 to 20
+- Updated Ruby from 2.6 to 2.7
+- Updated Rails from 4.2 to 5.2
+
 Dev
 - Works, but auth broken.
 - If blowing away Gemfile.lock to recreate, [do this](https://devcenter.heroku.com/articles/bundler-version#known-upgrade-issues) after `bundle install`: `bundle lock --add-platform x86_64-linux`
