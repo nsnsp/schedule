@@ -12,8 +12,10 @@ class Season
   # arbitrary decision that seems to make the most sense, as credit for days
   # worked during non-winter months generally applies to the following winter.
   def date_range
-    Date.new(starting_year, BOUNDARY_MONTH, 1)...
+    (
+      Date.new(starting_year + 0, BOUNDARY_MONTH, 1)...
       Date.new(starting_year + 1, BOUNDARY_MONTH, 1)
+    )
   end
 
   def include?(date)
