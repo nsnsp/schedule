@@ -86,8 +86,8 @@ class UsersController < ApplicationController
       # roles is a ActionController::Parameters
       # something about our big upgrade broke role updating as passed raw from the form
       new_roles = user_params[:roles].select{ |key, val| val.eql?("1") }.keys
-      user_params.merge!(roles: new_roles)
-      
+      user_params = user_params.merge(roles: new_roles)
+
       if @user.update(user_params)
         format.html do
           message = @user == current_user ?
