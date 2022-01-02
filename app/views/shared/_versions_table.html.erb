@@ -30,7 +30,7 @@
             <td rowspan="<%= rowspan %>">
               <%= user ? link_to(h(name), user) : h(name) %>
             </td>
-            <td><%= changes.first.try(:[], 0).try(:to_s).try(:humanize) %></td>
+            <td><%= changes.first.try(:[], 0).try(:to_s).try(:humanize) || version.event.humanize %></td>
             <td><%= versions_table_value(changes.first, :first, timezone) %></td>
             <td><%= versions_table_value(changes.first, :last, timezone) %></td>
           </tr>
