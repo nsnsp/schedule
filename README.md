@@ -17,6 +17,10 @@ Clean up daily email notifications
 
 **Notes**
 
+Dev
+- Works, but auth broken.
+- If blowing away Gemfile.lock to recreate, [do this](https://devcenter.heroku.com/articles/bundler-version#known-upgrade-issues) after `bundle install`: `bundle lock --add-platform x86_64-linux`
+
 Deployment
 - production: push to `master`
 - staging: push to `staging`
