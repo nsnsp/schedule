@@ -90,7 +90,7 @@ class UsersController < ApplicationController
       puts "new_roles: #{new_roles}"
       puts "user_params: #{user_params.merge(new_roles)}"
 
-      if @user.update(user_params.merge(new_roles)
+      if @user.update(user_params.merge(new_roles))
         format.html do
           message = @user == current_user ?
             'Your information has been updated.' :
