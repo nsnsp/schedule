@@ -10,6 +10,7 @@ class ApplicationController < ActionController::Base
     redirect_to root_url, alert: exception.message
   end
 
+  before_action :set_paper_trail_whodunnit
   before_action :punt_suspended_user, if: -> { current_user.try(:suspended?) }
 
   def flashify_errors(object, params = {})

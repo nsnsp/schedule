@@ -22,11 +22,12 @@
           <% roles = user.try(:roles).try(:to_sentence).try(:capitalize) %>
           <% ex = Array(locals[:exclude]).map { |x| x.to_s } << 'updated_at' %>
           <% changes = Array(version.changeset).reject { |c| c[0].in? ex } %>
+          <% rowspan = [1, changes.count].max %>
           <tr class="<%= even_odd(i) %>">
-            <td rowspan="<%= changes.count %>">
+            <td rowspan="<%= rowspan %>">
               <%= version.created_at.in_time_zone(timezone) %>
             </td>
-            <td rowspan="<%= changes.count %>">
+            <td rowspan="<%= rowspan %>">
               <%= user ? link_to(h(name), user) : h(name) %>
             </td>
             <td><%= changes.first.try(:[], 0).try(:to_s).try(:humanize) %></td>
