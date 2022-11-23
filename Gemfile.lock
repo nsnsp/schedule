@@ -64,7 +64,7 @@ GEM
     crass (1.0.6)
     css_parser (1.11.0)
       addressable
-    dalli (3.2.2)
+    dalli (3.2.3)
     erubi (1.10.0)
     execjs (2.8.1)
     faraday (2.3.0)
