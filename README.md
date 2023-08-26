@@ -32,3 +32,4 @@ Deployment
 
 Running migrations: `heroku run -a nsnsp rake --trace db:migrate`
 
+Setting up a fresh database: `heroku run rake db:schema:load`
