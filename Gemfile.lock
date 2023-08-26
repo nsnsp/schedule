@@ -112,19 +112,19 @@ GEM
     marcel (1.0.2)
     method_source (1.0.0)
     mini_mime (1.1.2)
-    mini_portile2 (2.8.0)
+    mini_portile2 (2.8.4)
     minitest (5.17.0)
     momentjs-rails (2.20.1)
       railties (>= 3.1)
     multi_xml (0.6.0)
     newrelic_rpm (8.9.0)
     nio4r (2.5.8)
-    nokogiri (1.13.10)
-      mini_portile2 (~> 2.8.0)
+    nokogiri (1.15.4)
+      mini_portile2 (~> 2.8.2)
       racc (~> 1.4)
-    nokogiri (1.13.10-x86_64-darwin)
+    nokogiri (1.15.4-x86_64-darwin)
       racc (~> 1.4)
-    nokogiri (1.13.10-x86_64-linux)
+    nokogiri (1.15.4-x86_64-linux)
       racc (~> 1.4)
     oauth2 (2.0.6)
       faraday (>= 0.17.3, < 3.0)
@@ -160,7 +160,7 @@ GEM
     public_suffix (4.0.7)
     puma (5.6.4)
       nio4r (~> 2.0)
-    racc (1.6.1)
+    racc (1.7.1)
     rack (2.2.6.4)
     rack-protection (2.2.0)
       rack
@@ -258,7 +258,7 @@ DEPENDENCIES
   lodash-rails
   momentjs-rails (~> 2.20.1)
   newrelic_rpm
-  nokogiri
+  nokogiri (= 1.15.4)
   omniauth-auth0
   omniauth-rails_csrf_protection
   paper_trail (~> 12.1.0)
