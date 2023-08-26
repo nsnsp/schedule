@@ -17,7 +17,12 @@ Clean up daily email notifications
 
 **Notes**
 
-Januacy, 2022 Update
+August, 2023 Update
+- Updated Heroku from buildpack 20 to 22
+- Updated Ruby from 2.7.6 to 3.2.2 (Rubygems 3.4.10)
+- Rails stayed at 5.2.8.1 (EOL)
+
+January, 2022 Update
 - Updated Heroku from buildpack 18 to 20
 - Updated Ruby from 2.6 to 2.7
 - Updated Rails from 4.2 to 5.2
