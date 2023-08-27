@@ -1,6 +1,13 @@
 source 'https://rubygems.org'
 ruby File.read('.ruby-version').strip
 
+gem "webpacker"
+
+gem "net-http"
+gem "net-smtp"
+gem "net-imap"
+gem "uri", "~> 0.10"
+
 # Monitoring
 gem 'newrelic_rpm'
 
@@ -9,7 +16,7 @@ gem 'rollbar', '~> 3.3'
 gem 'sucker_punch', '~> 3.0'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 5.2.6'
+gem 'rails', '~> 6.0.6'
 gem 'strip_attributes', '~> 1.13'
 gem 'paper_trail', '~> 12.3'
 
