@@ -1,5 +1,5 @@
 class CommitmentMailer < ApplicationMailer
-  add_template_helper(CommitmentsHelper)
+  helper CommitmentsHelper
   TODAY = 'today'
 
   def notify_day(recipient, days_away = 0, day_description = TODAY)
