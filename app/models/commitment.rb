@@ -35,11 +35,11 @@ class Commitment < ApplicationRecord
     1
   end
 
-  def self.frozen?(date)
-    logger.info("Class method: frozen?")
-    # Time.now > date.to_date.to_time + LOCAL_FREEZE_HOUR.hours
-    false
-  end
+  # def self.frozen?(date)
+  #   logger.info("Class method: frozen?")
+  #   # Time.now > date.to_date.to_time + LOCAL_FREEZE_HOUR.hours
+  #   false
+  # end
 
   def self.unavailable?(date)
     # frozen?(date.to_date) || !Season.new.include?(date)
