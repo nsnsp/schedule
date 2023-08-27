@@ -9,7 +9,7 @@ Bundler.require(*Rails.groups)
 module Nsnsp
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
-    config.load_defaults 6.0
+    config.load_defaults 6.1
 
     # Setting this baesd on what I think the docs are telling me to do:
     # https://guides.rubyonrails.org/upgrading_ruby_on_rails.html#autoloading
