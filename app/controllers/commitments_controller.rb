@@ -4,7 +4,6 @@ class CommitmentsController < ApplicationController
 
   # authorize via temporize token for notify_early.json, notify_today.json
   skip_authorize_resource only: [:notify_early, :notify_today]
-  protect_from_forgery with: :null_session, only: [:notify_early, :notify_today]
 
   # GET /commitments
   # GET /commitments.json
