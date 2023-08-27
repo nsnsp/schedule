@@ -1,8 +1,6 @@
 source 'https://rubygems.org'
 ruby File.read('.ruby-version').strip
 
-gem "webpacker"
-
 gem "net-http"
 gem "net-smtp"
 gem "net-imap"
