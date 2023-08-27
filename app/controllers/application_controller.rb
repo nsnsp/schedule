@@ -63,7 +63,7 @@ class ApplicationController < ActionController::Base
 
   def frozen?(date)
     logger.debug("Application controller: frozen?")
-    Commitment.frozen?(date)
+    Commitment.is_frozen?(date)
   end
 
   def unavailable?(date)
