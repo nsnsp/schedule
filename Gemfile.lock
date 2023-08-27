@@ -76,6 +76,13 @@ GEM
       sassc (>= 2.0.0)
     builder (3.2.4)
     cancancan (3.5.0)
+    coffee-rails (5.0.0)
+      coffee-script (>= 2.2.0)
+      railties (>= 5.2.0)
+    coffee-script (2.4.1)
+      coffee-script-source
+      execjs
+    coffee-script-source (1.12.2)
     concurrent-ruby (1.2.2)
     crass (1.0.6)
     css_parser (1.14.0)
@@ -271,6 +278,7 @@ DEPENDENCIES
   awesome_print
   bootstrap-sass
   cancancan
+  coffee-rails
   dalli
   fullcalendar-rails
   high_voltage
