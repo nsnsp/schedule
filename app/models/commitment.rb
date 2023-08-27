@@ -35,15 +35,13 @@ class Commitment < ApplicationRecord
     1
   end
 
-  # def self.frozen?(date)
-  #   logger.info("Class method: frozen?")
-  #   # Time.now > date.to_date.to_time + LOCAL_FREEZE_HOUR.hours
-  #   false
-  # end
+  def self.is_frozen?(date)
+    logger.info("Class method: is_frozen?")
+    Time.now > date.to_date.to_time + LOCAL_FREEZE_HOUR.hours
+  end
 
   def self.unavailable?(date)
-    # frozen?(date.to_date) || !Season.new.include?(date)
-    false
+    is_frozen?(date.to_date) || !Season.new.include?(date)
   end
 
   def to_s
@@ -72,8 +70,7 @@ class Commitment < ApplicationRecord
 
   def frozen?
     logger.info("Instance method: frozen?")
-    logger.info("self: ", self)
-    # self.class.frozen?(self)
+    self.class.is_frozen?(self)
     false
   end
 
@@ -84,7 +81,7 @@ class Commitment < ApplicationRecord
   private
 
   def verify_destruction_allowed
-    # return true unless frozen?
+    return true unless frozen?
     errors[:base] <<
       "It's too late to cancel for #{date.strftime('%A, %-m/%-d/%y')}"
     false
@@ -92,7 +89,7 @@ class Commitment < ApplicationRecord
 
   def day_not_frozen
     message = "It's too late to sign up for #{date.strftime('%A, %-m/%-d/%y')}"
-    # errors[:base] << message if frozen?
+    errors[:base] << message if frozen?
   end
 
 end
