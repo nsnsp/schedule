@@ -5,13 +5,13 @@ ruby File.read('.ruby-version').strip
 gem 'newrelic_rpm'
 
 # Error reporting
-gem 'rollbar', '~> 3.3'
-gem 'sucker_punch', '~> 3.0'
+gem 'rollbar'
+gem 'sucker_punch'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 7.0.7'
-gem 'strip_attributes', '~> 1.13'
-gem 'paper_trail', '~> 12.3'
+gem 'strip_attributes'
+gem 'paper_trail', '~> 12.3' # TODO: too lazy to look into breaking changes
 
 # Caching
 gem 'dalli'
@@ -20,11 +20,11 @@ gem 'dalli'
 gem 'sendgrid-ruby'
 
 # Use postgresql as the database for Active Record
-gem 'pg', '~> 1.2'
+gem 'pg'
 # Use SCSS for stylesheets
-gem 'sassc-rails', '~> 2.1'
+gem 'sassc-rails'
 # Use CoffeeScript for .js.coffee assets and views
-gem 'coffee-rails', '~> 5.0.0'
+# gem 'coffee-rails', '~> 5.0.0'
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
@@ -33,13 +33,14 @@ gem 'lodash-rails'
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
 # gem 'turbolinks'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
-gem 'jbuilder', '~> 2.11'
+# gem 'jbuilder', '~> 2.11'
 # bundle exec rake doc:rails generates the API under doc/api.
 # gem 'sdoc', '~> 2.2',          group: :doc
 
 # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
-gem 'spring', '~> 3.1',        group: :development
-gem 'listen',                  group: :development
+gem 'spring',        group: :development
+gem 'listen',        group: :development
+gem 'awesome_print', group: :development
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
@@ -51,13 +52,12 @@ gem 'puma'
 
 # Use debugger
 # gem 'byebug', group: [:development, :test]
-gem 'awesome_print'
 # gem 'web-console', '~> 4.2', group: :development
 
 # Bootstrap
-gem 'bootstrap-sass', '~> 3.4'
+gem 'bootstrap-sass'
 gem 'autoprefixer-rails'
-gem 'sprockets-rails', '~> 3.4'
+gem 'sprockets-rails'
 
 gem 'high_voltage'
 
