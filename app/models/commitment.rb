@@ -36,7 +36,6 @@ class Commitment < ApplicationRecord
   end
 
   def self.is_frozen?(date)
-    logger.info("Class method: is_frozen?")
     Time.now > date.to_date.to_time + LOCAL_FREEZE_HOUR.hours
   end
 
@@ -69,9 +68,7 @@ class Commitment < ApplicationRecord
   end
 
   def frozen?
-    logger.info("Instance method: frozen?")
     self.class.is_frozen?(self)
-    false
   end
 
   def set_defaults
