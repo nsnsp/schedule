@@ -1,6 +1,11 @@
 source 'https://rubygems.org'
 ruby File.read('.ruby-version').strip
 
+gem "net-http"
+gem "net-smtp"
+gem "net-imap"
+gem "uri", "~> 0.10"
+
 # Monitoring
 gem 'newrelic_rpm'
 
