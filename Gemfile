@@ -24,7 +24,7 @@ gem 'pg'
 # Use SCSS for stylesheets
 gem 'sassc-rails'
 # Use CoffeeScript for .js.coffee assets and views
-# gem 'coffee-rails', '~> 5.0.0'
+gem 'coffee-rails'
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
