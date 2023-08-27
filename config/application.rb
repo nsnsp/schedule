@@ -9,7 +9,7 @@ Bundler.require(*Rails.groups)
 module Nsnsp
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
-    config.load_defaults 6.1
+    config.load_defaults 7.0
 
     # Configuration for the application, engines, and railties goes here.
     #
@@ -19,10 +19,6 @@ module Nsnsp
     # config.time_zone = "Central Time (US & Canada)"
     # config.eager_load_paths << Rails.root.join("extras")
     config.time_zone = 'Pacific Time (US & Canada)'
-
-    # Setting this baesd on what I think the docs are telling me to do:
-    # https://guides.rubyonrails.org/upgrading_ruby_on_rails.html#autoloading
-    config.autoloader = :zeitwerk
 
     # https://guides.rubyonrails.org/upgrading_ruby_on_rails.html#config-add-autoload-paths-to-load-path
     config.add_autoload_paths_to_load_path = false
