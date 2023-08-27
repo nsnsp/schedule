@@ -27,8 +27,8 @@ Dev
 - If blowing away Gemfile.lock to recreate, [do this](https://devcenter.heroku.com/articles/bundler-version#known-upgrade-issues) after `bundle install`: `bundle lock --add-platform x86_64-linux`
 
 Deployment
-- production: push to `master`
-- staging: push to `staging`
+- production: manual deploy in Heroku
+- staging: push to `main`
 
 Running migrations: `heroku run -a nsnsp rake --trace db:migrate`
 
