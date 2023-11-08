@@ -173,13 +173,7 @@ class UsersController < ApplicationController
     permitted << :early_schedule_notification if
       can? :early_schedule_notification, User.find_by_id(params[:id])
 
-    user = params[:user]
-    raw_roles = user[:roles]
-    new_roles = raw_roles.try(:reject) { |key, val| val.to_i.zero? }
-    params[:user][:roles] = new_roles
-    
-    logger.info "yyy new_roles: #{new_roles}"
-    logger.info "zzz params: #{params}"
+    params[:user][:roles] = params[:user][:roles].try(:reject) { |key, val| val.to_i.zero? }
 
     params.require(:user).permit(permitted)
   end
