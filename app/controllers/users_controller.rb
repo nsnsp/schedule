@@ -176,7 +176,7 @@ class UsersController < ApplicationController
     logger.info "xxx params: #{params}"
     user = params[:user]
     logger.info "uuu user: #{user}"
-    raw_roles = user.try(:roles)
+    raw_roles = user[:roles]
     logger.info "rrr raw_roles: #{raw_roles}"
     
     new_roles = raw_roles.try(:select) { |key, val| val.eql?("1") }.try(:keys)
