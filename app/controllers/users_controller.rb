@@ -164,9 +164,9 @@ class UsersController < ApplicationController
 
   private
 
-    # Never trust parameters from the scary internet, only allow the white list through.
+  # Never trust parameters from the scary internet, only allow the white list through.
   def user_params
-    params.transform_values do |value|
+    params.transform_values! do |value|
       # remove deselected roles (i.e. those with a value of "0")
       value['roles'] = value['roles'].try(:reject) { |k, v| v.to_i.zero? } if value.is_a?(Hash)
       value
