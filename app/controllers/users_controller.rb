@@ -174,7 +174,12 @@ class UsersController < ApplicationController
       can? :early_schedule_notification, User.find_by_id(params[:id])
 
     logger.info "xxx params: #{params}"
-    new_roles = params[:user].try(:roles).try(:select) { |key, val| val.eql?("1") }.keys
+    user = params[:user]
+    logger.info "uuu user: #{user}"
+    raw_roles = user.try(:roles)
+    logger.info "rrr raw_roles: #{raw_roles}"
+    
+    new_roles = raw_roles.try(:select) { |key, val| val.eql?("1") }.try(:keys)
     params[:roles] = new_roles
     logger.info "yyy new_roles: #{new_roles}"
     logger.info "zzz params: #{params}"
