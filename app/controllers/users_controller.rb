@@ -168,9 +168,7 @@ class UsersController < ApplicationController
   def user_params
     params.transform_values do |value|
       # remove deselected roles (i.e. those with a value of "0")
-      if value.is_a?(Hash)
-        roles = value['roles'].try(:reject) { |k, v| v.to_i.zero? }
-        value['roles'] = roles
+      value['roles'] = value['roles'].try(:reject) { |k, v| v.to_i.zero? } if value.is_a?(Hash)
       value
     end
 
