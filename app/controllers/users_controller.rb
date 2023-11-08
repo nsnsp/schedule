@@ -173,10 +173,18 @@ class UsersController < ApplicationController
     permitted << :early_schedule_notification if
       can? :early_schedule_notification, User.find_by_id(params[:id])
 
+    logger.debug "params hash: #{params}"
+    
     params.transform_values { |value|
+      
+      logger.debug "value hash: #{value}"
+      
       # remove deselected roles (i.e. those with a value of "0")
       if value.is_a?(Hash)
         roles = value[:roles].try(:select) { |k, v| v.eql?("1") }.keys
+        
+        logger.debug "roles: #{roles}"
+        
         value['roles'] = roles
       end
       value
