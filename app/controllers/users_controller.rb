@@ -180,7 +180,7 @@ class UsersController < ApplicationController
     logger.info "rrr raw_roles: #{raw_roles}"
     
     new_roles = raw_roles.try(:reject) { |key, val| val.to_i.zero? }.try(:keys)
-    params[:roles] = new_roles
+    params[:user][:roles] = new_roles
     logger.info "yyy new_roles: #{new_roles}"
     logger.info "zzz params: #{params}"
 
