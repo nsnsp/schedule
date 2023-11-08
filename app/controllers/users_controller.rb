@@ -71,15 +71,7 @@ class UsersController < ApplicationController
   # PATCH/PUT /users/1.json
   def update
     respond_to do |format|
-      # Something about our big upgrade broke role updating as passed raw from the form,
-      # so we manually merge them in.
-      #
-      # NOTES
-      #  - `roles` is a ActionController::Parameters
-      #  - user_params.merge!(roles: new_roles) doesn't stick
-      new_roles = user_params[:roles].select{ |key, val| val.eql?("1") }.keys
-
-      if @user.update(user_params.merge(roles: new_roles))
+      if @user.update(user_params)
         format.html do
           message = @user == current_user ?
             'Your information has been updated.' :
@@ -176,7 +168,9 @@ class UsersController < ApplicationController
   def user_params
     params.transform_values do |value|
       # remove deselected roles (i.e. those with a value of "0")
-      value['roles'].try(:reject!) { |k, v| v.to_i.zero? } if value.is_a?(Hash)
+      if value.is_a?(Hash)
+        roles = value['roles'].try(:reject) { |k, v| v.to_i.zero? }
+        value['roles'] = roles
       value
     end
 
