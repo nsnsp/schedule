@@ -166,12 +166,6 @@ class UsersController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def user_params
-    params.transform_values! do |value|
-      # remove deselected roles (i.e. those with a value of "0")
-      value['roles'] = value['roles'].try(:reject) { |k, v| v.to_i.zero? } if value.is_a?(Hash)
-      value
-    end
-
     permitted = :email, :first_name, :last_name, :phone
     permitted << { roles: User.valid_roles } if can? :manage, User
     permitted << :daily_schedule_notification if
@@ -179,7 +173,14 @@ class UsersController < ApplicationController
     permitted << :early_schedule_notification if
       can? :early_schedule_notification, User.find_by_id(params[:id])
 
-    params.require(:user).permit(permitted)
+    params.transform_values { |value|
+      # remove deselected roles (i.e. those with a value of "0")
+      if value.is_a?(Hash)
+        roles = value[:roles].try(:select) { |k, v| v.eql?("1") }.keys
+        value['roles'] = roles
+      end
+      value
+    }.require(:user).permit(permitted)
   end
 
   def build_user
