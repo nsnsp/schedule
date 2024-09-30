@@ -7,8 +7,6 @@ The official website of Northstar National Ski Patrol.
 
 **TODO**
 
-Hello world!
-
 Clean up daily email notifications
 - move `CommitmentsController::notify_day` into a rake task
 - modify Heroku Scheduler to run the rake task rather than curl a magic URL
@@ -17,7 +15,12 @@ Clean up daily email notifications
 
 **Notes**
 
-Januacy, 2022 Update
+September 30, 2024 Update
+- Updated Heroku stack from 22 to 24
+- Updated Ruby from 3.3.0 to 3.3.5
+- Updated Rails from 7.1.3 to 7.1.4
+
+January, 2022 Update
 - Updated Heroku from buildpack 18 to 20
 - Updated Ruby from 2.6 to 2.7
 - Updated Rails from 4.2 to 5.2
