@@ -18,7 +18,7 @@ Clean up daily email notifications
 September 30, 2024 Update
 - Updated Heroku stack from 22 to 24
 - Updated Ruby from 3.3.0 to 3.3.5
-- Updated Rails from 7.1.3 to 7.1.4
+- Updated Rails from 7.1.3 to 7.2.1
 
 January, 2022 Update
 - Updated Heroku from buildpack 18 to 20
