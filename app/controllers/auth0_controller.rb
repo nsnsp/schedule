@@ -42,7 +42,7 @@ class Auth0Controller < ApplicationController
       returnTo: params[:from_www] ? ENV['AUTH0_LOGOUT_URL'] : ENV['AUTH0_LOGOUT_WWW_URL']
     }.to_query
 
-    redirect_to uri.to_s
+    redirect_to uri.to_s, allow_other_host: true
   end
 
   def verify_email
