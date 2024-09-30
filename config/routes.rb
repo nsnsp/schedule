@@ -29,7 +29,7 @@ Rails.application.routes.draw do
 
   # auth0
   get '/login', to: redirect('/')
-  get '/logout' => 'auth0#logout'
+  post '/logout' => 'auth0#logout'
   get '/auth/auth0/callback' => 'auth0#callback'
   get '/auth/failure' => 'auth0#failure'
   get '/auth/auth0/verify_email' => 'auth0#verify_email'
