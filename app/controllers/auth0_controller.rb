@@ -3,6 +3,7 @@ require 'uri'
 
 class Auth0Controller < ApplicationController
   before_action :reset_session
+  skip_before_action :reset_session, only: [:logout]
 
   def callback
     auth = request.env['omniauth.auth']
