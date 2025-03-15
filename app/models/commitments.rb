@@ -36,7 +36,7 @@ module Commitments
     def self.bootstrap_class_suffix() 'warning' end
   end
   
-  class CandidateAuxilary < Commitment
+  class CandidateAuxiliary < Commitment
     def self.display_color() '#F0AD4E' end
     def self.display_verb() 'Attend training (MMHQ)' end
     def self.bootstrap_class_suffix() 'warning' end
@@ -50,5 +50,5 @@ module Commitments
   end
 
   DISPLAY_ORDER = [Other, Patrol, PatrolPM, PatrolAuxiliary,
-                   Instructor, InstructorTransport, Candidate, CandidateAuxilary]
+                   Instructor, InstructorTransport, Candidate, CandidateAuxiliary]
 end
