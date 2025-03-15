@@ -38,6 +38,7 @@ module Commitments
   
   class CandidateAuxiliary < Commitment
     def self.display_color() '#F0AD4E' end
+    def self.display_text() 'Candidate (MMHQ)' end
     def self.display_verb() 'Attend training (MMHQ)' end
     def self.bootstrap_class_suffix() 'warning' end
   end
