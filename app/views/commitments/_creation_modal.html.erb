@@ -18,7 +18,7 @@
               Commitments::Instructor,
               Commitments::InstructorTransport,
               Commitments::Candidate,
-              Commitments::CandidateAuxiliary].each_with_index do |klass, i| %>
+              Commitments::Training].each_with_index do |klass, i| %>
             <div class="radio">
               <label>
                 <%= f.radio_button :type, klass.name, checked: i.zero? %>
