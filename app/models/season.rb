@@ -1,5 +1,5 @@
 class Season
-  BOUNDARY_MONTH = 6
+  BOUNDARY_MONTH = 10
 
   attr_reader :starting_year
 
@@ -23,6 +23,7 @@ class Season
   end
 
   def to_s
-    "#{starting_year}/#{starting_year + 1}"
+    month_abbr = Date::ABBR_MONTHNAMES.fetch(BOUNDARY_MONTH)
+    "#{month_abbr}. #{starting_year}–#{starting_year + 1}"
   end
 end
