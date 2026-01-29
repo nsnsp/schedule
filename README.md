@@ -15,6 +15,9 @@ Clean up daily email notifications
 
 **Notes**
 
+January 29, 2026 Update
+- Updated Ruby from 3.3.5 to 3.4.8
+
 September 30, 2024 Update
 - Updated Heroku stack from 22 to 24
 - Updated Ruby from 3.3.0 to 3.3.5
