@@ -107,12 +107,12 @@ GEM
     erb (6.0.1)
     erubi (1.13.1)
     execjs (2.9.1)
-    faraday (2.12.0)
-      faraday-net_http (>= 2.0, < 3.4)
+    faraday (2.14.1)
+      faraday-net_http (>= 2.0, < 3.5)
       json
       logger
-    faraday-net_http (3.3.0)
-      net-http
+    faraday-net_http (3.4.2)
+      net-http (~> 0.5)
     ffi (1.17.1-x86_64-linux-gnu)
     fullcalendar-rails (3.9.0.0)
       jquery-rails (>= 4.0.5, < 5.0.0)
@@ -144,7 +144,7 @@ GEM
       thor (>= 0.14, < 2.0)
     jquery-ui-rails (8.0.0)
       railties (>= 3.2.16)
-    json (2.7.2)
+    json (2.18.1)
     jwt (2.9.1)
       base64
     listen (3.9.0)
@@ -170,8 +170,8 @@ GEM
       railties (>= 3.1)
     multi_xml (0.8.0)
       bigdecimal (>= 3.1, < 5)
-    net-http (0.4.1)
-      uri
+    net-http (0.9.1)
+      uri (>= 0.11.1)
     net-imap (0.6.2)
       date
       net-protocol
@@ -321,7 +321,7 @@ GEM
     tsort (0.2.0)
     tzinfo (2.0.6)
       concurrent-ruby (~> 1.0)
-    uri (0.13.3)
+    uri (1.1.1)
     useragent (0.16.11)
     version_gem (1.1.4)
     websocket-driver (0.8.0)
