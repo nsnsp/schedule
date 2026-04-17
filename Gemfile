@@ -74,30 +74,6 @@ gem 'omniauth-auth0'
 #      https://github.com/cookpad/omniauth-rails_csrf_protection/issues/27
 gem 'omniauth-rails_csrf_protection', '~> 1.0.2'
 
-# Auth0 login has been failing since commit 38efa3b ("Bump Rails to 7.2.3.1 and
-# update all dependencies"). Pinning omniauth-rails_csrf_protection back to 1.0.2
-# (above) was not sufficient, and the failure is silent: session cookie and
-# authenticity_token are both submitted, no stack trace appears in Rollbar,
-# OmniAuth 302s to /auth/failure. To narrow the cause further, roll back the
-# remaining CSRF-adjacent gems that moved in 38efa3b to the exact versions that
-# were in use the last time login worked. Each of these is a transitive
-# dependency, so the pins are listed explicitly here.
-# Remove these pins once login is confirmed working and the actual culprit is
-# isolated.
-# NOTE: rack and rack-session are deliberately NOT rolled back -- the pre-bump
-# versions (rack 3.2.4, rack-session 2.1.1) have known CVEs (rack multipart
-# DoS/path exposure/directory traversal, rack-session secretless session
-# forgery). They are left at the patched versions that 38efa3b shipped.
-gem 'omniauth',        '~> 2.1.2', '< 2.1.4'  # was 2.1.2, bumped to 2.1.4
-gem 'omniauth-oauth2', '~> 1.8.0'             # was 1.8.0, bumped to 1.9.0
-gem 'rack-protection', '~> 4.0.0'             # was 4.0.0, bumped to 4.2.1 (biggest jump)
-# Roll back OAuth/JWT gems further. jwt is a *major* version bump (2 -> 3)
-# and oauth2 (used by omniauth-oauth2 to verify Auth0 id_tokens) also moved.
-# These are the remaining login-adjacent dependencies from 38efa3b that were
-# not previously rolled back.
-gem 'jwt',             '~> 2.9.1'             # was 2.9.1, bumped to 3.1.2 (MAJOR version)
-gem 'oauth2',          '~> 2.0.9', '< 2.0.10' # was 2.0.9, bumped to 2.0.18
-
 gem 'cancancan'
 gem 'role_model'
 
