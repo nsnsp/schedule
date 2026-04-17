@@ -77,16 +77,18 @@ gem 'omniauth-rails_csrf_protection', '~> 1.0.2'
 # (above) was not sufficient, and the failure is silent: session cookie and
 # authenticity_token are both submitted, no stack trace appears in Rollbar,
 # OmniAuth 302s to /auth/failure. To narrow the cause further, roll back the
-# remaining CSRF- and session-adjacent gems that moved in 38efa3b to the exact
-# versions that were in use the last time login worked. Each of these is a
-# transitive dependency, so the pins are listed explicitly here.
+# remaining CSRF-adjacent gems that moved in 38efa3b to the exact versions that
+# were in use the last time login worked. Each of these is a transitive
+# dependency, so the pins are listed explicitly here.
 # Remove these pins once login is confirmed working and the actual culprit is
 # isolated.
+# NOTE: rack and rack-session are deliberately NOT rolled back -- the pre-bump
+# versions (rack 3.2.4, rack-session 2.1.1) have known CVEs (rack multipart
+# DoS/path exposure/directory traversal, rack-session secretless session
+# forgery). They are left at the patched versions that 38efa3b shipped.
 gem 'omniauth',        '~> 2.1.2', '< 2.1.4'  # was 2.1.2, bumped to 2.1.4
 gem 'omniauth-oauth2', '~> 1.8.0'             # was 1.8.0, bumped to 1.9.0
-gem 'rack',            '~> 3.2.4', '< 3.2.6'  # was 3.2.4, bumped to 3.2.6
 gem 'rack-protection', '~> 4.0.0'             # was 4.0.0, bumped to 4.2.1 (biggest jump)
-gem 'rack-session',    '~> 2.1.1', '< 2.1.2'  # was 2.1.1, bumped to 2.1.2
 
 gem 'cancancan'
 gem 'role_model'
