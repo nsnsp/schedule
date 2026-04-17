@@ -63,7 +63,11 @@
 
 <div id="login-failed" class="alert alert-danger" role="alert">
   <strong>Login failed.</strong>
-  Please click the &ldquo;Patroller login&rdquo; button above to try again.
+  <% if flash[:alert].present? %>
+    <%= flash[:alert] %>
+  <% else %>
+    Please click the &ldquo;Patroller login&rdquo; button above to try again.
+  <% end %>
 </div>
 
 <% content_for :js do %>
@@ -88,6 +92,12 @@
         // sessionStorage unavailable (e.g. privacy mode); skip auto-submit
         // rather than risk a loop. Users can still click the login button.
       }
+    <% else %>
+      // A flash message is already being rendered above (e.g. the humanized
+      // failure message from /auth/failure). Don't auto-submit -- that would
+      // just loop the user right back into the failing login flow. Hide the
+      // spinner so the page doesn't look stuck.
+      $('#login-spinner').hide();
     <% end %>
   <% end %>
 <% end %>
