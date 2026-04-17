@@ -101,8 +101,6 @@ GEM
     css_parser (2.0.0)
       addressable
     csv (3.3.5)
-    dalli (5.0.2)
-      logger
     date (3.5.1)
     drb (2.2.3)
     erb (6.0.3)
@@ -346,8 +344,6 @@ DEPENDENCIES
   bootstrap-sass
   cancancan
   coffee-rails
-  connection_pool (~> 2.4)
-  dalli
   fullcalendar-rails
   high_voltage
   httparty
