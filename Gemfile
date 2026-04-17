@@ -72,6 +72,22 @@ gem 'omniauth-auth0'
 #      https://github.com/cookpad/omniauth-rails_csrf_protection/issues/27
 gem 'omniauth-rails_csrf_protection', '~> 1.0.2'
 
+# Auth0 login has been failing since commit 38efa3b ("Bump Rails to 7.2.3.1 and
+# update all dependencies"). Pinning omniauth-rails_csrf_protection back to 1.0.2
+# (above) was not sufficient, and the failure is silent: session cookie and
+# authenticity_token are both submitted, no stack trace appears in Rollbar,
+# OmniAuth 302s to /auth/failure. To narrow the cause further, roll back the
+# remaining CSRF- and session-adjacent gems that moved in 38efa3b to the exact
+# versions that were in use the last time login worked. Each of these is a
+# transitive dependency, so the pins are listed explicitly here.
+# Remove these pins once login is confirmed working and the actual culprit is
+# isolated.
+gem 'omniauth',        '~> 2.1.2', '< 2.1.4'  # was 2.1.2, bumped to 2.1.4
+gem 'omniauth-oauth2', '~> 1.8.0'             # was 1.8.0, bumped to 1.9.0
+gem 'rack',            '~> 3.2.4', '< 3.2.6'  # was 3.2.4, bumped to 3.2.6
+gem 'rack-protection', '~> 4.0.0'             # was 4.0.0, bumped to 4.2.1 (biggest jump)
+gem 'rack-session',    '~> 2.1.1', '< 2.1.2'  # was 2.1.1, bumped to 2.1.2
+
 gem 'cancancan'
 gem 'role_model'
 
