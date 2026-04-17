@@ -51,7 +51,19 @@
 <% content_for :js do %>
   <% javascript_tag do %>
     <% if flash.none? %>
-      $('#login').trigger('submit');
+      // Auto-submit the sign-in form, but only once per browser tab so that
+      // any failure redirecting us back here cannot trigger an infinite loop
+      // (e.g. if an auth CSRF/flash issue prevents the server-side flash
+      // guard above from suppressing the re-submit).
+      try {
+        if (!window.sessionStorage.getItem('nsnspLoginAutoAttempted')) {
+          window.sessionStorage.setItem('nsnspLoginAutoAttempted', '1');
+          $('#login').trigger('submit');
+        }
+      } catch (e) {
+        // sessionStorage unavailable (e.g. privacy mode); skip auto-submit
+        // rather than risk a loop. Users can still click the login button.
+      }
     <% end %>
   <% end %>
 <% end %>
