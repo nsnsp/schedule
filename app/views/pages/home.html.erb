@@ -50,6 +50,8 @@
 
 <% content_for :js do %>
   <% javascript_tag do %>
-    $('a#login').click();
+    <% if flash.none? %>
+      $('#login').trigger('submit');
+    <% end %>
   <% end %>
 <% end %>
