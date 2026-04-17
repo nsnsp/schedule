@@ -13,12 +13,6 @@ gem 'rails', '~> 7.2.3', '>= 7.2.3.1'
 gem 'strip_attributes'
 gem 'paper_trail', '~> 12.3' # TODO: too lazy to look into breaking changes
 
-# Caching
-gem 'dalli'
-# Pin connection_pool to 2.x due to incompatibility with Rails 7.2.3's MemCacheStore initialization
-# See: https://github.com/mperham/connection_pool/issues/212
-gem 'connection_pool', '~> 2.4'
-
 # Mail
 gem 'sendgrid-ruby'
 
