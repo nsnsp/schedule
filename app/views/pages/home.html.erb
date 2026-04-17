@@ -40,16 +40,47 @@
     transform: scale(1.0);
   }
 }
+
+#login-failed {
+  display: none;
+  margin: 27vh auto 53vh;
+  max-width: 30em;
+  text-align: center;
+}
 </style>
 
-<div class="spinner">
+<div class="spinner" id="login-spinner">
   <div class="bounce1"></div>
   <div class="bounce2"></div>
   <div class="bounce3"></div>
 </div>
 
+<div id="login-failed" class="alert alert-danger" role="alert">
+  <strong>Login failed.</strong>
+  Please click the &ldquo;Patroller login&rdquo; button above to try again.
+</div>
+
 <% content_for :js do %>
   <% javascript_tag do %>
-    $('#login').trigger('submit');
+    // Auto-submit the sign-in form, but only once per browser tab so that
+    // any failure redirecting us back here cannot trigger an infinite loop
+    // (e.g. if an auth CSRF/flash issue prevents a server-side flash guard
+    // from suppressing the re-submit). The guard is cleared on any signed-in
+    // page load (see layout), so a later successful sign-in resets it.
+    try {
+      if (!window.sessionStorage.getItem('nsnspLoginAutoAttempted')) {
+        window.sessionStorage.setItem('nsnspLoginAutoAttempted', '1');
+        $('#login').trigger('submit');
+      } else {
+        // We already auto-submitted once in this tab and are back on the
+        // home page, so the login attempt failed. Hide the (misleading)
+        // spinner and surface the failure to the user.
+        $('#login-spinner').hide();
+        $('#login-failed').show();
+      }
+    } catch (e) {
+      // sessionStorage unavailable (e.g. privacy mode); skip auto-submit
+      // rather than risk a loop. Users can still click the login button.
+    }
   <% end %>
 <% end %>
