@@ -67,12 +67,7 @@ gem 'sprockets-rails'
 gem 'high_voltage'
 
 gem 'omniauth-auth0'
-# Pin to 1.x: omniauth-rails_csrf_protection 2.0.x breaks CSRF token delegation
-# on Rails < 8.1, causing every OmniAuth request-phase POST to fail with
-# ActionController::InvalidAuthenticityToken.
-# See: https://github.com/cookpad/omniauth-rails_csrf_protection/issues/26
-#      https://github.com/cookpad/omniauth-rails_csrf_protection/issues/27
-gem 'omniauth-rails_csrf_protection', '~> 1.0.2'
+gem 'omniauth-rails_csrf_protection'
 
 gem 'cancancan'
 gem 'role_model'
