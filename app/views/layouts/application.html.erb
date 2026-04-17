@@ -96,6 +96,15 @@
 
     <%= render 'layouts/rollbar' %>
     <%= javascript_include_tag "application" %>
+    <% if current_user %>
+      <%= javascript_tag do %>
+        // Signed-in page load: clear the one-shot home-page auto-submit guard
+        // so that any future visit to the root URL (e.g. after sign-out in the
+        // same tab) starts fresh instead of showing a stale "Login failed."
+        // message without an actual attempt.
+        try { window.sessionStorage.removeItem('nsnspLoginAutoAttempted'); } catch (e) {}
+      <% end %>
+    <% end %>
     <%= yield :js %>
 
     <script>
