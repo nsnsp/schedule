@@ -210,7 +210,7 @@ GEM
     omniauth-oauth2 (1.9.0)
       oauth2 (>= 2.0.2, < 3)
       omniauth (~> 2.0)
-    omniauth-rails_csrf_protection (2.0.1)
+    omniauth-rails_csrf_protection (1.0.2)
       actionpack (>= 4.2)
       omniauth (~> 2.0)
     ostruct (0.6.3)
@@ -362,7 +362,7 @@ DEPENDENCIES
   newrelic_rpm
   nokogiri
   omniauth-auth0
-  omniauth-rails_csrf_protection
+  omniauth-rails_csrf_protection (~> 1.0.2)
   paper_trail (~> 12.3)
   pg
   premailer-rails
