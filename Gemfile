@@ -89,6 +89,12 @@ gem 'omniauth-rails_csrf_protection', '~> 1.0.2'
 gem 'omniauth',        '~> 2.1.2', '< 2.1.4'  # was 2.1.2, bumped to 2.1.4
 gem 'omniauth-oauth2', '~> 1.8.0'             # was 1.8.0, bumped to 1.9.0
 gem 'rack-protection', '~> 4.0.0'             # was 4.0.0, bumped to 4.2.1 (biggest jump)
+# Roll back OAuth/JWT gems further. jwt is a *major* version bump (2 -> 3)
+# and oauth2 (used by omniauth-oauth2 to verify Auth0 id_tokens) also moved.
+# These are the remaining login-adjacent dependencies from 38efa3b that were
+# not previously rolled back.
+gem 'jwt',             '~> 2.9.1'             # was 2.9.1, bumped to 3.1.2 (MAJOR version)
+gem 'oauth2',          '~> 2.0.9', '< 2.0.10' # was 2.0.9, bumped to 2.0.18
 
 gem 'cancancan'
 gem 'role_model'

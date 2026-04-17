@@ -1,3 +1,9 @@
+<% # The spinner is only meaningful while an auto-submit is pending. If we land
+   # back on the home page with the sessionStorage guard already set, the
+   # previous auto-submit failed (e.g. OmniAuth 302'd to /auth/failure and then
+   # bounced us back here). In that case, hide the spinner and show a failure
+   # message instead. The check has to happen in JS because sessionStorage is
+   # client-side only. %>
 <style>
 .spinner {
   margin: 27vh auto 53vh;
@@ -40,12 +46,24 @@
     transform: scale(1.0);
   }
 }
+
+#login-failed {
+  display: none;
+  margin: 27vh auto 53vh;
+  max-width: 30em;
+  text-align: center;
+}
 </style>
 
-<div class="spinner">
+<div class="spinner" id="login-spinner">
   <div class="bounce1"></div>
   <div class="bounce2"></div>
   <div class="bounce3"></div>
+</div>
+
+<div id="login-failed" class="alert alert-danger" role="alert">
+  <strong>Login failed.</strong>
+  Please click the &ldquo;Patroller login&rdquo; button above to try again.
 </div>
 
 <% content_for :js do %>
@@ -59,6 +77,12 @@
         if (!window.sessionStorage.getItem('nsnspLoginAutoAttempted')) {
           window.sessionStorage.setItem('nsnspLoginAutoAttempted', '1');
           $('#login').trigger('submit');
+        } else {
+          // We already auto-submitted once in this tab and are back on the
+          // home page, so the login attempt failed. Hide the (misleading)
+          // spinner and surface the failure to the user.
+          $('#login-spinner').hide();
+          $('#login-failed').show();
         }
       } catch (e) {
         // sessionStorage unavailable (e.g. privacy mode); skip auto-submit
