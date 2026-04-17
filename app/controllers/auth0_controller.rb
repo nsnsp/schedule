@@ -30,38 +30,9 @@ class Auth0Controller < ApplicationController
   end
 
   def failure
-    # Capture as much detail as possible about why OmniAuth bounced the user
-    # here. Prior to this, we logged at :info with no context, which made it
-    # impossible to diagnose silent login failures. Log at :error so it shows
-    # up in the Rollbar error dashboard.
-    omniauth_error = request.env['omniauth.error']
-    error_type     = request.env['omniauth.error.type']
-    error_strategy = request.env['omniauth.error.strategy']
-    message_param  = request.params['message']
+    Rollbar.info("Authentication error")
 
-    diagnostics = {
-      message:           message_param,
-      strategy_param:    request.params['strategy'],
-      origin_param:      request.params['origin'],
-      error_type:        error_type,
-      error_strategy:    error_strategy.respond_to?(:name) ? error_strategy.name : error_strategy.to_s,
-      error_class:       omniauth_error&.class&.name,
-      error_message:     omniauth_error&.message,
-      error_backtrace:   omniauth_error&.backtrace&.first(20),
-      session_cookie_present:    request.cookies['_nsnsp_session'].present?,
-      any_session_cookie:        request.cookies.keys.any? { |k| k.to_s.include?('session') },
-      authenticity_token_param:  request.params['authenticity_token'].present?,
-      referer:           request.referer,
-      user_agent:        request.user_agent,
-      remote_ip:         request.remote_ip,
-      host:              request.host,
-      forwarded_proto:   request.headers['X-Forwarded-Proto'],
-      forwarded_host:    request.headers['X-Forwarded-Host']
-    }
-
-    Rollbar.error("OmniAuth authentication failure", diagnostics)
-
-    alert = message_param.presence&.humanize || 'Login failed.'
+    alert = request.params['message'].presence&.humanize || 'Login failed.'
     redirect_to root_url, alert: alert
   end
 
