@@ -18,8 +18,10 @@ Clean up daily email notifications
 August 4, 2026 Update
 - Updated Rails from 7.2.1 to 8.1.3.1
 - Updated Ruby from 3.4.8 to 3.4.10
+- Update all gems (and unpin two old specific versions)
 - Used cloudflare-rails instead of homegrown library
 - Changed Memcached for Redis
+- Add a Content Security Policy (CSP)
 
 January 29, 2026 Update
 - Updated Ruby from 3.3.5 to 3.4.8

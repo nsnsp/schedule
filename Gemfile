@@ -11,7 +11,7 @@ gem 'sucker_punch'
 # To bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 8.1.0'
 gem 'strip_attributes'
-gem 'paper_trail', '~> 12.3' # TODO: too lazy to look into breaking changes
+gem 'paper_trail'
 
 # Caching
 gem 'redis'
@@ -69,7 +69,7 @@ gem 'role_model'
 
 gem 'icalendar'
 gem 'fullcalendar-rails'
-gem 'momentjs-rails', '~> 2.20.1' # JS console error in newer versions ("export default")
+gem 'momentjs-rails'
 gem 'terser'
 
 gem 'httparty'
