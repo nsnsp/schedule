@@ -23,7 +23,7 @@ Rails.application.configure do
                        "https://js-agent.newrelic.com",
                        "https://cdn.rollbar.com",
                        "https://static.cloudflareinsights.com"
-    policy.style_src   :self, :https,
+    policy.style_src   :self, :https, :unsafe_hashes,
                        "sha256-nl7KIPaWHGWfTnpndjwrwQu7M+OUNGI8ZwVVms4l2tg="
     # Specify URI for violation reports
     # policy.report_uri "/csp-violation-report-endpoint"
