@@ -16,6 +16,9 @@ Clean up daily email notifications
 **Notes**
 
 January 29, 2026 Update
+- Updated Ruby from 3.4.8 to 3.4.10
+
+January 29, 2026 Update
 - Updated Ruby from 3.3.5 to 3.4.8
 
 September 30, 2024 Update
