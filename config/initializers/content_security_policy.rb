@@ -22,9 +22,9 @@ Rails.application.configure do
                        "https://*.google-analytics.com",
                        "https://js-agent.newrelic.com",
                        "https://cdn.rollbar.com",
-                       "https://static.cloudflareinsights.com",
+                       "https://static.cloudflareinsights.com"
+    policy.style_src   :self, :https,
                        "sha256-nl7KIPaWHGWfTnpndjwrwQu7M+OUNGI8ZwVVms4l2tg="
-    policy.style_src   :self, :https
     # Specify URI for violation reports
     # policy.report_uri "/csp-violation-report-endpoint"
   end
