@@ -7,10 +7,22 @@
 Rails.application.configure do
   config.content_security_policy do |policy|
     policy.default_src :self
+    policy.connect_src :self,
+                       "https://*.google-analytics.com",
+                       "https://*.analytics.google.com",
+                       "https://*.googletagmanager.com",
+                       "https://*.nr-data.net",
+                       "https://api.rollbar.com"
     policy.font_src    :self
-    policy.img_src     :self, :data, "https://static.nsnsp.org"
+    policy.img_src     :self, :data,
+                       "https://static.nsnsp.org",
+                       "https://*.google-analytics.com"
     policy.object_src  :none
-    policy.script_src  :self, "https://www.googletagmanager.com", "https://*.google-analytics.com"
+    policy.script_src  :self,
+                       "https://www.googletagmanager.com",
+                       "https://*.google-analytics.com",
+                       "https://js-agent.newrelic.com",
+                       "https://cdn.rollbar.com"
     policy.style_src   :self, :https
     # Specify URI for violation reports
     # policy.report_uri "/csp-violation-report-endpoint"
