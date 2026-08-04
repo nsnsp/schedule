@@ -17,6 +17,7 @@ Clean up daily email notifications
 
 January 29, 2026 Update
 - Updated Ruby from 3.4.8 to 3.4.10
+- Changed Memcached for Redis
 
 January 29, 2026 Update
 - Updated Ruby from 3.3.5 to 3.4.8
