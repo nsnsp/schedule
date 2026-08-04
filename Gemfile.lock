@@ -225,9 +225,9 @@ GEM
       actionpack (>= 4.2)
       omniauth (~> 2.0)
     ostruct (0.6.3)
-    paper_trail (12.3.0)
-      activerecord (>= 5.2)
-      request_store (~> 1.1)
+    paper_trail (17.0.0)
+      activerecord (>= 7.1)
+      request_store (~> 1.4)
     pg (1.6.3-x86_64-linux)
     pp (0.6.4)
       prettyprint
@@ -378,7 +378,7 @@ DEPENDENCIES
   nokogiri
   omniauth-auth0
   omniauth-rails_csrf_protection
-  paper_trail (~> 12.3)
+  paper_trail
   pg
   premailer-rails
   puma
