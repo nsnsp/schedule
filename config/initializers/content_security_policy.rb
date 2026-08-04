@@ -14,11 +14,7 @@ Rails.application.configure do
                        "https://*.nr-data.net",
                        "https://api.rollbar.com"
     policy.font_src    :self
-    policy.img_src     :self, :data,
-                       "https://static.nsnsp.org",
-                       "https://*.google-analytics.com",
-                       "https://*.analytics.google.com",
-                       "https://*.googletagmanager.com"
+    policy.img_src     :self, :data, :https
     policy.object_src  :none
     policy.script_src  :self,
                        "https://www.googletagmanager.com",
