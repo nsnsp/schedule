@@ -6,18 +6,18 @@
 
 Rails.application.configure do
   config.content_security_policy do |policy|
-    policy.default_src :self, :https
-    policy.font_src    :self, :https, :data
-    policy.img_src     :self, :https, :data
+    policy.default_src :self
+    policy.font_src    :self
+    policy.img_src     :self, :data, "https://static.nsnsp.org"
     policy.object_src  :none
-    policy.script_src  :self, :https, 'sha256-fXVWGuhI0afknfVOlc/OIUHWeBw/74xqrLmGC6nJBY0=', 'sha256-4UGXk+753OxyX2jk1FlvK0byaNuDotCcHIeCX7TRqQU='
+    policy.script_src  :self, "https://www.googletagmanager.com", "https://*.google-analytics.com"
     policy.style_src   :self, :https
     # Specify URI for violation reports
     # policy.report_uri "/csp-violation-report-endpoint"
   end
 
   # Generate session nonces for permitted importmap, inline scripts, and inline styles.
-  config.content_security_policy_nonce_generator = ->(request) { request.session.id.to_s }
+  config.content_security_policy_nonce_generator = ->(request) { SecureRandom.base64(16) }
   config.content_security_policy_nonce_directives = %w(script-src style-src)
 
   # Automatically add `nonce` to `javascript_tag`, `javascript_include_tag`, and `stylesheet_link_tag`
