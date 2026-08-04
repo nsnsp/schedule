@@ -16,7 +16,9 @@ Rails.application.configure do
     policy.font_src    :self
     policy.img_src     :self, :data,
                        "https://static.nsnsp.org",
-                       "https://*.google-analytics.com"
+                       "https://*.google-analytics.com",
+                       "https://*.analytics.google.com",
+                       "https://*.googletagmanager.com"
     policy.object_src  :none
     policy.script_src  :self,
                        "https://www.googletagmanager.com",
