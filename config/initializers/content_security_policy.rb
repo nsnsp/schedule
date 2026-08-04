@@ -20,7 +20,8 @@ Rails.application.configure do
                        "https://www.googletagmanager.com",
                        "https://*.google-analytics.com",
                        "https://js-agent.newrelic.com",
-                       "https://cdn.rollbar.com"
+                       "https://cdn.rollbar.com",
+                       "sha256-nl7KIPaWHGWfTnpndjwrwQu7M+OUNGI8ZwVVms4l2tg="
     policy.style_src   :self, :https
     # Specify URI for violation reports
     # policy.report_uri "/csp-violation-report-endpoint"
