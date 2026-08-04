@@ -14,12 +14,7 @@ gem 'strip_attributes'
 gem 'paper_trail', '~> 12.3' # TODO: too lazy to look into breaking changes
 
 # Caching
-# Pin Dalli to the 3.2.x line: Dalli 4.0 removed SASL authentication support,
-# which Memcachedcloud requires via MEMCACHEDCLOUD_{USERNAME,PASSWORD}.
-gem 'dalli', '~> 3.2'
-# Pin connection_pool to 2.x due to incompatibility with Rails 7.2.3's MemCacheStore initialization
-# See: https://github.com/mperham/connection_pool/issues/212
-gem 'connection_pool', '~> 2.4'
+gem 'redis'
 
 # Mail
 gem 'sendgrid-ruby'
