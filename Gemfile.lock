@@ -87,6 +87,11 @@ GEM
       sassc (>= 2.0.0)
     builder (3.3.0)
     cancancan (3.6.1)
+    cloudflare-rails (7.0.0)
+      actionpack (>= 7.2.0, < 8.2.0)
+      activesupport (>= 7.2.0, < 8.2.0)
+      railties (>= 7.2.0, < 8.2.0)
+      zeitwerk (>= 2.5.0)
     coffee-rails (5.0.0)
       coffee-script (>= 2.2.0)
       railties (>= 5.2.0)
@@ -351,6 +356,7 @@ DEPENDENCIES
   awesome_print
   bootstrap-sass
   cancancan
+  cloudflare-rails
   coffee-rails
   fullcalendar-rails
   high_voltage

@@ -75,3 +75,7 @@ gem 'terser'
 gem 'httparty'
 gem 'nokogiri'
 gem 'premailer-rails'
+
+group :production do
+  gem 'cloudflare-rails'
+end
