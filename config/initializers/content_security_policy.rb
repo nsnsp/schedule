@@ -12,7 +12,8 @@ Rails.application.configure do
                        "https://*.analytics.google.com",
                        "https://*.googletagmanager.com",
                        "https://*.nr-data.net",
-                       "https://api.rollbar.com"
+                       "https://api.rollbar.com",
+                       "https://cloudflareinsights.com"
     policy.font_src    :self
     policy.img_src     :self, :data, :https
     policy.object_src  :none
@@ -21,6 +22,7 @@ Rails.application.configure do
                        "https://*.google-analytics.com",
                        "https://js-agent.newrelic.com",
                        "https://cdn.rollbar.com",
+                       "https://static.cloudflareinsights.com",
                        "sha256-nl7KIPaWHGWfTnpndjwrwQu7M+OUNGI8ZwVVms4l2tg="
     policy.style_src   :self, :https
     # Specify URI for violation reports
