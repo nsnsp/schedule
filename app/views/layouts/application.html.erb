@@ -86,7 +86,7 @@
       <footer>
         <div class="links">
           <a href="https://www.nsnsp.org/terms-of-use/">Terms of Use</a>
-          <span style="margin: 0 .1em">/</span>
+          <span class="footer-links-separator">/</span>
           <a href="https://www.nsnsp.org/privacy-policy/">Privacy Policy</a>
         </div>
         <p>&copy; Northstar National Ski Patrol <%= Date.today.year %></p>
@@ -107,6 +107,7 @@
     <% end %>
     <%= yield :js %>
 
+    <%# Ensure you update the script-src hash in content_security_policy.rb after modifying: %>
     <script>
       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
       (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
