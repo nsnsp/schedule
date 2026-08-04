@@ -1,7 +1,7 @@
 # Be sure to restart your server when you modify this file.
 
 # Use :cache_store for session storage. In production this is backed by
-# Memcachedcloud (see config/environments/production.rb), which is shared
+# Redis Cloud (see config/environments/production.rb), which is shared
 # across all Puma workers and Heroku dynos, so sessions written on one
 # request are visible to subsequent requests regardless of which worker
 # handles them.
