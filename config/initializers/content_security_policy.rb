@@ -10,7 +10,7 @@ Rails.application.configure do
     policy.font_src    :self, :https, :data
     policy.img_src     :self, :https, :data
     policy.object_src  :none
-    policy.script_src  :self, :https, 'sha256-N0fLjYtdsWDzge9dcEGmsRD+aIe5fZPnwRbiLxAQM2k=', 'sha256-4UGXk+753OxyX2jk1FlvK0byaNuDotCcHIeCX7TRqQU='
+    policy.script_src  :self, :https, 'sha256-N0fLjYtdsWDzge9dcEGmsRD+aIe5fZPnwRbiLxAQM2k=', 'sha256-fXVWGuhI0afknfVOlc/OIUHWeBw/74xqrLmGC6nJBY0='
     policy.style_src   :self, :https
     # Specify URI for violation reports
     # policy.report_uri "/csp-violation-report-endpoint"
