@@ -8,8 +8,8 @@ gem 'newrelic_rpm'
 gem 'rollbar'
 gem 'sucker_punch'
 
-# Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 8.0.0'
+# To bundle edge Rails instead: gem 'rails', github: 'rails/rails'
+gem 'rails', '~> 8.1.0'
 gem 'strip_attributes'
 gem 'paper_trail', '~> 12.3' # TODO: too lazy to look into breaking changes
 
