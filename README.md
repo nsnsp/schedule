@@ -16,6 +16,7 @@ Clean up daily email notifications
 **Notes**
 
 October 21, 2026 Update
+- Updated Heroku stack from 24 to 26
 - Updated Rails from 8.1.3.1 to 8.1.4
 - Updated Ruby from 3.4.10 to 3.4.11
 - Update all gems (fixes two css_parser advisories); hold json at 2.x since 3.0 has breaking changes
