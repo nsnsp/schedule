@@ -24,5 +24,9 @@ module Nsnsp
     # config.time_zone = "Central Time (US & Canada)"
     # config.eager_load_paths << Rails.root.join("extras")
     config.time_zone = 'Pacific Time (US & Canada)'
+
+    # Active Storage isn't used, so don't look for an image variant processor
+    # (avoids a warning about the missing image_processing gem).
+    config.active_storage.variant_processor = :disabled
   end
 end
