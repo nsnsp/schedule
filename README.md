@@ -48,6 +48,7 @@ Dev
 Deployment
 - production: manual deploy in Heroku
 - staging: push to `main`
+- buildpacks: `heroku/nodejs`, then `heroku/ruby` (the Node.js version comes from `package.json`)
 
 Running migrations: `heroku run -a nsnsp rake --trace db:migrate`
 
