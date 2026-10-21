@@ -76,6 +76,11 @@ gem 'httparty'
 gem 'nokogiri'
 gem 'premailer-rails'
 
+# json 3.0 (Sep 2026) is a breaking release: unknown options raise, duplicate
+# keys are rejected, and non-ASCII binary strings are no longer generated.
+# Hold at 2.x until the rest of the bundle has caught up.
+gem 'json', '~> 2.21'
+
 group :production do
   gem 'cloudflare-rails'
 end
