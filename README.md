@@ -15,6 +15,10 @@ Clean up daily email notifications
 
 **Notes**
 
+November 12, 2026 Update
+- Updated Rails from 8.1.4 to 8.1.4.1 (security release)
+- Updated nokogiri, loofah, rails-html-sanitizer, crass and addressable to clear the remaining gem advisories
+
 October 21, 2026 Update
 - Updated Heroku stack from 24 to 26
 - Updated Rails from 8.1.3.1 to 8.1.4
