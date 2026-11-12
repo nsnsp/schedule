@@ -17,7 +17,7 @@ Clean up daily email notifications
 
 November 12, 2026 Update
 - Updated Rails from 8.1.4 to 8.1.4.1 (security release)
-- Updated nokogiri, loofah, rails-html-sanitizer, crass and addressable to clear the remaining gem advisories
+- Update all gems (clears every open gem advisory); json is still held at 2.x, and omniauth-auth0 stays at 3.1.1 because 3.2.0 would force jwt back down to 2.x
 
 October 21, 2026 Update
 - Updated Heroku stack from 24 to 26
