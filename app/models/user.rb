@@ -51,7 +51,7 @@ class User < ApplicationRecord
   private
 
   def unique_name
-    errors[:base] << "A user named #{name} already exists." if self.class.
+    errors.add(:base, "A user named #{name} already exists.") if self.class.
       where(first_name: first_name, last_name: last_name).
       where.not(id: id).exists?
   end
