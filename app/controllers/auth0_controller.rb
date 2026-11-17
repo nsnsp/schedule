@@ -16,6 +16,12 @@ class Auth0Controller < ApplicationController
       identity.email_verified = auth[:extra][:raw_info][:email_verified]
     end
 
+    # Auth0 is the only trustworthy source for an identity's email address and
+    # whether it has been verified, so refresh both on every login rather than
+    # only when the identity is first created.
+    identity.update!(email: auth[:info][:email],
+                     email_verified: auth[:extra][:raw_info][:email_verified])
+
     if identity.provider_is?('auth0') && !identity.email_verified?
       failure_message = 'Account created – please check your email for a ' \
                         'verification link.'
@@ -46,6 +52,11 @@ class Auth0Controller < ApplicationController
     redirect_to uri.to_s, allow_other_host: true
   end
 
+  # Auth0 redirects the browser here after someone follows the link in their
+  # verification email. Nothing about this request is authenticated – anyone can
+  # craft the URL – so it must never change any data or sign anyone in. Whether
+  # an address has really been verified is read from Auth0 at the next login
+  # (see #callback).
   def verify_email
     # Auth0 sends us this - it should always be present and "true"
     unless params[:success] == 'true'
@@ -55,31 +66,8 @@ class Auth0Controller < ApplicationController
       return
     end
 
-    # We configure this param to be present in the Auth0 callback URL, to ensure
-    # that a malicious user can less easily craft a fake email verification GET.
-    # NOTE: someone could still easily obtain this value from a legit registration.
-    unless params[:secret_key] == ENV['AUTH0_VERIFY_EMAIL_CALLBACK_SECRET_KEY']
-      redirect_to root_url, alert: 'Email verification failed – bad secret key'
-      return
-    end
-
-    email = params[:email]
-    identity = Identity.find_by_auth0_email(email)
-
-    # Email address might not exist or the associated identity might have a
-    # provider other than auth0. Should never happen; protects against evil.
-    unless identity
-      message = "Email verification failed – unknown email address: #{email}"
-      redirect_to root_url, alert: message
-      return
-    end
-
-    identity.update!(email_verified: true)
-
-    handle_identity(identity,
-                    success_message: "Email address verified – you're all set!",
-                    failure_message: 'Email address verified – please ask an ' \
-                                     'administrator to approve your account.')
+    redirect_to root_url,
+                notice: 'Email address verified – please log in to continue.'
   end
 
   def password_reset

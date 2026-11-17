@@ -78,15 +78,15 @@ class Commitment < ApplicationRecord
   private
 
   def verify_destruction_allowed
-    return true unless frozen?
-    errors[:base] <<
-      "It's too late to cancel for #{date.strftime('%A, %-m/%-d/%y')}"
-    false
+    return unless frozen?
+    errors.add(:base,
+               "It's too late to cancel for #{date.strftime('%A, %-m/%-d/%y')}")
+    throw :abort
   end
 
   def day_not_frozen
     message = "It's too late to sign up for #{date.strftime('%A, %-m/%-d/%y')}"
-    errors[:base] << message if frozen?
+    errors.add(:base, message) if frozen?
   end
 
 end
